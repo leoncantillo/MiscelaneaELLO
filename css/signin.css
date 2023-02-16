@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --highlight: #9C78BF;
+    --background: #f2e0ff;
+    --backgroundBox: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.dinamic_background {
+    align-items: center;
+    background-color: var(--background);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh; 
+}
+
+.singinbox {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    height: 100vh;
+    justify-content: center;
+    position: absolute;
+    overflow: hidden;
+    width: 100vw;
+}
+
+.singinbox::before {
+    animation: animate 5s linear infinite;
+    background: linear-gradient(var(--background),var(--highlight),var(--background));
+    content: '';
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+@keyframes animate {
+    0% {transform: translateY(-100%)}
+    100% {transform: translateY(100%);}
+}
+
+.singinbox span {
+    background-color: var(--backgroundBox);
+    display: block;
+    height: calc(5.25vw - 2px);
+    position: relative;
+    transition: 1.5s;
+    width: calc(5.25vw - 2px);
+    z-index: 2;
+}
+
+.singinbox span:hover {
+    background-color: var(--highlight);
+   transition: 0s;
+}
+
+.singinbox .signin {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.5);
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    position: absolute;
+    width: 400px;
+    z-index: 999;
+}
+
+.singinbox .signin .content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.singinbox .signin .content h2 {
+    font-size: 2em;
+    color: var(--highlight);
+    text-transform: uppercase;
+}
+
+.singinbox .signin .content .form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.singinbox .signin .content .form .inputbx {
+    position: relative;
+    width: 100%;
+}
+
+.singinbox .signin .content .form .inputbx input {
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.25em;
+    font-weight: 500;
+    letter-spacing: .05em;
+    outline: none;
+    padding: 8px 10px;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+.singinbox .signin .content .form .inputbx label {
+    color: var(--highlight);
+    font-size: 1em;
+    font-weight: 400;
+    letter-spacing: .05em;
+    padding: 10px 0;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    transition: .5s;
+    z-index: 1;
+}
+
+.singinbox .signin .content .form .inputbx input:focus ~ label,
+.singinbox .signin .content .form .inputbx input:valid ~ label {
+    font-size: 0.85em;
+    font-weight: 600;
+    transform: translateY(-32px);
+}
+
+.singinbox .signin .content .form .inputbx i {
+    background: var(--highlight);
+    border-radius: 4px;
+    height: 3px;
+    pointer-events: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: .5s;
+    width: 100%;
+    z-index: 1;
+}
+
+.singinbox .signin .content .form .inputbx input:focus ~ i,
+.singinbox .signin .content .form .inputbx input:valid ~ i {
+    height: 100%;
+}
+
+.signin .content .form .links {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+}
+
+.signin .content .form .links a {
+    color: #000;
+    text-decoration: none
+}
+
+.signin .content .form .links a:nth-child(2) {
+    color: var(--highlight);
+    font-weight: 600;
+}
+
+.signin .content .form .inputbx input[type="submit"] {
+    background-color: var(--highlight);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.25em;
+    font-weight: 600;
+    letter-spacing: .5em;
+    padding: 10px;
+}
+
+@media (max-width: 900px) {
+    .singinbox span {
+        height: calc(10vw - 2px);
+        width: calc(10vw - 2px);
+    }
+}
+
+@media (max-width: 600px) {
+    .singinbox span {
+        height: calc(20vw - 2px);
+        width: calc(20vw - 2px);
+    }
+}
