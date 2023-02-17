@@ -1,0 +1,33 @@
+@import url(../css/global-colors.css);
+
+.hero {
+    background: url(../img/jpg/Bg-Hero.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: 50% 100%;
+    color: var(--global-color-3);
+    display: flex;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 20px;
+        justify-content: center;
+    height: 100vh;
+    margin-top: -80px;
+    text-align: center;
+    z-index: 980;
+}
+
+.hero h2 {font-size: 40px; text-transform: uppercase;}
+.hero p {font-size: 20px; font-weight: 400}
+.hero h4 {font-size: 30px;}
+
+.hero .sale-button {
+    background: var(--global-color-4);
+    border: none;
+    border-radius: 40px;
+    color: var(--global-color-3);
+    font-size: 'poppins';
+    font-weight: 800;
+    height: 40px;
+    width: 300px;
+}
