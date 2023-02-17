@@ -11,20 +11,20 @@
 }
 
 .dinamic_background {
-    align-items: center;
     background-color: var(--background);
     display: flex;
-    justify-content: center;
+        align-items: center;
+        justify-content: center;
     min-height: 100vh; 
 }
 
 .singinbox {
-    align-items: center;
     display: flex;
-    flex-wrap: wrap;
-    gap: 2px;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2px;
+        justify-content: center;
     height: 100vh;
-    justify-content: center;
     position: absolute;
     overflow: hidden;
     width: 100vw;
@@ -60,12 +60,12 @@
 }
 
 .singinbox .signin {
-    align-items: center;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 15px 35px rgba(0,0,0,.5);
     display: flex;
-    justify-content: center;
+        align-items: center;
+        justify-content: center;
     padding: 40px;
     position: absolute;
     width: 400px;
@@ -75,9 +75,9 @@
 .singinbox .signin .content {
     align-items: center;
     display: flex;
-    flex-direction: column;
-    gap: 40px;
-    justify-content: center;
+        flex-direction: column;
+        gap: 40px;
+        justify-content: center;
     position: relative;
     width: 100%;
 }
@@ -90,8 +90,8 @@
 
 .singinbox .signin .content .form {
     display: flex;
-    flex-direction: column;
-    gap: 25px;
+        flex-direction: column;
+        gap: 25px;
     width: 100%;
 }
 
@@ -123,7 +123,7 @@
     padding: 10px 0;
     pointer-events: none;
     position: absolute;
-    left: 0;
+        left: 0;
     transition: .5s;
     z-index: 1;
 }
@@ -141,8 +141,8 @@
     height: 3px;
     pointer-events: none;
     position: absolute;
-    bottom: 0;
-    left: 0;
+        bottom: 0;
+        left: 0;
     transition: .5s;
     width: 100%;
     z-index: 1;
@@ -155,7 +155,7 @@
 
 .signin .content .form .links {
     display: flex;
-    justify-content: space-between;
+        justify-content: space-between;
     position: relative;
     width: 100%;
 }
