@@ -1,5 +1,7 @@
 @import url(../css/global-colors.css);
+@import url(../css/reset.css);
 @import url(../css/banner.css);
+@import url(../css/header.css);
 
 .hero {
     background-position: 50% 100%;
