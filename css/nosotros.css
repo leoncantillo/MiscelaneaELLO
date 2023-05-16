@@ -1,0 +1,74 @@
+@import url(../css/global-colors.css);
+@import url(../css/banner.css);
+
+.banner::before {
+    content: '';
+    background: rgba(0,0,0,.4);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+}
+
+.banner h4 {
+    color: snow;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.banner img {
+    height: 200px;
+    width: 200px;
+    transition: 0.5s;
+}
+
+.banner img:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.contenedor {
+    display: flex;
+        /* gap: 20px; */
+        align-items: center;
+        justify-content: center;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;
+    min-height: 500px;
+    max-height: 500px;
+}
+
+.dos-parrafos {
+    display: grid;
+        justify-items: center;
+        grid-template-columns: 50% 50%;
+}
+
+.caja-parrafo h3 {
+    font-size: 30px;
+    margin: 20px auto;
+}
+
+.burbuja {
+    border-radius: 50%;
+    box-shadow: 20px 20px var(--global-color-3);
+    height: 300px;
+    margin: 0 auto;
+    object-fit: cover;
+    width: 300px;
+}
+
+.bg-mision {
+    background-color: #302b42;
+    /* background-image: url(../img/jpg/seccion-comics.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.seccion-mision {
+    /* background: rgba(255,255,255,.4); */
+    border-radius: 20px;
+    color: snow;
+    padding: 20px;
+}
