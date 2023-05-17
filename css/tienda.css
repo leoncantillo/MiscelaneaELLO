@@ -1,0 +1,75 @@
+@import url(../css/global-colors.css);
+@import url(../css/reset.css);
+@import url(../css/banner.css);
+@import url(../css/header.css);
+
+.tienda-home {
+    display: grid;
+        gap: 20px;
+        grid-template-columns: 25% 75%;
+    margin: 50px auto 20px; 
+    padding: 20px 20px;
+    position: relative;
+    max-width: 1280px;
+}
+
+.ordenar-productos {
+    position: absolute;
+        right: 0;
+        top: -30px;
+}
+
+.productos-en-venta {
+    display: flex;  
+        flex-direction: column;
+        gap: 40px;
+}
+
+.producto-en-vitrina {
+    display: flex;
+        justify-content: space-between;
+        gap: 30px;
+}
+
+.imagen-producto {
+    border-radius: 5%;
+    cursor: pointer;
+    height: 200px;
+    width: 250px;
+    overflow: hidden;
+}
+
+.imagen-producto img {
+    height: auto;
+    transition: .5s;
+    width: 100%;
+}
+
+.imagen-producto img:hover {
+    transform: scale(1.2);
+}
+
+@supports(object-fit: cover){
+    .imagen-producto img{
+          height: 100%;
+          object-fit: cover;
+          object-position: center center;
+        }
+}
+
+.descripcion-del-producto {
+    display: flex;
+        flex-direction: column;
+        gap: 10px;
+}
+
+.descripcion-del-producto h3 {
+    color: var(--global-color-5);
+    font-size: 20px;
+}
+
+.descripcion-del-producto span {
+    color: #1b1b1b;
+    font-weight: 600;
+    padding-top: 20px;
+}
