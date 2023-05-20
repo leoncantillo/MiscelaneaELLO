@@ -1,8 +1,6 @@
 <div class="slider-contain">
     <div class="slider">
-        <img src="../img/jpg/bg-desenfocado.webp" alt="">
-        <img src="../img/jpg/bg-miscelanea.jpg" alt="">
-        <img src="../img/jpg/seccion-comics.jpg" alt="">
+        <?php getSliderImages($directory); ?>
     </div>
     <button class="prev-button slider-button">&lt;</button>
     <button class="next-button slider-button">&gt;</button>
@@ -30,7 +28,7 @@
     }
 
     function startSlider() {
-        timer = setInterval(showNextSlide, 2000);
+        timer = setInterval(showNextSlide, 5000);
     }
 
     function stopSlider() {
@@ -52,3 +50,14 @@
     startSlider();
 
 </script>
+
+<?php
+function getSliderImages($directory) {
+    $files = scandir($directory);
+    foreach ($files as $file) {
+        if (is_file($directory . "/" . $file)) {
+            echo '<img src="' . $directory . "/" . $file . '" alt="">';
+        }
+    }
+}
+?>

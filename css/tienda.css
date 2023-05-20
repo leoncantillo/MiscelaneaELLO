@@ -4,19 +4,51 @@
     display: grid;
         gap: 20px;
         grid-template-columns: 25% 75%;
-    margin: 50px auto 20px; 
+        grid-template-rows: 10% 90%;
+    margin: 20px auto; 
     padding: 20px 20px;
     position: relative;
     max-width: 1280px;
 }
 
+/* ESTILOS DEL ASIDE ====================================*/
+
+.titulo-producto-filtro {
+    align-self: center;
+    font-size: 25px;
+    grid-row: 1 / 2;
+}
+
+.aside-filtros {
+    grid-row: 2 / 3;
+}
+
+.aside-filtros .filtros, .aside-filtros .sub-filtros {
+    display: flex;
+        flex-direction: column;
+        gap: 10px;
+    list-style: none;
+    margin-top: 10px;
+}
+
+.aside-filtros .filtros li {
+    color: #333333;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.aside-filtros .filtros .sub-filtros li {
+    color:  #666666;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* ESTILOS PARA EL FILTRO DE ORDEN =======================*/
 .ordenar-productos {
     display: flex;
         align-items: center;
         gap: 3px;
-    position: absolute;
-        top: -30px;
-        right: 0;
+        justify-self: flex-end;
 }
 
 .ordenar-productos .filtros-de-orden {

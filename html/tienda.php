@@ -10,24 +10,24 @@
 </head>
 <body>
     <?php include 'header.html'?>
-    <?php include 'slider.php'?>
+    <?php $directory = "../img/jpg/slides"; include 'slider.php'?>
     <section class="tienda-home">
-        <aside>
-            <h4>Filtros</h4>
-            <ul>
+        <h4 class="titulo-producto-filtro">Filtros</h4>
+        <aside class="aside-filtros">
+            <ul class="filtros">
                 <li>Etiquetas</li>
                 <li>Categorías</li>
                 <li>Ubicación</li>
                 <li>Condición
-                    <ul>
+                    <ul class="sub-filtros">
                         <li>Nuevo</li>
                         <li>Usado</li>
                     </ul>
                 </li>
             </ul>
         </aside>
+        <div class="ordenar-productos">Ordenar por <span class="filtros-de-orden">Más Vendidos <?php include '../img/svg/icon-chevron-down.svg'?></span></div>
         <section>
-            <div class="ordenar-productos">Ordenar por <span class="filtros-de-orden">Más Vendidos <?php include '../img/svg/icon-chevron-down.svg'?></span></div>
             <div class="productos-en-venta">
                 <div class="producto-en-vitrina">
                     <div class="imagen-producto">
