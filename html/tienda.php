@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/slider.css">
     <link rel="stylesheet" href="../css/tienda.css">
     <title>Miscelanea ELLO</title>
 </head>
 <body>
     <?php include 'header.html'?>
-    <!-- <section class="banner" style="--bg-banner: url(../img/jpg/seccion-comics.jpg)">
-        <h4 class="foco">Miscelanea ELLO</h1>
-        <img class="foco" src="../img/svg/logotipo-white.svg" alt="">
-    </section> -->
+    <?php include 'slider.php'?>
     <section class="tienda-home">
         <aside>
             <h4>Filtros</h4>
@@ -29,19 +27,22 @@
             </ul>
         </aside>
         <section>
-            <div class="ordenar-productos">Ordenar por <span>Más Vendidos</span></div>
+            <div class="ordenar-productos">Ordenar por <span class="filtros-de-orden">Más Vendidos <?php include '../img/svg/icon-chevron-down.svg'?></span></div>
             <div class="productos-en-venta">
                 <div class="producto-en-vitrina">
                     <div class="imagen-producto">
                         <img src="../img/jpg/Productos/Cuaderno anillado.jpg" alt="">
                     </div>
                     <div class="descripcion-del-producto">
-                        <h3>Cuaderno Anillado 5 Materias</h3>
-                        <span>$ 8000.00 cop</span> <!--Este valor será dinámico -->
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam iure sit est fugit magni earum enim et inventore quia dolores?</p>
-                        <div>
+                        <div class="info-producto">
+                            <h3 class="nombre-producto">Cuaderno Anillado 5 Materias</h3>
+                            <span class="precio-descuento"></span>
+                            <span class="precio-producto">$ 8000.00 cop</span> <!--Este valor será dinámico -->
+                            <p class="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam iure sit est fugit magni earum enim et inventore quia dolores?</p>
+                        </div>
+                        <div class="etiquetas-producto">
                             <span>Etiquetas: Taltal</span>
-                            <span>Categoría: Blabla bla</span>
+                            <span>Categoría: Blablabla</span>
                             <span>Color: Rojo</span>
                         </div>
                     </div>
@@ -51,13 +52,16 @@
                         <img src="../img/jpg/Productos/Caja Lapiz HB.jpg" alt="">
                     </div>
                     <div class="descripcion-del-producto">
-                        <h3>Caja De Lapices HB Faber Castell</h3>
-                        <span>$ 4800.00 cop</span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam iure sit est fugit magni earum enim et inventore quia dolores?</p>
-                        <div>
-                            <span>Etiquetas: Taltal</span>
-                            <span>Categoría: Blabla bla</span>
-                            <span>Color: Rojo</span>
+                        <div class="info-producto">
+                            <h3 class="nombre-producto">Caja De Lapices HB Faber Castell</h3>
+                            <span class="precio-descuento">$ 6000.00 cop</span>
+                            <span class="precio-producto">$ 4800.00 cop</span>
+                            <p class="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam iure sit est fugit magni earum enim et inventore quia dolores?</p>
+                        </div>
+                        <div class="etiquetas-producto">
+                            <span>Etiquetas: </span>
+                            <span>Categoría: Útiles</span>
+                            <span>Color: Verde</span>
                         </div>
                     </div>
                 </div>

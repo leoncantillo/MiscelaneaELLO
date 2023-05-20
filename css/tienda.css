@@ -1,7 +1,4 @@
-@import url(../css/global-colors.css);
-@import url(../css/reset.css);
-@import url(../css/banner.css);
-@import url(../css/header.css);
+@import url(../css/estilos-globales.css);
 
 .tienda-home {
     display: grid;
@@ -14,11 +11,26 @@
 }
 
 .ordenar-productos {
+    display: flex;
+        align-items: center;
+        gap: 3px;
     position: absolute;
-        right: 0;
         top: -30px;
+        right: 0;
 }
 
+.ordenar-productos .filtros-de-orden {
+    background: var(--global-color-6);
+    color: snow;
+    display: flex;
+        align-items: center;
+    line-height: 1.5rem;
+    padding: 0 10px;
+}
+
+.ordenar-productos .filtros-de-orden svg{fill: snow;}
+
+/* ESTILOS DEL PRODUCTO EN VENTA ===================================== */
 .productos-en-venta {
     display: flex;  
         flex-direction: column;
@@ -60,16 +72,45 @@
 .descripcion-del-producto {
     display: flex;
         flex-direction: column;
+        gap: 30px;
+}
+
+.info-producto {
+    display: flex;
+        flex-direction: column;
         gap: 10px;
 }
 
-.descripcion-del-producto h3 {
+.info-producto .nombre-producto {
     color: var(--global-color-5);
     font-size: 20px;
 }
 
-.descripcion-del-producto span {
+.info-producto .precio-descuento {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    height: 12px;
+    line-height: px;
+    text-decoration: line-through;
+    margin-bottom: -10px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.info-producto .precio-producto {
     color: #1b1b1b;
     font-weight: 600;
-    padding-top: 20px;
+}
+
+.info-producto .info {color: var(--text-paragraph)}
+
+.etiquetas-producto {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.etiquetas-producto  span{
+    color: var(--global-color-6);
+    font-weight: 500;
 }
