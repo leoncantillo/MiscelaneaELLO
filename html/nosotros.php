@@ -16,7 +16,7 @@
     <section>
         <div class="contenedor dos-parrafos">
             <div class="caja-parrafo">
-                <h3>¿Quienes Somos?</h3>
+                <h3 class="titulo">¿Quienes Somos?</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla tenetur quis ratione voluptatem reiciendis corporis veniam, maiores culpa hic voluptatum cumque possimus temporibus numquam harum odio quo, quasi alias. Et voluptatum eligendi id vel facere eius maiores minus commodi. Natus laudantium velit nam amet, quam dolores aut facere, quibusdam odit eaque cumque! Corporis est quas, facilis dolorum, nostrum necessitatibus recusandae dolor blanditiis nihil, dolore aut dignissimos praesentium unde eos fuga?</p>
             </div>
             <div>
@@ -30,7 +30,7 @@
                 <img class="burbuja" src="../img/jpg/img-placeholder.jpg" alt="">
             </div>
             <div class="caja-parrafo seccion-mision">
-                <h3>Misión</h3>
+                <h3 class="titulo">Misión</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla tenetur quis ratione voluptatem reiciendis corporis veniam, maiores culpa hic voluptatum cumque possimus temporibus numquam harum odio quo, quasi alias. Et voluptatum eligendi id vel facere eius maiores minus commodi. Natus laudantium velit nam amet, quam dolores aut facere, quibusdam odit eaque cumque! Corporis est quas, facilis dolorum, nostrum necessitatibus recusandae dolor blanditiis nihil, dolore aut dignissimos praesentium unde eos fuga?</p>
             </div>
         </div>
@@ -38,7 +38,7 @@
     <section>
         <div class="contenedor dos-parrafos">
             <div class="caja-parrafo">
-                <h3>Visión</h3>
+                <h3 class="titulo">Visión</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla tenetur quis ratione voluptatem reiciendis corporis veniam, maiores culpa hic voluptatum cumque possimus temporibus numquam harum odio quo, quasi alias. Et voluptatum eligendi id vel facere eius maiores minus commodi. Natus laudantium velit nam amet, quam dolores aut facere, quibusdam odit eaque cumque! Corporis est quas, facilis dolorum, nostrum necessitatibus recusandae dolor blanditiis nihil, dolore aut dignissimos praesentium unde eos fuga?</p>
             </div>
             <div>

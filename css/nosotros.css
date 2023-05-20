@@ -1,7 +1,4 @@
-@import url(../css/global-colors.css);
-@import url(../css/reset.css);
-@import url(../css/banner.css);
-@import url(../css/header.css);
+@import url(../css/estilos-globales.css);
 
 .banner::before {
     content: '';
@@ -44,13 +41,15 @@
 .dos-parrafos {
     display: grid;
         justify-items: center;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 1fr 1fr;
 }
 
 .caja-parrafo h3 {
     font-size: 30px;
     margin: 20px auto;
 }
+
+.caja-parrafo p {color: var(--text-paragraph);}
 
 .burbuja {
     border-radius: 50%;
@@ -68,9 +67,6 @@
     background-repeat: no-repeat;
 }
 
-.seccion-mision {
-    /* background: rgba(255,255,255,.4); */
-    border-radius: 20px;
-    color: snow;
-    padding: 20px;
-}
+.seccion-mision {padding: 20px;}
+
+.seccion-mision .titulo,.seccion-mision p {color: snow;}

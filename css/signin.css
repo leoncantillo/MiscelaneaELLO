@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
 @import url(../css/reset.css);
 
-:root {
-    --highlight: #9C78BF;
-    --background: #f2e0ff;
-    --backgroundBox: #ffffff;
-}
-
 * {
     box-sizing: border-box;
 }
 
 .dinamic_background {
+    --highlight: #9C78BF;
+    --background: #f2e0ff;
+    --backgroundBox: #ffffff;
     background-color: var(--background);
     display: flex;
         align-items: center;
@@ -19,7 +16,7 @@
     min-height: 100vh; 
 }
 
-.singinbox {
+.signinbox {
     display: flex;
         align-items: center;
         flex-wrap: wrap;
@@ -31,7 +28,7 @@
     width: 100vw;
 }
 
-.singinbox::before {
+.signinbox::before {
     animation: animate 5s linear infinite;
     background: linear-gradient(var(--background),var(--highlight),var(--background));
     content: '';
@@ -45,22 +42,22 @@
     100% {transform: translateY(100%);}
 }
 
-.singinbox span {
+.signinbox span {
     background-color: var(--backgroundBox);
     display: block;
-    height: calc(5.25vw - 2px);
+    height: calc(5vw - 2px);
     position: relative;
     transition: 1.5s;
-    width: calc(5.25vw - 2px);
+    width: calc(5vw - 2px);
     z-index: 2;
 }
 
-.singinbox span:hover {
+.signinbox span:hover {
     background-color: var(--highlight);
    transition: 0s;
 }
 
-.singinbox .signin {
+.signinbox .signin {
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 15px 35px rgba(0,0,0,.5);
@@ -73,7 +70,7 @@
     z-index: 999;
 }
 
-.singinbox .signin .content {
+.signinbox .signin .content {
     align-items: center;
     display: flex;
         flex-direction: column;
@@ -83,25 +80,25 @@
     width: 100%;
 }
 
-.singinbox .signin .content h2 {
+.signinbox .signin .content h2 {
     font-size: 2em;
     color: var(--highlight);
     text-transform: uppercase;
 }
 
-.singinbox .signin .content .form {
+.signinbox .signin .content .form {
     display: flex;
         flex-direction: column;
         gap: 25px;
     width: 100%;
 }
 
-.singinbox .signin .content .form .inputbx {
+.signinbox .signin .content .form .inputbx {
     position: relative;
     width: 100%;
 }
 
-.singinbox .signin .content .form .inputbx input {
+.signinbox .signin .content .form .inputbx input {
     color: #fff;
     background-color: transparent;
     border: none;
@@ -116,7 +113,7 @@
     z-index: 2;
 }
 
-.singinbox .signin .content .form .inputbx label {
+.signinbox .signin .content .form .inputbx label {
     color: var(--highlight);
     font-size: 1em;
     font-weight: 400;
@@ -129,14 +126,14 @@
     z-index: 1;
 }
 
-.singinbox .signin .content .form .inputbx input:focus ~ label,
-.singinbox .signin .content .form .inputbx input:valid ~ label {
+.signinbox .signin .content .form .inputbx input:focus ~ label,
+.signinbox .signin .content .form .inputbx input:valid ~ label {
     font-size: 0.85em;
     font-weight: 600;
     transform: translateY(-32px);
 }
 
-.singinbox .signin .content .form .inputbx i {
+.signinbox .signin .content .form .inputbx i {
     background: var(--highlight);
     border-radius: 4px;
     height: 3px;
@@ -149,8 +146,8 @@
     z-index: 1;
 }
 
-.singinbox .signin .content .form .inputbx input:focus ~ i,
-.singinbox .signin .content .form .inputbx input:valid ~ i {
+.signinbox .signin .content .form .inputbx input:focus ~ i,
+.signinbox .signin .content .form .inputbx input:valid ~ i {
     height: 100%;
 }
 
@@ -182,14 +179,14 @@
 }
 
 @media (max-width: 900px) {
-    .singinbox span {
+    .signinbox span {
         height: calc(10vw - 2px);
         width: calc(10vw - 2px);
     }
 }
 
 @media (max-width: 600px) {
-    .singinbox span {
+    .signinbox span {
         height: calc(20vw - 2px);
         width: calc(20vw - 2px);
     }
