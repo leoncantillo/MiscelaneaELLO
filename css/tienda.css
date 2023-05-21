@@ -32,7 +32,7 @@
 }
 
 .aside-filtros .filtros li {
-    color: #333333;
+    color: var(--text-dark);
     font-size: 16px;
     font-weight: 500;
 }

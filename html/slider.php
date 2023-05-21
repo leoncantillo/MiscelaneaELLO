@@ -1,3 +1,14 @@
+<?php
+function getSliderImages($directory) {
+    $files = scandir($directory);
+    foreach ($files as $file) {
+        if (is_file($directory . "/" . $file)) {
+            echo '<img src="' . $directory . "/" . $file . '" alt="">';
+        }
+    }
+}
+?>
+
 <div class="slider-contain">
     <div class="slider">
         <?php getSliderImages($directory); ?>
@@ -50,14 +61,3 @@
     startSlider();
 
 </script>
-
-<?php
-function getSliderImages($directory) {
-    $files = scandir($directory);
-    foreach ($files as $file) {
-        if (is_file($directory . "/" . $file)) {
-            echo '<img src="' . $directory . "/" . $file . '" alt="">';
-        }
-    }
-}
-?>
