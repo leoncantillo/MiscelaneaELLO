@@ -2,9 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 .header {
+    --header-height: 80px;
     background: snow;
     box-shadow: 5px 0 10px rgba(0,0,0,.3);
-    height: 80px;
+    height: var(--header-height);
     width: 100%;
     z-index: 999;
 }
@@ -73,6 +74,8 @@
 .header__searcher svg {fill: var(--transparent);}
 .header__searcher * {user-select: none; color: var(--transparent);}
 
+.header__nav--useroptions {position: relative;}
+
 .header__nav--useroptions--button {
     background: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
@@ -84,10 +87,54 @@
     width: 50px;
 }
 
+.header__nav--useroptions--button:hover {
+    background: var(--global-color-3);
+}
+
 .header__nav--useroptions--button svg {
     fill: var(--global-color-3);
     user-select: none;
 }
 
+.header__nav--useroptions--button:hover svg {fill:snow ;}
+
 .header__nav--useroptions--button :nth-child(1) {height: 20px;}
 .header__nav--useroptions--button :nth-child(2) {width: 15px;}
+
+.menu-opciones-usuario {
+    background-color: var(--light-background);
+    border: 1px solid #ac97c2;
+    display: block;
+    position: absolute;
+        top: calc(var(--header-height) - 15px);
+        right: 0;
+    width: 240px;
+}
+
+.menu-opciones-usuario ul {
+    list-style: none;
+}
+
+.menu-opciones-usuario ul li {
+    display: flex;
+        align-items: center;
+    border-bottom: 1px solid #d8d8d8;
+    height: 40px;
+}
+
+.menu-opciones-usuario ul li:not(:has(a)) {margin-left: 20px; color: #888888;}
+
+.menu-opciones-usuario ul li:has(a) a {
+    display: flex;
+        align-items: center;
+        justify-content: space-between;
+    color: var(--text-dark);
+    height: 100%;
+    margin: 0 20px;
+    width: 100%;
+}
+
+.menu-opciones-usuario ul li:has(a):hover a {color: snow}
+.menu-opciones-usuario ul li:has(a) {background-color: snow;}
+.menu-opciones-usuario ul li:has(a):hover {background-color: var(--global-color-3);}
+
