@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <header>
     <div class="header">
         <div class="header__container">
@@ -33,12 +36,18 @@
                     </svg>
                 </div>
                 <!-- menu desplegable -->
-                    <!-- <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Tienda</a></li>
-                        <li><a href="#">Nosotros</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul> -->
+                <div class="menu-opciones-usuario">
+                    <?php
+                        include 'user-options-menu-header.php';
+
+                        $logueado = true; // Esto cambia según la lógica de la aplicación
+                        $esAdmin = false; // Esto cambia según la lógica de la aplicación
+
+                        // Llamar a la función para generar e imprimir la lista de opciones
+                        generarListaOpciones($logueado, $esAdmin);
+                    ?>
+
+                </div>
             </div>
         </div>
     </div>
