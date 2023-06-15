@@ -286,7 +286,7 @@
             <div class="signin">
                 <div class="content">
                     <h2>Iniciar Sesion</h2>
-                    <div class="form">
+                    <form class="form">
                         <div class="inputbx">
                             <input type="text" name="" id="" required>
                             <label>Nombre de usuario</label>
@@ -299,12 +299,12 @@
                         </div>
                         <div class="links">
                             <a href="">Olvidé mi contraseña</a>
-                            <a href="">Registrarse</a>
+                            <a href="">Registrarse</a> 
                         </div>
                         <div class="inputbx">
                             <input type="submit" value="Entrar">
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </section>
