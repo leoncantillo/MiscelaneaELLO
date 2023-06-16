@@ -11,7 +11,6 @@
     <title>Miscelanea ELLO</title>
 </head>
 <body>
-    <?php include 'header.php'?>
     <?php $directory = "../img/jpg/slides"; include 'slider.php'?>
     <section class="tienda-home">
         <h4 class="titulo-producto-filtro">Filtros</h4>

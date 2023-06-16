@@ -9,7 +9,6 @@
     <title>Miscelanea ELLO</title>
 </head>
 <body>
-    <?php include 'header.php'?>
     <section class="banner" style="--bg-banner: url(../img/jpg/bg-desenfocado.webp)">
         <h4 class="foco">Miscelanea ELLO</h1>
         <img class="foco" src="../img/svg/logotipo-white.svg" alt="">

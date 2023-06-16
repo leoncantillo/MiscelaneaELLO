@@ -17,8 +17,13 @@
     border: none;
     border-radius: 40px;
     color: var(--global-color-3);
-    font-size: 'poppins';
+    font-family: 'poppins';
     font-weight: 800;
     height: 40px;
     width: 300px;
+}
+
+section{
+    margin: 40px auto;
+    width: 1000px;
 }
