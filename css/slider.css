@@ -1,8 +1,9 @@
+.slider-contain {position: relative;}
+
 .slider {
     width: 100%;
     height: 600px;
     overflow: hidden;
-    position: relative;
 }
 
 .slider img {
