@@ -12,21 +12,22 @@
     <!--HEADER-->
     <?php include 'header.php'?>
 
-    <section>
-        <div class="dinamic-contain">
-            <?php
-                if(isset($_GET["rute"])){
-                    if($_GET["rute"] == "home" ||
-                       $_GET["rute"] == "shop" ||
-                       $_GET["rute"] == "about-us" ||
-                       $_GET["rute"] == "contact"){
-                        include "view/html/".$_GET["rute"].".php";
-                       }
+    <section class="dinamic-contain">
+        <?php
+            if(isset($_GET["rute"])){
+                if($_GET["rute"] == "home" ||
+                    $_GET["rute"] == "shop" ||
+                    $_GET["rute"] == "about-us" ||
+                    $_GET["rute"] == "contact"){
+                    include "view/html/".$_GET["rute"].".php";
                 }else {
-                    include "view/html/home.php";
+                    // Cambiar por redirigir página
+                    include "view/html/404.php";
                 }
-            ?>
-        </div>
+            }else {
+                include "view/html/home.php";
+            }
+        ?>
     </section>
 
     <!--FOOTER-->
