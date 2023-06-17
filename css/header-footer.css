@@ -53,7 +53,7 @@
 
 .header__nav--main ul a {
     color: var(--global-color-3);
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif, Helvetica;
     font-size: 14px;
     font-weight: 700;
 }

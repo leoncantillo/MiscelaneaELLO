@@ -17,7 +17,7 @@
     border: none;
     border-radius: 40px;
     color: var(--global-color-3);
-    font-family: 'poppins';
+    font-family: 'poppins', sans-serif, Helvetica;
     font-weight: 800;
     height: 40px;
     width: 300px;
