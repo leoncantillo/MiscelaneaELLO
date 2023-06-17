@@ -4,8 +4,8 @@ function generarListaOpciones($logueado, $esAdmin) {
         // Lista si el usuario es invitado
         echo '
         <ul>
-            <li><a href="#">Iniciar Sesión <i class="fa-solid fa-right-to-bracket"></i></a></li>
-            <li><a href="#">Registrarse <i class="fa-solid fa-user-plus"></i></a></li>
+            <li><a href="index.php?rute=signin">Iniciar Sesión <i class="fa-solid fa-right-to-bracket"></i></a></li>
+            <li><a href="index.php?rute=signup">Registrarse <i class="fa-solid fa-user-plus"></i></a></li>
         </ul>';
     } elseif ($esAdmin) {
         // Lista de usuario administrador

@@ -9,28 +9,31 @@
     <link rel="stylesheet" href="view/css/header-footer.css">
 </head>
 <body>
-    <!--HEADER-->
-    <?php include 'header.php'?>
-
     <section class="dinamic-contain">
         <?php
-            if(isset($_GET["rute"])){
-                if($_GET["rute"] == "home" ||
+            if (isset($_GET["rute"])) {
+                if ($_GET["rute"] == "home" ||
                     $_GET["rute"] == "shop" ||
                     $_GET["rute"] == "about-us" ||
-                    $_GET["rute"] == "contact"){
+                    $_GET["rute"] == "contact") {
+                    
+                    include "view/html/header.php";
                     include "view/html/".$_GET["rute"].".php";
+                    include "view/html/footer.php";
+
+                }elseif ($_GET["rute"] == "signin" ||
+                         $_GET["rute"] == "signup"){
+                            
+                    include "view/html/".$_GET["rute"].".php";
+
                 }else {
                     // Cambiar por redirigir página
                     include "view/html/404.php";
                 }
-            }else {
+            } else {
                 include "view/html/home.php";
             }
         ?>
     </section>
-
-    <!--FOOTER-->
-    <?php include 'footer.php'?>
 </body>
 </html>
