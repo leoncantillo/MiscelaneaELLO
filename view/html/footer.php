@@ -10,7 +10,7 @@
         </div>
         <div class="contfooter info">
             <div class="footerbox">
-                <img class="logo-footer" src="../img/svg/logotipo-white.svg" alt="logotipo-white">
+                <img class="logo-footer" src="view/img/svg/logotipo-white.svg" alt="logotipo-white">
                 <ul class="links">
                     <li>INICIO</li>
                     <li>TIENDA</li>
@@ -27,7 +27,7 @@
                     <li>CORREO@GMAIL.COM</li>
                     <li>BARRANQUILLA COL.</li>
                 </ul>
-                <img class="qr-code" src="../../sources/codigo.png" alt="">
+                <img class="qr-code" src="sources/codigo.png" alt="">
             </div>
         </div>
 </footer>

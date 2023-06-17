@@ -1,4 +1,4 @@
-@import url(../css/estilos-globales.css);
+@import url(estilos-globales.css);
 
 .banner::before {
     content: '';
@@ -9,19 +9,19 @@
     z-index: 0;
 }
 
-.banner h4 {
+.banner .foco h4 {
     color: snow;
     font-size: 40px;
     margin-bottom: 20px;
 }
 
-.banner img {
+.banner .foco img {
     height: 200px;
     width: 200px;
     transition: 0.5s;
 }
 
-.banner img:hover {
+.banner .foco img:hover {
     cursor: pointer;
     transform: scale(1.2);
 }
