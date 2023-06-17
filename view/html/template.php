@@ -16,6 +16,10 @@
         include 'home.php'
     ?>
 
+    <script>
+        
+    </script>
+
     <!--FOOTER-->
     <?php include 'footer.php'?>
 </body>

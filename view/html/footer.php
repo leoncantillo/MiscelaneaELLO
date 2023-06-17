@@ -27,7 +27,7 @@
                     <li>CORREO@GMAIL.COM</li>
                     <li>BARRANQUILLA COL.</li>
                 </ul>
-                <img class="qr-code" src="../sources/codigo.png" alt="">
+                <img class="qr-code" src="../../sources/codigo.png" alt="">
             </div>
         </div>
 </footer>
