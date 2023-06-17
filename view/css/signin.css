@@ -116,7 +116,7 @@
 .signinbox .signin .content .form .inputbx label {
     color: var(--highlight);
     font-size: 1em;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: .05em;
     padding: 10px 0;
     pointer-events: none;
@@ -129,7 +129,6 @@
 .signinbox .signin .content .form .inputbx input:focus ~ label,
 .signinbox .signin .content .form .inputbx input:valid ~ label {
     font-size: 0.85em;
-    font-weight: 600;
     transform: translateY(-32px);
 }
 
