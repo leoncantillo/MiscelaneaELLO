@@ -75,9 +75,14 @@
 .header__searcher svg {fill: var(--transparent);}
 .header__searcher * {user-select: none; color: var(--transparent);}
 
-.header__nav--useroptions {position: relative;}
-
-input[id="active-useroptions"] {display: none;}
+.header__nav--useroptions {
+    display: flex;
+        align-items: center;
+        justify-content: center;
+    height: 100%;
+    position: relative;
+    width: 100px;
+}
 
 .header__nav--useroptions--button {
     background: rgba(255, 255, 255, 0.4);
@@ -94,12 +99,8 @@ input[id="active-useroptions"] {display: none;}
 .header__nav--useroptions--button :nth-child(1) {font-size: 25px;}
 .header__nav--useroptions--button :nth-child(2) {font-size: 14px;}
 
-.header__nav--useroptions--button:hover {
-    background: var(--global-color-3);
-    color: snow;
-}
-
-input[id="active-useroptions"]:checked ~ .header__nav--useroptions--button {
+.header__nav--useroptions--button:hover,
+.header__nav--useroptions--button.hovered {
     background: var(--global-color-3);
     color: snow;
 }
@@ -109,13 +110,16 @@ input[id="active-useroptions"]:checked ~ .header__nav--useroptions--button {
     border: 1px solid #ac97c2;
     display: none;
     position: absolute;
-        top: calc(var(--header-height) - 15px);
+        top: var(--header-height);
         right: 0;
     width: 240px;
     z-index: 999;
 }
 
-input[id="active-useroptions"]:checked ~ .menu-opciones-usuario {display: block;}
+.header__nav--useroptions:hover .menu-opciones-usuario {display: block;}
+.header__nav--useroptions--button:hover ~ .menu-opciones-usuario {display: block;}
+.menu-opciones-usuario:hover {display: block;}
+
 
 .menu-opciones-usuario ul {
     list-style: none;
