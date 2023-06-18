@@ -6,7 +6,7 @@
         <h2>Descuento en utiles escolares</h2>
         <p>Encuentra las mejores ofertas<br/>Precios especiales</p>
         <h4>¡No te lo pierdas!</h4>
-        <button class="sale-button">Ver artículos</button>
+        <a href="index.php?rute=shop" class="sale-button">Ver artículos</a>
     </div>
 </section>
 <section class="parrafo">

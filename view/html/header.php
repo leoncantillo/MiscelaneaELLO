@@ -66,8 +66,8 @@
                     <?php
                         include 'user-options-menu-header.php';
 
-                        $logueado = true; // Esto cambia según la lógica de la aplicación
-                        $esAdmin = true; // Esto cambia según la lógica de la aplicación
+                        $logueado = false; // Esto cambia según la lógica de la aplicación
+                        $esAdmin = false; // Esto cambia según la lógica de la aplicación
 
                         // Llamar a la función para generar e imprimir la lista de opciones
                         generarListaOpciones($logueado, $esAdmin);

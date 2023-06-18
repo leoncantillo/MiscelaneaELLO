@@ -4,10 +4,10 @@
     background-position: 50% 100%;
     color: var(--global-color-3);
     margin-top: -80px;
-    row-gap: 20px;
     text-align: center;
-    width: 100%;
 }
+
+.hero div * {margin-bottom: 20px;}
 
 .hero div h2 {font-size: 40px; text-transform: uppercase;}
 .hero div p {font-size: 20px; font-weight: 400}
@@ -15,12 +15,13 @@
 
 .hero div .sale-button {
     background: var(--global-color-4);
-    border: none;
     border-radius: 40px;
     color: var(--global-color-3);
+    display: inline-block;
     font-family: 'poppins', sans-serif, Helvetica;
     font-weight: 800;
     height: 40px;
+    line-height: 40px;
     width: 300px;
 }
 
