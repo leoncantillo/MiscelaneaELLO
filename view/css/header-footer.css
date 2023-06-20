@@ -22,13 +22,14 @@
     padding: 0 10px;
 }
 
+/* LOGO ================================= */
 .header__logo {
     display: flex;
         align-items: center;
         flex-direction: row;
+        gap: 10px;
         justify-content: space-between;
     height: 40px;
-    gap: 10px;
     margin: 0;
     max-width: 200px;
 }
@@ -43,8 +44,14 @@
     font-size: 40px;
 }
 
+/* NAVBAR =======================*/
 .header__nav--main {
     width: 400px;
+}
+
+.header__nav--main svg {
+    display: none;
+    fill: var(--global-color-3)
 }
 
 .header__nav--main ul{
@@ -60,6 +67,7 @@
     font-weight: 700;
 }
 
+/* SEARCHER =====================================*/
 .header__searcher {
     --transparent: rgba(71, 3, 140, 0.4);
     background: rgba(255, 255, 255, 0.4);
@@ -77,6 +85,7 @@
 .header__searcher svg {fill: var(--transparent);}
 .header__searcher * {user-select: none; color: var(--transparent);}
 
+/* USER OPTIONS ===============================================*/
 .header__nav--useroptions {
     display: flex;
         align-items: center;
@@ -149,6 +158,16 @@
 .menu-opciones-usuario ul li:has(a):hover a {color: snow}
 .menu-opciones-usuario ul li:has(a) {background-color: snow;}
 .menu-opciones-usuario ul li:has(a):hover {background-color: var(--global-color-3);}
+
+@media (max-width: 900px) {
+    .header__nav--main svg {
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    
+}
 
 /* FOOTER ====================================*/
 footer {
