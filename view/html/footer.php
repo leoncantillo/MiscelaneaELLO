@@ -1,4 +1,5 @@
 <footer>
+    <div class="footer">
         <div class="contfooter form">
             <div class="footerbox">
                 <h4>CONTACTO</h4>
@@ -30,4 +31,5 @@
                 <img class="qr-code" src="sources/codigo.png" alt="">
             </div>
         </div>
+    </div>
 </footer>
