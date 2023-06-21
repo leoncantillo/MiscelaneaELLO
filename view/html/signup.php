@@ -282,17 +282,17 @@
                 <h2>Registro</h2>
                 <form class="form" method="post">
                     <div class="inputbx">
-                        <input type="text" name="username" id="" required>
+                        <input type="text" name="register-username" id="" required>
                         <label>Nombre de usuario</label>
                         <i></i>
                     </div>
                     <div class="inputbx">
-                        <input type="text" name="email" id="" required>
+                        <input type="email" name="register-email" id="" required>
                         <label>Email</label>
                         <i></i>
                     </div>
                     <div class="inputbx">
-                        <input type="password" name="password" id="" required>
+                        <input type="password" name="register-password" id="" required>
                         <label>Contraseña</label>
                         <i></i>
                     </div>
@@ -306,7 +306,6 @@
                 </form>
 
                 <?php
-                    require_once "controllers/forms-controller.php";
                     $registro = FormsController::ctrSignUp();
                     
                     if($registro == true) {
@@ -315,9 +314,9 @@
                             if (window.history.replaceState) {
                                 window.history.replaceState(null,null,window.location.href);
                             }
+                            alert('El usuario ha sido registrado correctamente');
+                            window.location = 'index.php?rute=signin'
                         </script>";
-
-                        echo "El usuario ha sido registrado";
                     }
                 ?>
             </div>
