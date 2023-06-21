@@ -6,17 +6,14 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    border-top: 5px solid #cecece;
     color: snow;
+    display: grid;
     min-height: 95vh;
 }
 
-.footer .contfooter.form {
-    border-top: 5px solid #cecece;
-    height: 40%;
-}
 .footer .contfooter.info {
     background-color: #47038ce8;
-    height: 60%;
 }
 
 .footer .footerbox{
@@ -94,6 +91,7 @@
 }
 
 @media (max-width: 600px) {
+
     .footer .contfooter.info .footerbox, .footer .contfooter.form .footerbox {
         display: flex;
             flex-direction: column;
