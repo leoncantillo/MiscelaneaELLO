@@ -230,7 +230,7 @@
     .header__nav--main .header__nav--list ul li:hover {background-color: var(--global-color-3);}
     .header__nav--main .header__nav--list ul li:hover a {color: snow}
 }
-/* 
+
 @media (max-width: 600px) {
-    
-} */
+    .header__container{padding: 0 20px;}
+}
