@@ -6,48 +6,62 @@
                 <h1>ELLO</h1>
             </figure>
             <nav class="header__nav--main">
-                <ul>
-                    <?php if(isset($_GET["rute"])): ?>
-                        <!-- HOME -->
-                        <?php if($_GET["rute"] == "home"): ?>
-                            <li><a class="active" href="index.php?rute=home">Inicio</a></li>
-                        <?php else: ?>
+                <span class="show-menu"><i class="fa-solid fa-bars">H</i></span>
+                <div class="header__nav--list closed">
+                    <span class="hide-menu"><i class="fa-regular fa-circle-xmark">X</i></span>
+                    <ul>
+                        <?php if(isset($_GET["rute"])): ?>
+                            <!-- HOME -->
+                            <?php if($_GET["rute"] == "home"): ?>
+                                <li><a class="active" href="index.php?rute=home">Inicio</a></li>
+                            <?php else: ?>
+                                <li><a href="index.php?rute=home">Inicio</a></li>
+                            <?php endif ?>
+
+                            <!-- SHOP -->
+                            <?php if($_GET["rute"] == "shop"): ?>
+                                <li><a class="active" href="index.php?rute=shop">Tienda</a></li>
+                            <?php else: ?>
+                                <li><a href="index.php?rute=shop">Tienda</a></li>
+                            <?php endif ?>
+
+                            <!-- ABOUT US -->
+                            <?php if($_GET["rute"] == "about-us"): ?>
+                                <li><a class="active" href="index.php?rute=about-us">Nosotros</a></li>
+                            <?php else: ?>
+                                <li><a href="index.php?rute=about-us">Nosotros</a></li>
+                            <?php endif ?>
+
+                            <!-- CONTACT -->
+                            <?php if($_GET["rute"] == "contact"): ?>
+                                <li><a class="active" href="index.php?rute=contact">Contacto</a></li>
+                            <?php else: ?>
+                                <li><a href="index.php?rute=contact">Contacto</a></li>
+                            <?php endif ?>
+
+                        <?php else:?>
+
                             <li><a href="index.php?rute=home">Inicio</a></li>
-                        <?php endif ?>
-
-                        <!-- SHOP -->
-                        <?php if($_GET["rute"] == "shop"): ?>
-                            <li><a class="active" href="index.php?rute=shop">Tienda</a></li>
-                        <?php else: ?>
                             <li><a href="index.php?rute=shop">Tienda</a></li>
-                        <?php endif ?>
-
-                        <!-- ABOUT US -->
-                        <?php if($_GET["rute"] == "about-us"): ?>
-                            <li><a class="active" href="index.php?rute=about-us">Nosotros</a></li>
-                        <?php else: ?>
-                            <li><a href="index.php?rute=about-us">Nosotros</a></li>
-                        <?php endif ?>
-
-                        <!-- CONTACT -->
-                        <?php if($_GET["rute"] == "contact"): ?>
-                            <li><a class="active" href="index.php?rute=contact">Contacto</a></li>
-                        <?php else: ?>
+                            <li><a href="index.php?rute=about_us">Nosotros</a></li>
                             <li><a href="index.php?rute=contact">Contacto</a></li>
+
                         <?php endif ?>
+                    </ul>
+                </div>
+                <script>
+                    const headerNavList = document.querySelector(".header__nav--list");
+                    const showMenu = document.querySelector(".show-menu");
+                    const hideMenu = document.querySelector(".hide-menu");
 
-                    <?php else:?>
+                    showMenu.addEventListener("click", function(){
+                        headerNavList.classList.remove("closed");
+                    });
 
-                        <li><a href="index.php?rute=home">Inicio</a></li>
-                        <li><a href="index.php?rute=shop">Tienda</a></li>
-                        <li><a href="index.php?rute=about_us">Nosotros</a></li>
-                        <li><a href="index.php?rute=contact">Contacto</a></li>
-
-                    <?php endif ?>
-                </ul>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #00000;transform: ;msFilter:;">
-                    <path d="M4 6h16v2H4zm4 5h12v2H8zm5 5h7v2h-7z"></path>
-                </svg>
+                    hideMenu.addEventListener("click", function(){
+                        headerNavList.classList.add("closed")
+                    })
+                </script>
             </nav>
             <div class="header__searcher">
                 <!-- cambiar por un input -->
@@ -80,11 +94,11 @@
 
                     function displayMenu (element) {
                         element.addEventListener('mouseover', function() {
-                        button.classList.add('hovered');
+                            button.classList.add('hovered');
                         });
 
                         element.addEventListener('mouseout', function() {
-                        button.classList.remove('hovered');
+                            button.classList.remove('hovered');
                         }); 
                     }
 
