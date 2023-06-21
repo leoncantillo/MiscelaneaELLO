@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +18,9 @@
                 if ($_GET["rute"] == "home" ||
                     $_GET["rute"] == "shop" ||
                     $_GET["rute"] == "about-us" ||
-                    $_GET["rute"] == "contact") {
+                    $_GET["rute"] == "contact" ||
+                    $_GET["rute"] == "profile" ||
+                    $_GET["rute"] == "logout") {
                     
                     include "view/html/header.php";
                     include "view/html/".$_GET["rute"].".php";

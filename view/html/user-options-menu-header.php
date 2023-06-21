@@ -12,7 +12,7 @@ function generarListaOpciones($logueado, $esAdmin) {
         echo '
         <ul>
             <li>Perfil</li>
-            <li><a href="#">Ver Perfil <i class="fa-solid fa-user"></i></a></li>
+            <li><a href="index.php?rute=profile">Ver Perfil <i class="fa-solid fa-user"></i></a></li>
             <li><a href="#">Configuración <i class="fa-solid fa-gear"></i></a></li>
             <li><a href="#">Notificaciones <i class="fa-solid fa-bell"></i></a></li>
             <li>Administrador</li>
@@ -20,16 +20,16 @@ function generarListaOpciones($logueado, $esAdmin) {
             <li><a href="#">Gestionar Ventas <i class="fa-solid fa-sack-dollar"></i></a></li>
             <li><a href="#">Preguntas <i class="fa-solid fa-circle-question"></i></a></li>
             <li><a href="#">Administrar <i class="fa-solid fa-key"></i></a></li>
-            <li><a href="#">Cerrar Sesión <i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li><a href="index.php?rute=logout">Cerrar Sesión <i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>';
     } else {
         // Lista si el usuario está logueado
         echo '
         <ul>
-            <li><a href="#">Ver Perfil <i class="fa-solid fa-user"></i></a></li>
+            <li><a href="index.php?rute=profile">Ver Perfil <i class="fa-solid fa-user"></i></a></li>
             <li><a href="#">Notificaciones <i class="fa-solid fa-bell"></i></a></li>
             <li><a href="#">Configuración <i class="fa-solid fa-gear"></i></a></li>
-            <li><a href="#">Cerrar Sesión <i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li><a href="index.php?rute=logout">Cerrar Sesión <i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>';
     }
 }

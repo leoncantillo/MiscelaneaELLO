@@ -27,10 +27,9 @@ Class FormsController {
             $item = "email";
             $value = $_POST["login-email"];
             $answer = FormsModel::mdlSelectRegister($table, $item, $value);
-            
-            // echo "<pre>"; print_r($answer); echo "</pre>";
 
             if($answer["email"] == $_POST["login-email"] && $answer["password"] == $_POST["login-password"]){
+                $_SESSION["validate-login"] = true;
                 echo "<script>
                         if (window.history.replaceState) {
                             window.history.replaceState(null,null,window.location.href);
