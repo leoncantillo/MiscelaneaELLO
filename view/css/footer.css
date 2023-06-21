@@ -24,14 +24,14 @@
         flex-direction: column;
     height: 100%;
     margin: 0 auto;
-    width: 900px;
+    max-width: 900px;
+    padding: 40px 20px;
 }
 
 .footer .contfooter.form .footerbox {
     gap: 10px;
     justify-content: flex-end;
     align-items: flex-start;
-    padding-bottom: 50px;
 }
 
 .footer .contfooter.form .footerbox h4{
@@ -63,7 +63,6 @@
         gap: 20px;
         grid-template-columns: 2fr 2fr 1fr;
         grid-template-rows: 1fr 2fr;
-    padding: 40px 0;
 }
 
 .footer div img.logo-footer {
