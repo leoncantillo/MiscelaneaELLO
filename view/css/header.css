@@ -53,6 +53,7 @@
     cursor: pointer;
     display: none;
     font-size: 20px;
+    text-align: right;
     transition: transform 0.5s;
 }
 
@@ -79,19 +80,44 @@
 .header__searcher {
     --transparent: rgba(71, 3, 140, 0.4);
     background: rgba(255, 255, 255, 0.4);
+    position: relative;
+}
+
+.header__searcher--input {
+    background: rgba(255, 255, 255, 0.4);
     border: .5px var(--transparent) solid;
     border-radius: 40px;
-    display: flex;
-        align-items: center;
-        gap: 10px;
     height: 40px;
     min-width: 200px;
-    padding: 0 10px;
+    outline: none;
     width: 250px;
 }
 
-.header__searcher svg {fill: var(--transparent);}
-.header__searcher * {user-select: none; color: var(--transparent);}
+input.header__searcher--input:focus,
+input.header__searcher--input:valid {
+    border: 1px var(--global-color-5) solid;
+    padding: 0 15px;
+}
+
+.header__searcher--input:focus ~ .header__searcher--placeholder,
+.header__searcher--input:valid ~ .header__searcher--placeholder
+{display: none;}
+
+.header__searcher--placeholder {
+    color: var(--transparent);
+    display: flex;
+        align-items: center;
+        gap: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    pointer-events: none;
+    position: absolute;
+        top: 0;
+        left: 15px;
+    user-select: none;
+    height: 100%;
+}
+
 
 /* USER OPTIONS ===============================================*/
 .header__nav--useroptions {
@@ -172,16 +198,22 @@
 .menu-opciones-usuario ul li:has(a):hover {background-color: var(--global-color-3);}
 
 @media (max-width: 900px) {
-
     .header__container{padding: 0 50px;}
+
+    /* NAVBAR =======================*/
 
     .header__nav--main {
         order: 3;
-        width: auto;
+        width: fit-content;
+        justify-self: flex-end;
     }
     
     .header__nav--main .show-menu,
-    .header__nav--main .header__nav--list .hide-menu {display: block;}
+    .header__nav--main .header__nav--list .hide-menu {
+        display: flex;
+            justify-content: flex-end;
+        width: fit-content;
+    }
 
     .header__nav--main .header__nav--list {
         background-color: snow;
@@ -202,17 +234,16 @@
 
     .header__nav--main .header__nav--list.closed {
         visibility: hidden;
-        /* display: none; */
         transform: translateX(250px);
     }
 
     .header__nav--main .header__nav--list .hide-menu {
         color: var(--global-color-3);
         align-self: flex-end;
-        font-family: "Font Awesome 6 Free";
+        font-size: 25px;
         margin-bottom: 40px;
     }
-
+    
     .header__nav--main .header__nav--list ul{display: block;}
 
     .header__nav--main .header__nav--list ul li {
@@ -234,7 +265,57 @@
     .header__nav--main .header__nav--list ul li:hover {background-color: var(--global-color-3);}
     .header__nav--main .header__nav--list ul li:hover a {color: snow}
 }
-/* 
+
 @media (max-width: 600px) {
-    
-} */
+    .header {
+        --header-height: min-content;
+    }
+
+    .header__container {
+        display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        padding: 20px 50px;
+    }
+
+    /* LOGO ====================================== */
+    .header__logo {
+        gap: 20px;
+        grid-column: 1/4;
+        margin: 0 auto;
+    }
+
+    /* SEARCHER =====================================*/
+    /* .header__searcher {
+        --transparent: rgba(71, 3, 140, 0.4);
+        background: rgba(255, 255, 255, 0.4);
+        position: relative;
+    } */
+
+    /* .header__searcher--input, .header__searcher--placeholder span {
+        display: none;
+    } */
+
+    /* input.header__searcher--input:focus,
+    input.header__searcher--input:valid {
+        border: 1px var(--global-color-5) solid;
+        padding: 0 15px;
+    }
+
+    .header__searcher--input:focus ~ .header__searcher--placeholder,
+    .header__searcher--input:valid ~ .header__searcher--placeholder
+    {display: none;} */
+
+    .header__searcher--placeholder {
+        color: var(--global-color-3);
+        cursor: pointer;
+        pointer-events: all;
+        position: relative;
+    }
+
+
+    /* USER OPTIONS ========================= */
+    .header__nav--useroptions {
+        margin: 0 auto;
+        width: fit-content;
+    }
+}
