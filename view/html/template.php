@@ -32,7 +32,9 @@
                     include "view/html/404.php";
                 }
             } else {
+                include "view/html/header.php";
                 include "view/html/home.php";
+                include "view/html/footer.php";
             }
         ?>
     </section>
