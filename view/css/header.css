@@ -103,6 +103,8 @@
     width: 80px;
 }
 
+.header__nav--useroptions--select {display: none;}
+
 .header__nav--useroptions--button {
     background: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
@@ -118,6 +120,7 @@
 .header__nav--useroptions--button :nth-child(1) {font-size: 25px;}
 .header__nav--useroptions--button :nth-child(2) {font-size: 14px;}
 
+.header__nav--useroptions--select:checked + .header__nav--useroptions--button,
 .header__nav--useroptions--button:hover,
 .header__nav--useroptions--button.hovered {
     background: var(--global-color-3);
@@ -135,8 +138,9 @@
     z-index: 999;
 }
 
-.header__nav--useroptions:hover .menu-opciones-usuario {display: block;}
-.header__nav--useroptions--button:hover ~ .menu-opciones-usuario {display: block;}
+.header__nav--useroptions--select:checked ~ .menu-opciones-usuario,
+.header__nav--useroptions:hover .menu-opciones-usuario,
+.header__nav--useroptions--button:hover ~ .menu-opciones-usuario,
 .menu-opciones-usuario:hover {display: block;}
 
 

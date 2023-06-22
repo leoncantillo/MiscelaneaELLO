@@ -71,10 +71,11 @@
                 <span class="header__searcher--placeholder">Buscar</span>
             </div>
             <div class="header__nav--useroptions">
-                <div class="header__nav--useroptions--button">
+                <input class="header__nav--useroptions--select" type="checkbox" name="" id="useroptions--select">
+                <label class="header__nav--useroptions--button" for="useroptions--select">
                     <i class="fa-regular fa-user"></i>
                     <i class="fa-solid fa-chevron-down"></i>
-                </div>
+                </label>
                 <!-- menu desplegable -->
                 <div class="menu-opciones-usuario">
                     <?php
