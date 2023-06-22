@@ -28,7 +28,6 @@
                     include "view/html/".$_GET["rute"].".php";
 
                 }else {
-                    // Cambiar por redirigir página
                     include "view/html/404.php";
                 }
             } else {
