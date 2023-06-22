@@ -6,9 +6,9 @@
                 <h1>ELLO</h1>
             </figure>
             <nav class="header__nav--main">
-                <span class="show-menu"><i class="fa-solid fa-bars">H</i></span>
+                <span class="show-menu"><i class="fa-solid fa-bars"></i></span>
                 <div class="header__nav--list closed">
-                    <span class="hide-menu"><i class="fa-regular fa-circle-xmark">X</i></span>
+                    <span class="hide-menu"><i class="fa-regular fa-circle-xmark"></i></span>
                     <ul>
                         <?php if(isset($_GET["rute"])): ?>
                             <!-- HOME -->
@@ -64,17 +64,18 @@
                 </script>
             </nav>
             <div class="header__searcher">
-                <!-- cambiar por un input -->
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                    <path d="M17.545 15.467l-3.779-3.779c0.57-0.935 0.898-2.035 0.898-3.21 0-3.417-2.961-6.377-6.378-6.377s-6.186 2.769-6.186 6.186c0 3.416 2.961 6.377 6.377 6.377 1.137 0 2.2-0.309 3.115-0.844l3.799 3.801c0.372 0.371 0.975 0.371 1.346 0l0.943-0.943c0.371-0.371 0.236-0.84-0.135-1.211zM4.004 8.287c0-2.366 1.917-4.283 4.282-4.283s4.474 2.107 4.474 4.474c0 2.365-1.918 4.283-4.283 4.283s-4.473-2.109-4.473-4.474z"></path>
-                </svg>                    
-                <span class="header__searcher--placeholder">Buscar</span>
+                <input class="header__searcher--input" type="text" required/>
+                <div class="header__searcher--placeholder">
+                    <i class="fa-solid fa-magnifying-glass placeholder-search icon"></i>                   
+                    <span class="placeholder-search text">Buscar</span>
+                </div>
             </div>
             <div class="header__nav--useroptions">
-                <div class="header__nav--useroptions--button">
+                <input class="header__nav--useroptions--select" type="checkbox" name="" id="useroptions--select">
+                <label class="header__nav--useroptions--button" for="useroptions--select">
                     <i class="fa-regular fa-user"></i>
                     <i class="fa-solid fa-chevron-down"></i>
-                </div>
+                </label>
                 <!-- menu desplegable -->
                 <div class="menu-opciones-usuario">
                     <?php
@@ -88,9 +89,10 @@
                     ?>
                 </div>
                 <script>
+                    // Mostrar opciones de usuario
                     const button = document.querySelector('.header__nav--useroptions--button');
-                    const content = document.querySelector('.header__nav--useroptions');
-                    const menu = document.querySelector('.menu-opciones-usuario');
+                    const navUser = document.querySelector('.header__nav--useroptions');
+                    const userMenu = document.querySelector('.menu-opciones-usuario');
 
                     function displayMenu (element) {
                         element.addEventListener('mouseover', function() {
@@ -102,8 +104,54 @@
                         }); 
                     }
 
-                    displayMenu(content);
-                    displayMenu(menu)
+                    displayMenu(navUser);
+                    displayMenu(userMenu);
+
+                    // Buscador en móviles
+                    const headerContainer = document.querySelector('.header__container');
+                    const logo = document.querySelector('.header__logo');
+                    const navMenu = document.querySelector('.header__nav--main');
+                    const containerSearcher = document.querySelector('.header__searcher--placeholder');
+                    const inputSearch = document.querySelector('.header__searcher--input');
+                    const iconSearch = document.querySelector('.placeholder-search.icon');
+                    let overlaySearch = document.querySelector(".overlay-search");
+
+                    // Función para poder intercalar eventos en el icono de busqueda.
+                    iconSearch.addEventListener("click", startSearch)
+
+                    function startSearch() {
+                        logo.classList.add('hideItForSearch');
+                        navMenu.classList.add('hideItForSearch');
+                        navUser.classList.add('hideItForSearch');
+                        headerContainer.classList.add('clickToSearch');
+                        containerSearcher.classList.add('clickToSearch');
+                        inputSearch.classList.add('clickToSearch');
+                        inputSearch.focus();
+                        iconSearch.classList.add('clickToSearch');
+
+                        if (!overlaySearch) {
+                            overlaySearch = document.createElement("div");
+                            overlaySearch.classList.add("overlay-search");
+                            overlaySearch.addEventListener("click", endSearch);
+
+                            // Insertar el overlay anter del header
+                            const header = document.querySelector('header');
+                            header.parentNode.insertBefore(overlaySearch, header);
+                        }
+                    };
+
+                    function endSearch() {
+                        logo.classList.remove('hideItForSearch');
+                        navMenu.classList.remove('hideItForSearch');
+                        navUser.classList.remove('hideItForSearch');
+                        headerContainer.classList.remove('clickToSearch');
+                        containerSearcher.classList.remove('clickToSearch');
+                        inputSearch.classList.remove('clickToSearch');
+                        iconSearch.classList.remove('clickToSearch');
+
+                        overlaySearch.remove();
+                        overlaySearch = null
+                    }
                 </script>
             </div>
         </div>

@@ -6,6 +6,7 @@
     background: snow;
     box-shadow: 5px 0 10px rgba(0,0,0,.3);
     height: var(--header-height);
+    position: relative;
     width: 100%;
     z-index: 999;
 }
@@ -53,6 +54,7 @@
     cursor: pointer;
     display: none;
     font-size: 20px;
+    text-align: right;
     transition: transform 0.5s;
 }
 
@@ -79,19 +81,44 @@
 .header__searcher {
     --transparent: rgba(71, 3, 140, 0.4);
     background: rgba(255, 255, 255, 0.4);
+    position: relative;
+}
+
+.header__searcher--input {
+    background: rgba(255, 255, 255, 0.4);
     border: .5px var(--transparent) solid;
     border-radius: 40px;
-    display: flex;
-        align-items: center;
-        gap: 10px;
     height: 40px;
     min-width: 200px;
-    padding: 0 10px;
+    outline: none;
     width: 250px;
 }
 
-.header__searcher svg {fill: var(--transparent);}
-.header__searcher * {user-select: none; color: var(--transparent);}
+input.header__searcher--input:focus,
+input.header__searcher--input:valid {
+    border: 1px var(--global-color-5) solid;
+    padding: 0 15px;
+}
+
+.header__searcher--input:focus ~ .header__searcher--placeholder,
+.header__searcher--input:valid ~ .header__searcher--placeholder
+{display: none;}
+
+.header__searcher--placeholder {
+    color: var(--transparent);
+    display: flex;
+        align-items: center;
+        gap: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    pointer-events: none;
+    position: absolute;
+        top: 0;
+        left: 15px;
+    user-select: none;
+    height: 100%;
+}
+
 
 /* USER OPTIONS ===============================================*/
 .header__nav--useroptions {
@@ -102,6 +129,8 @@
     position: relative;
     width: 80px;
 }
+
+.header__nav--useroptions--select {display: none;}
 
 .header__nav--useroptions--button {
     background: rgba(255, 255, 255, 0.4);
@@ -118,6 +147,7 @@
 .header__nav--useroptions--button :nth-child(1) {font-size: 25px;}
 .header__nav--useroptions--button :nth-child(2) {font-size: 14px;}
 
+.header__nav--useroptions--select:checked + .header__nav--useroptions--button,
 .header__nav--useroptions--button:hover,
 .header__nav--useroptions--button.hovered {
     background: var(--global-color-3);
@@ -135,8 +165,9 @@
     z-index: 999;
 }
 
-.header__nav--useroptions:hover .menu-opciones-usuario {display: block;}
-.header__nav--useroptions--button:hover ~ .menu-opciones-usuario {display: block;}
+.header__nav--useroptions--select:checked ~ .menu-opciones-usuario,
+.header__nav--useroptions:hover .menu-opciones-usuario,
+.header__nav--useroptions--button:hover ~ .menu-opciones-usuario,
 .menu-opciones-usuario:hover {display: block;}
 
 
@@ -168,16 +199,22 @@
 .menu-opciones-usuario ul li:has(a):hover {background-color: var(--global-color-3);}
 
 @media (max-width: 900px) {
-
     .header__container{padding: 0 50px;}
+
+    /* NAVBAR =======================*/
 
     .header__nav--main {
         order: 3;
-        width: auto;
+        width: fit-content;
+        justify-self: flex-end;
     }
     
     .header__nav--main .show-menu,
-    .header__nav--main .header__nav--list .hide-menu {display: block;}
+    .header__nav--main .header__nav--list .hide-menu {
+        display: flex;
+            justify-content: flex-end;
+        width: fit-content;
+    }
 
     .header__nav--main .header__nav--list {
         background-color: snow;
@@ -198,17 +235,16 @@
 
     .header__nav--main .header__nav--list.closed {
         visibility: hidden;
-        /* display: none; */
         transform: translateX(250px);
     }
 
     .header__nav--main .header__nav--list .hide-menu {
         color: var(--global-color-3);
         align-self: flex-end;
-        font-family: "Font Awesome 6 Free";
+        font-size: 25px;
         margin-bottom: 40px;
     }
-
+    
     .header__nav--main .header__nav--list ul{display: block;}
 
     .header__nav--main .header__nav--list ul li {
@@ -232,5 +268,93 @@
 }
 
 @media (max-width: 600px) {
-    .header__container{padding: 0 20px;}
+    .header {
+        --header-height: min-content;
+    }
+
+    .header__container {
+        display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        padding: 20px 50px;
+    }
+
+    /* LOGO ====================================== */
+    .header__logo {
+        gap: 20px;
+        grid-column: 1/4;
+        margin: 0 auto;
+    }
+
+    /* SEARCHER =====================================*/
+    /* .header__searcher {
+        --transparent: rgba(71, 3, 140, 0.4);
+        background: rgba(255, 255, 255, 0.4);
+        position: relative;
+    } */
+
+    .overlay-search {
+        background-color: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        height: 100%;
+        position: fixed;
+            top: 0;
+            left: 0;
+        width: 100%;
+        z-index: 888;
+      }
+
+    .header__searcher--input, .header__searcher--placeholder span {
+        display: none;
+    }
+
+    .header__searcher--input:focus ~ .header__searcher--placeholder,
+    .header__searcher--input:valid ~ .header__searcher--placeholder
+    {display: block;}   
+
+    .header__searcher--placeholder {
+        color: var(--global-color-3);
+        cursor: pointer;
+        left: 0;
+        pointer-events: all;
+    }
+
+    .hideItForSearch {display: none;}
+    .clickToSearch {display: block;}
+
+    .header__container.clickToSearch {
+        display: grid;
+            grid-template-columns: 1fr;
+    }
+
+    input.header__searcher--input.clickToSearch {
+        border: none;
+        border-bottom: 2px var(--global-color-3) solid;
+        border-radius: 0;
+        width: 100%;
+    }
+
+    input.header__searcher--input.clickToSearch:focus,
+    input.header__searcher--input.clickToSearch:valid {
+        border-bottom: 2px var(--global-color-5) solid;
+        padding: 0 30px;
+    }
+
+    .header__searcher--placeholder.clickToSearch {top: 10px;}
+
+    input.header__searcher--input.clickToSearch:focus ~ .header__searcher--placeholder.clickToSearch,
+    input.header__searcher--input.clickToSearch:valid ~ .header__searcher--placeholder.clickToSearch {
+        color: var(--global-color-5);
+    }
+
+    /* USER OPTIONS ========================= */
+    .header__nav--useroptions {
+        margin: 0 auto;
+        position: static;
+        width: fit-content;
+    }
+
+    .menu-opciones-usuario {
+        top: calc(var(--header-height)-10px);
+        width: 100%;
+    }
 }
