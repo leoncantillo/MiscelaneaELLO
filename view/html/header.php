@@ -66,8 +66,8 @@
             <div class="header__searcher">
                 <input class="header__searcher--input" type="text" required/>
                 <div class="header__searcher--placeholder">
-                    <i class="fa-solid fa-magnifying-glass"></i>                   
-                    <span>Buscar</span>
+                    <i class="fa-solid fa-magnifying-glass placeholder-search icon"></i>                   
+                    <span class="placeholder-search text">Buscar</span>
                 </div>
             </div>
             <div class="header__nav--useroptions">
@@ -89,9 +89,10 @@
                     ?>
                 </div>
                 <script>
+                    // Mostrar opciones de usuario
                     const button = document.querySelector('.header__nav--useroptions--button');
-                    const content = document.querySelector('.header__nav--useroptions');
-                    const menu = document.querySelector('.menu-opciones-usuario');
+                    const navUser = document.querySelector('.header__nav--useroptions');
+                    const userMenu = document.querySelector('.menu-opciones-usuario');
 
                     function displayMenu (element) {
                         element.addEventListener('mouseover', function() {
@@ -103,8 +104,54 @@
                         }); 
                     }
 
-                    displayMenu(content);
-                    displayMenu(menu)
+                    displayMenu(navUser);
+                    displayMenu(userMenu);
+
+                    // Buscador en móviles
+                    const headerContainer = document.querySelector('.header__container');
+                    const logo = document.querySelector('.header__logo');
+                    const navMenu = document.querySelector('.header__nav--main');
+                    const containerSearcher = document.querySelector('.header__searcher--placeholder');
+                    const inputSearch = document.querySelector('.header__searcher--input');
+                    const iconSearch = document.querySelector('.placeholder-search.icon');
+                    let overlaySearch = document.querySelector(".overlay-search");
+
+                    // Función para poder intercalar eventos en el icono de busqueda.
+                    iconSearch.addEventListener("click", startSearch)
+
+                    function startSearch() {
+                        logo.classList.add('hideItForSearch');
+                        navMenu.classList.add('hideItForSearch');
+                        navUser.classList.add('hideItForSearch');
+                        headerContainer.classList.add('clickToSearch');
+                        containerSearcher.classList.add('clickToSearch');
+                        inputSearch.classList.add('clickToSearch');
+                        inputSearch.focus();
+                        iconSearch.classList.add('clickToSearch');
+
+                        if (!overlaySearch) {
+                            overlaySearch = document.createElement("div");
+                            overlaySearch.classList.add("overlay-search");
+                            overlaySearch.addEventListener("click", endSearch);
+
+                            // Insertar el overlay anter del header
+                            const header = document.querySelector('header');
+                            header.parentNode.insertBefore(overlaySearch, header);
+                        }
+                    };
+
+                    function endSearch() {
+                        logo.classList.remove('hideItForSearch');
+                        navMenu.classList.remove('hideItForSearch');
+                        navUser.classList.remove('hideItForSearch');
+                        headerContainer.classList.remove('clickToSearch');
+                        containerSearcher.classList.remove('clickToSearch');
+                        inputSearch.classList.remove('clickToSearch');
+                        iconSearch.classList.remove('clickToSearch');
+
+                        overlaySearch.remove();
+                        overlaySearch = null
+                    }
                 </script>
             </div>
         </div>

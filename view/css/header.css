@@ -6,6 +6,7 @@
     background: snow;
     box-shadow: 5px 0 10px rgba(0,0,0,.3);
     height: var(--header-height);
+    position: relative;
     width: 100%;
     z-index: 999;
 }
@@ -291,31 +292,69 @@ input.header__searcher--input:valid {
         position: relative;
     } */
 
-    /* .header__searcher--input, .header__searcher--placeholder span {
-        display: none;
-    } */
+    .overlay-search {
+        background-color: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        height: 100%;
+        position: fixed;
+            top: 0;
+            left: 0;
+        width: 100%;
+        z-index: 888;
+      }
 
-    /* input.header__searcher--input:focus,
-    input.header__searcher--input:valid {
-        border: 1px var(--global-color-5) solid;
-        padding: 0 15px;
+    .header__searcher--input, .header__searcher--placeholder span {
+        display: none;
     }
 
     .header__searcher--input:focus ~ .header__searcher--placeholder,
     .header__searcher--input:valid ~ .header__searcher--placeholder
-    {display: none;} */
+    {display: block;}   
 
     .header__searcher--placeholder {
         color: var(--global-color-3);
         cursor: pointer;
+        left: 0;
         pointer-events: all;
-        position: relative;
     }
 
+    .hideItForSearch {display: none;}
+    .clickToSearch {display: block;}
+
+    .header__container.clickToSearch {
+        display: grid;
+            grid-template-columns: 1fr;
+    }
+
+    input.header__searcher--input.clickToSearch {
+        border: none;
+        border-bottom: 2px var(--global-color-3) solid;
+        border-radius: 0;
+        width: 100%;
+    }
+
+    input.header__searcher--input.clickToSearch:focus,
+    input.header__searcher--input.clickToSearch:valid {
+        border-bottom: 2px var(--global-color-5) solid;
+        padding: 0 30px;
+    }
+
+    .header__searcher--placeholder.clickToSearch {top: 10px;}
+
+    input.header__searcher--input.clickToSearch:focus ~ .header__searcher--placeholder.clickToSearch,
+    input.header__searcher--input.clickToSearch:valid ~ .header__searcher--placeholder.clickToSearch {
+        color: var(--global-color-5);
+    }
 
     /* USER OPTIONS ========================= */
     .header__nav--useroptions {
         margin: 0 auto;
+        position: static;
         width: fit-content;
+    }
+
+    .menu-opciones-usuario {
+        top: calc(var(--header-height)-10px);
+        width: 100%;
     }
 }
