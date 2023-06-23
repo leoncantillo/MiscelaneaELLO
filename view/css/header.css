@@ -358,3 +358,7 @@ input.header__searcher--input:valid {
         width: 100%;
     }
 }
+
+@media (max-width: 300px) {
+    .header__container {padding: 20px;}
+}

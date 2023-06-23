@@ -96,8 +96,16 @@
         display: flex;
             flex-direction: column;
             align-items: center;
+        width: min-content;
     }
+
+    .footer .contfooter.form .footerbox form input[type="text"] {width: min-content;}
 
     .footer div ul.links, .footer div div.networks,
     .footer div ul.contact {text-align: center;}
+}
+
+@media(max-width: 300px) {
+    .footer .footerbox {padding: 40px 0;}
+    .footer .contfooter.form .footerbox form input[type="text"] {width: 150px;}
 }
