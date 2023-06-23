@@ -19,25 +19,31 @@ Class FormsModel {
             print_r(Connection::connect()->errorInfo());
         }
 
-        $statement -> close();
+        $statement->closeCursor();
         $statement = null;
     }
 
-    static public function mdlSelectRegister($table, $item, $value) {
-
-        if($item == null && $value == null) {
-            $statement = Connection::connect() -> prepare("SELECT * FROM $table");
-            $statement -> execute();
-            return $statement -> fetchAll();
-        }else {
-            $statement = Connection::connect() -> prepare("SELECT * FROM $table WHERE $item = :$item ");
-            $statement -> bindParam(":".$item, $value, PDO::PARAM_STR);
-            $statement -> execute();
-            return $statement -> fetch();
+    static public function mdlSelectRegister($table, $columnName, $value) {
+        if ($columnName == null && $value == null) {
+            $statement = Connection::connect()->prepare("SELECT * FROM $table");
+            $statement->execute();
+            $result = $statement->fetchAll();
+    
+            $statement->closeCursor();
+            $statement = null;
+    
+            return $result;
+        } else {
+            $statement = Connection::connect()->prepare("SELECT * FROM $table WHERE $columnName = :$columnName");
+            $statement->bindParam(":".$columnName, $value, PDO::PARAM_STR);
+            $statement->execute();
+            $result = $statement->fetch();
+    
+            $statement->closeCursor();
+            $statement = null;
+    
+            return $result;
         }
-
-        $statement -> close();
-        $statement = null;
     }
 }
 

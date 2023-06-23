@@ -4,7 +4,7 @@ Class FormsController {
     # SIGNUP  =========================
     static public function ctrSignUp() {
         if(isset($_POST["register-username"])){
-            $table = "registered_users";
+            $table = "ellodb_users";
             $data = array("username" => $_POST["register-username"],
                            "email" => $_POST["register-email"],
                            "password" => $_POST["register-password"]);
@@ -23,19 +23,21 @@ Class FormsController {
     # SIGNIN =========================
     public function ctrSignin() {
         if(isset($_POST["login-email"])){
-            $table = "registered_users";
-            $item = "email";
+            $table = "ellodb_users";
+            $columnName = "email";
             $value = $_POST["login-email"];
-            $answer = FormsModel::mdlSelectRegister($table, $item, $value);
+            $answer = FormsModel::mdlSelectRegister($table, $columnName, $value);
 
-            if($answer["email"] == $_POST["login-email"] && $answer["password"] == $_POST["login-password"]){
-                $_SESSION["validate-login"] = true;
-                echo "<script>
-                        if (window.history.replaceState) {
-                            window.history.replaceState(null,null,window.location.href);
-                        }
-                        window.location = 'index.php?rute=shop'
-                    </script>";
+            if(is_array($answer)) {
+                if($answer["email"] == $_POST["login-email"] && $answer["password"] == $_POST["login-password"]){
+                    $_SESSION["validate-login"] = true;
+                    echo "<script>
+                            if (window.history.replaceState) {
+                                window.history.replaceState(null,null,window.location.href);
+                            }
+                            window.location = 'index.php?rute=shop'
+                        </script>";
+                }
             }else {
                 echo "<script>
                         if (window.history.replaceState) {
