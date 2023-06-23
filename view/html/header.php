@@ -82,7 +82,13 @@
                         include 'user-options-menu-header.php';
 
                         $logueado = false; // Esto cambia según la lógica de la aplicación
-                        $esAdmin = false; // Esto cambia según la lógica de la aplicación
+                        $esAdmin = true; // Esto cambia según la lógica de la aplicación
+
+                        if(isset($_SESSION["validate-login"])){
+                            if($_SESSION["validate-login"] == true){
+                                $logueado = true;
+                            }
+                        }
 
                         // Llamar a la función para generar e imprimir la lista de opciones
                         generarListaOpciones($logueado, $esAdmin);

@@ -280,14 +280,14 @@
         <div class="signin">
             <div class="content">
                 <h2>Iniciar Sesion</h2>
-                <form class="form">
+                <form class="form" method="post">
                     <div class="inputbx">
-                        <input type="text" name="" id="" required>
-                        <label>Nombre de usuario</label>
+                        <input type="email" name="login-email" id="" required>
+                        <label>Correo Electrónico</label>
                         <i></i>
                     </div>
                     <div class="inputbx">
-                        <input type="password" name="" id="" required>
+                        <input type="password" name="login-password" id="" required>
                         <label>Contraseña</label>
                         <i></i>
                     </div>
@@ -299,6 +299,11 @@
                         <input type="submit" value="Entrar">
                     </div>
                 </form>
+
+                <?php
+                    $login = new FormsController();
+                    $login -> ctrSignin();
+                ?>
             </div>
         </div>
     </section>
