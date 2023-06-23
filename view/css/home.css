@@ -3,7 +3,6 @@
 .hero {
     background-position: 50% 100%;
     color: var(--global-color-3);
-    margin-top: -80px;
     text-align: center;
 }
 
