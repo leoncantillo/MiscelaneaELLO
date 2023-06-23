@@ -95,7 +95,7 @@
                     ?>
                 </div>
                 <script>
-                    // Mostrar opciones de usuario
+                    // Mostrar opciones de usuario ==============================
                     const button = document.querySelector('.header__nav--useroptions--button');
                     const navUser = document.querySelector('.header__nav--useroptions');
                     const userMenu = document.querySelector('.menu-opciones-usuario');
@@ -113,7 +113,8 @@
                     displayMenu(navUser);
                     displayMenu(userMenu);
 
-                    // Buscador en móviles
+                    // Buscador en móviles =========================================
+                    const header = document.querySelector('.header');
                     const headerContainer = document.querySelector('.header__container');
                     const logo = document.querySelector('.header__logo');
                     const navMenu = document.querySelector('.header__nav--main');
@@ -141,7 +142,6 @@
                             overlaySearch.addEventListener("click", endSearch);
 
                             // Insertar el overlay anter del header
-                            const header = document.querySelector('header');
                             header.parentNode.insertBefore(overlaySearch, header);
                         }
                     };

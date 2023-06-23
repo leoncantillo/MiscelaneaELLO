@@ -3,3 +3,11 @@
 @import url(reset.css);
 @import url(banner.css);
 @import url(header.css);
+
+:root {
+    --header-height: 80px;
+}
+
+@media (max-width: 600px) {
+    :root {--header-height: 150px;}
+}
