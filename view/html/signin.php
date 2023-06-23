@@ -1,7 +1,6 @@
-<head>
-    <link rel="stylesheet" href="view/css/sign_in-up.css">
-    <title>Iniciar Sesion</title>
-</head>
+<link rel="stylesheet" href="view/css/sign_in-up.css">
+<title>Iniciar Sesion</title>
+
 <section class="dinamic_background">
     <section class="signinbox">
         <span></span>

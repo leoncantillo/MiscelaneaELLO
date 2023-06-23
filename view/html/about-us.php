@@ -1,7 +1,6 @@
-<head>
-    <link rel="stylesheet" href="view/css/about-us.css">
-    <title>Nosotros</title>
-</head>
+<link rel="stylesheet" href="view/css/about-us.css">
+<title>Nosotros</title>
+
 <section class="banner" style="--bg-banner: url(../img/jpg/bg-desenfocado.webp)">
     <div class="foco">
         <h4>Miscelanea ELLO</h1>

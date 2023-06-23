@@ -1,6 +1,6 @@
-<head>
-    <link rel="stylesheet" href="view/css/home.css">
-</head>
+<link rel="stylesheet" href="view/css/home.css">
+<title>Miscelanea ELLO</title>
+
 <section class="hero banner" style="--bg-banner: url(../img/jpg/bg-hero.jpg)">
     <div class="foco">
         <h2>Descuento en utiles escolares</h2>

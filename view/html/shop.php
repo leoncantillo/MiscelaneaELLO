@@ -1,8 +1,7 @@
-<head>
-    <link rel="stylesheet" href="view/css/slider.css">
-    <link rel="stylesheet" href="view/css/shop.css">
-    <title>Shop</title>
-</head>
+<link rel="stylesheet" href="view/css/slider.css">
+<link rel="stylesheet" href="view/css/shop.css">
+<title>Shop</title>
+
 <?php $directory = "view/img/jpg/slides"; include 'slider.php'?>
 <section class="tienda-home">
     <h4 class="titulo-producto-filtro">Filtros</h4>
