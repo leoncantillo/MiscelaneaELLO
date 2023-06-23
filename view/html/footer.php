@@ -19,8 +19,8 @@
                     <li>CONTACTO</li>
                 </ul>
                 <div class="networks">
-                    <span>f</span>
-                    <span>I</span>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
                 </div>
                 <ul class="contact">
                     <li>000-000-000-00</li>

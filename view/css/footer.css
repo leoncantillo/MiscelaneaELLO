@@ -76,12 +76,17 @@
 }
 
 .footer div div.networks {
+    display: flex;
+        flex-direction: row-reverse;
+        gap: 20px;
     font-weight: 900;
     font-size: 20px;
     grid-column: 2/3;
     grid-row: 1;
     text-align: right;
 }
+
+.footer div div.networks a {color: snow; font-size: 40px;}
 
 .footer div img.qr-code {
     grid-column: 3 / 4;
