@@ -56,13 +56,23 @@
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 15px 35px rgba(0,0,0,.5);
-    display: flex;
-        align-items: center;
-        justify-content: center;
+    max-height: 500px;
+    overflow:auto;
     padding: 40px;
     position: absolute;
+    text-align: center;
     width: 400px;
     z-index: 999;
+}
+
+.signinbox .signin::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+.signinbox .signin::-webkit-scrollbar-thumb {
+    background: var(--global-color-3);
+    border-radius: 5px;
 }
 
 .signinbox .signin .content {
