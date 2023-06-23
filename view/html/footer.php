@@ -13,15 +13,12 @@
             <div class="footerbox">
                 <img class="logo-footer" src="view/img/svg/logotipo-white.svg" alt="logotipo-white">
                 <ul class="links">
-                    <li>INICIO</li>
-                    <li>TIENDA</li>
-                    <li>NOSOTROS</li>
-                    <li>CONTACTO</li>
+                    <?php include 'nav-menu.php'?>
                 </ul>
-                <div class="networks">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                </div>
+                <ul class="networks">
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>
                 <ul class="contact">
                     <li>000-000-000-00</li>
                     <li>DIRECCIÓN #00-00</li>
