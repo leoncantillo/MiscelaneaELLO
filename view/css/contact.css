@@ -1,0 +1,112 @@
+div.contac-container {
+    display: grid;
+        gap: 30px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 40px 20px;
+    width: fit-content;
+}
+
+div.contac-container .contact-us {
+    display: flex;
+        flex-direction: column;
+        gap: 30px;
+    grid-row: 2 / 3;
+}
+
+div.contac-container ul {
+    display: flex;
+        gap: 10px;
+    list-style: none;
+}
+
+div.contac-container .contact-us ul {font-size: 40px;}
+
+div.contac-container ul.list-contacts {
+    flex-direction: column;
+    grid-row: 2 / 3;
+}
+
+div.contac-container ul.list-contacts li i {font-size: 20px; margin-right: 10px;}
+
+iframe.location-map {
+    background-color: #acacac;
+    height: 400px;
+    width: 100vw;
+    z-index: 50;
+}
+
+.form-container {
+    background-color: snow;
+    display: flex;
+        flex-direction: column;
+        gap: 10px;
+    margin: 0 auto;
+    padding: 50px 120px;
+    position: relative;
+        top: -150px;
+    text-align: center;
+    max-width: 700px;
+    z-index: 55;
+}
+
+.form-container h4 {
+    font-size: 30px;
+}
+
+.form-container form {
+    display: grid;
+        gap: 15px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    height: 200px;
+}
+
+.form-container form input, .form-container form textarea {
+    border: .5px #dbdbdb solid;
+    border-radius: 3px;
+    outline: none;
+    padding: 10px;
+}
+
+.form-container form textarea,
+.form-container form input[type="submit"] {
+    grid-column: 1 / 3;
+    width: 100%;
+}
+
+.form-container form textarea {height: 100px;}
+
+.form-container form input[type="submit"] {
+    background-color: #000;
+    border: none;
+    color: snow;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .form-container {top: -100px;}
+}
+
+@media (max-width: 600px) {
+
+    div.contac-container {grid-template-columns: 1fr;}
+    div.contac-container ul.list-contacts {grid-row: auto;}
+
+    .form-container {
+        gap: 20px;
+        padding: 50px;
+        top: 0;
+    }
+
+    .form-container form {
+        grid-template-columns: auto;
+        height: 270px;
+    }
+
+    .form-container form textarea,
+    .form-container form input[type="submit"]
+    {grid-column: 1;}
+}
