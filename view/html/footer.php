@@ -13,8 +13,11 @@
             <div class="footerbox">
                 <img class="logo-footer" src="view/img/svg/logotipo-white.svg" alt="logotipo-white">
                 <ul class="links">
-                    <?php include 'nav-menu.php'?>
-                </ul>
+                    <li><a href="index.php?rute=home">Inicio</a></li>
+                    <li><a href="index.php?rute=shop">Tienda</a></li>
+                    <li><a href="index.php?rute=about_us">Nosotros</a></li>
+                    <li><a href="index.php?rute=contact">Contacto</a></li>
+                    </ul>
                 <ul class="networks">
                     <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
                     <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
