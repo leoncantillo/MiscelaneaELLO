@@ -1,10 +1,12 @@
 <header>
     <div class="header">
         <div class="header__container">
-            <figure class="header__logo">
-                <img src="view/img/png/logotipo-normal.png" alt="">
-                <h1>ELLO</h1>
-            </figure>
+            <a href="index.php?rute=home">
+                <figure class="header__logo">
+                    <img src="view/img/png/logotipo-normal.png" alt="">
+                    <h1>ELLO</h1>
+                </figure>
+            </a>
             <nav class="header__nav--main">
                 <span class="show-menu"><i class="fa-solid fa-bars"></i></span>
                 <div class="header__nav--list closed">
