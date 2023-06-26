@@ -3,7 +3,7 @@
         <div class="contfooter form">
             <div class="footerbox">
                 <h4>CONTACTO</h4>
-                <form method="post" action="index.php?rute=contact">
+                <form method="post" action="index.php?rute=contact#location-map">
                     <input type="text" name="message" placeholder="Escribe tu mensaje..." required>
                     <input type="submit" value="ENVIAR">
                 </form>
