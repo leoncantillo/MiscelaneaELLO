@@ -3,8 +3,8 @@
         <div class="contfooter form">
             <div class="footerbox">
                 <h4>CONTACTO</h4>
-                <form action="">
-                    <input type="text" name="" id="" placeholder="Escribe tu mensaje...">
+                <form method="post" action="index.php?rute=contact">
+                    <input type="text" name="message" placeholder="Escribe tu mensaje..." required>
                     <input type="submit" value="ENVIAR">
                 </form>
             </div>

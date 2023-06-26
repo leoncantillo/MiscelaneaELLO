@@ -25,12 +25,26 @@
 <iframe class="location-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125331.46715983223!2d-74.83901635!3d10.992906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42c5022d41139%3A0x7777c8d5cf47bec!2sBarranquilla%2C%20Atl%C3%A1ntico!5e0!3m2!1ses-419!2sco!4v1687562953828!5m2!1ses-419!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 <div class="form-container">
-    <h4>Ponte en contacto con nosotros</h1>
+    <h4>Ponte en contacto con nosotros</h1> 
     <p class="require-field">Requerido *</p>
     <form action="#" method="post">
-      <input type="text" name="name" placeholder="Nombre" required>
+      <input type="text" name="name" placeholder="Nombre">
       <input type="email" name="email" placeholder="Email *" required>
-      <textarea name="message" placeholder="Mensaje *" required></textarea>
+      <?php 
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+          $message = $_POST["message"];
+        
+        if (!empty($mensaje)) {
+            $mensajePredeterminado = '';
+          } else {
+            $mensajePredeterminado = $message;
+          }
+        } else {
+          // Si la página se carga sin enviar el formulario, establece el valor predeterminado como vacío
+          $mensajePredeterminado = '';
+        }
+      ?>
+      <textarea name="message" placeholder="Mensaje *" required><?php echo $message ?></textarea>
       <input type="submit" value="Enviar">
     </form>
 </div>
