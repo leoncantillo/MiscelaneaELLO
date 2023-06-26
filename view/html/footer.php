@@ -11,7 +11,10 @@
         </div>
         <div class="contfooter info">
             <div class="footerbox">
-                <img class="logo-footer" src="view/img/svg/logotipo-white.svg" alt="logotipo-white">
+                <a href="index.php?rute=home">
+                    <img class="logo-footer" src="view/img/svg/logotipo-white.svg" alt="logotipo-white">
+                </a>
+
                 <ul class="links">
                     <li><a href="index.php?rute=home">Inicio</a></li>
                     <li><a href="index.php?rute=shop">Tienda</a></li>

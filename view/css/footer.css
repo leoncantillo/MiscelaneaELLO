@@ -62,6 +62,8 @@
         grid-template-rows: 1fr 2fr;
 }
 
+.footer .contfooter.info a:has(img.logo-footer) {width: fit-content;}
+
 .footer .contfooter.info img.logo-footer {
     height: 100px;
     width: 100px;
