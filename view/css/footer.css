@@ -40,6 +40,7 @@
 .footer .contfooter.form .footerbox form input[type="text"] {
     border: none;
     margin: 0;
+    outline: none;
     padding: 10px 20px;
     width: 300px;
 }
