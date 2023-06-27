@@ -31,6 +31,9 @@ Class FormsController {
             if(is_array($answer)) {
                 if($answer["email"] == $_POST["login-email"] && $answer["password"] == $_POST["login-password"]){
                     $_SESSION["validate-login"] = true;
+                    if ($answer["useradmin"] == 1) {
+                        $_SESSION["validate-useradmin"] = true;
+                    }
                     echo "<script>
                             if (window.history.replaceState) {
                                 window.history.replaceState(null,null,window.location.href);
