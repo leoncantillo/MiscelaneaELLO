@@ -1,9 +1,6 @@
 <?php
 
 if(isset($_SESSION["validate-login"])) {
-    echo "<script>window.location = 'index.php?rute=shop'</script>";
-    return;
-}else {
     if($_SESSION["validate-login"] == true){
         echo "<script>window.location = 'index.php?rute=shop'</script>";
         return;
@@ -295,7 +292,7 @@ if(isset($_SESSION["validate-login"])) {
                 <h2>Iniciar Sesion</h2>
                 <form class="form" method="post">
                     <div class="inputbx">
-                        <input type="email" name="login-email" id="" required>
+                        <input type="email" name="login-email" id="" required autofocus>
                         <label>Correo Electrónico</label>
                         <i></i>
                     </div>

@@ -290,7 +290,7 @@
                 <h2>Registro</h2>
                 <form class="form" method="post">
                     <div class="inputbx">
-                        <input type="text" name="register-username" id="" required>
+                        <input type="text" name="register-username" id="" required autofocus>
                         <label>Nombre de usuario</label>
                         <i></i>
                     </div>
