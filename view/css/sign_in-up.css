@@ -172,6 +172,18 @@
     font-weight: 600;
 }
 
+.signin .content .form .inputbx__admin {
+    color: var(--highlight);
+    font-weight: 600;
+    text-align: left;
+}
+
+.signin .content .form .inputbx__admin--options {
+    display: flex;
+        justify-content: space-around;
+    margin-top: 20px;
+}
+
 .signin .content .form .inputbx input[type="submit"] {
     background-color: var(--highlight);
     color: #fff;

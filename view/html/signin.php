@@ -1,3 +1,17 @@
+<?php
+
+if(isset($_SESSION["validate-login"])) {
+    echo "<script>window.location = 'index.php?rute=shop'</script>";
+    return;
+}else {
+    if($_SESSION["validate-login"] == true){
+        echo "<script>window.location = 'index.php?rute=shop'</script>";
+        return;
+    }
+}
+
+?>
+
 <link rel="stylesheet" href="view/css/sign_in-up.css">
 <title>Iniciar Sesion</title>
 
