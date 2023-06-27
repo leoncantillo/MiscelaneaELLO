@@ -1,7 +1,7 @@
 <header>
     <div class="header">
         <div class="header__container">
-            <a href="index.php?rute=home">
+            <a class="header__logo--ancle" href="index.php?rute=home">
                 <figure class="header__logo">
                     <img src="view/img/png/logotipo-normal.png" alt="">
                     <h1>ELLO</h1>
@@ -87,7 +87,7 @@
                     // Buscador en móviles =========================================
                     const header = document.querySelector('.header');
                     const headerContainer = document.querySelector('.header__container');
-                    const logo = document.querySelector('.header__logo');
+                    const logo = document.querySelector('.header__logo--ancle');
                     const navMenu = document.querySelector('.header__nav--main');
                     const containerSearcher = document.querySelector('.header__searcher--placeholder');
                     const inputSearch = document.querySelector('.header__searcher--input');

@@ -29,7 +29,6 @@ header {height: var(--header-height);}
         align-items: center;
         flex-direction: row;
         gap: 10px;
-        justify-content: space-between;
     height: 40px;
     margin: 0;
     max-width: 200px;
@@ -277,18 +276,16 @@ input.header__searcher--input:valid {
     }
 
     /* LOGO ====================================== */
+
+    a.header__logo--ancle {grid-column: 1/4;}
+
     .header__logo {
         gap: 20px;
-        grid-column: 1/4;
+        justify-content: center;
         margin: 0 auto;
     }
 
     /* SEARCHER =====================================*/
-    /* .header__searcher {
-        --transparent: rgba(71, 3, 140, 0.4);
-        background: rgba(255, 255, 255, 0.4);
-        position: relative;
-    } */
 
     .overlay-search {
         background-color: rgba(0, 0, 0, 0.5);
