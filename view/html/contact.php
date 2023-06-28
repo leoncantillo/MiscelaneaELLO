@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="view/css/contact.css">
-<title>Contact</title>
+<title>Contacto</title>
 
 <div class="contac-container">
   <h1>Contactos</h1>
@@ -27,23 +27,28 @@
 <div class="form-container">
     <h4>Ponte en contacto con nosotros</h1> 
     <p class="require-field">Requerido *</p>
-    <form action="#" method="post">
+    <form method="post">
       <input type="text" id="username" name="name" placeholder="Nombre">
       <input type="email" name="email" placeholder="Email *" required>
       <?php 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
-          $message = $_POST["message"];
-        
-        if (!empty($mensaje)) {
-            $defaultMessage = '';
-          } else {
-            $defaultMessage = $message;
-          }
-        } else {
-          $defaultMessage = '';
+        $defaultMessage = '';
+        if(isset($_POST["message_footer"])) {
+          $defaultMessage = $_POST["message_footer"];
         }
       ?>
       <textarea name="message" placeholder="Mensaje *" required><?php echo $defaultMessage ?></textarea>
       <input type="submit" value="Enviar">
     </form>
+
+    <?php
+      $contact = FormsController::ctrContactMessage();
+      if($contact == true) {
+        echo "<script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null,null,window.location.href);
+            }
+            alert('El mensaje se ha enviado exitosamente');
+        </script>";
+      }
+    ?>
 </div>
