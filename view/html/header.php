@@ -30,7 +30,7 @@
                 </script>
             </nav>
             <div class="header__searcher">
-                <input class="header__searcher--input" type="text" required/>
+                <input class="header__searcher--input" type="search" required/>
                 <div class="header__searcher--placeholder">
                     <i class="fa-solid fa-magnifying-glass placeholder-search icon"></i>                   
                     <span class="placeholder-search text">Buscar</span>
