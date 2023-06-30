@@ -18,6 +18,10 @@
                 $_GET["rute"] == "about-us" ||
                 $_GET["rute"] == "contact" ||
                 $_GET["rute"] == "profile" ||
+                $_GET["rute"] == "manage" ||
+                $_GET["rute"] == "create-product" ||
+                $_GET["rute"] == "update-product" ||
+                $_GET["rute"] == "delete-product" ||
                 $_GET["rute"] == "logout") {
                 
                 include "view/html/header.php";

@@ -19,7 +19,7 @@ function generarListaOpciones($logueado, $esAdmin) {
             <li><a href="#">Pedidos <i class="fa-solid fa-tag"></i></a></li>
             <li><a href="#">Gestionar Ventas <i class="fa-solid fa-sack-dollar"></i></a></li>
             <li><a href="#">Preguntas <i class="fa-solid fa-circle-question"></i></a></li>
-            <li><a href="#">Administrar <i class="fa-solid fa-key"></i></a></li>
+            <li><a href="index.php?rute=manage">Administrar <i class="fa-solid fa-key"></i></a></li>
             <li><a href="index.php?rute=logout">Cerrar Sesión <i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>';
     } else {
