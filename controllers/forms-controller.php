@@ -62,6 +62,13 @@ Class FormsController {
                             }
                             window.location = 'index.php?rute=shop'
                         </script>";
+                }else {
+                    echo "<script>
+                            if (window.history.replaceState) {
+                                window.history.replaceState(null,null,window.location.href);
+                            }
+                        </script>";
+                    echo "<div>El email o la contraseña son incorrectos</div>";
                 }
             }else {
                 echo "<script>
@@ -69,7 +76,7 @@ Class FormsController {
                             window.history.replaceState(null,null,window.location.href);
                         }
                     </script>";
-                echo "<div>El email o la contraseña son incorrectos</div>";
+                echo "<div>El usuario ingresado no existe</div>";
             }
         }
     }
