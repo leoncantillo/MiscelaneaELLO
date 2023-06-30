@@ -1,0 +1,68 @@
+.fieldset {
+    display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 50px 120px;
+}
+
+.fieldset h4 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.fieldset .require-field {
+    color: var(--text-paragraph);
+}
+
+.fieldset form {
+    color: var(--text-dark);
+    display: flex;
+        flex-direction: column;
+        gap: 20px;
+    font-weight: bold;
+    width: 100%;
+    text-align: start;
+}
+
+.fieldset form .inputbox {
+    display: flex;
+        flex-direction: column;
+        gap: 5px;
+}
+
+.fieldset form .inputbox input,
+.fieldset form .inputbox textarea,
+.fieldset form .inputbox select {
+    border: 0.5px #dbdbdb solid;
+    border-radius: 3px;
+    outline: none;
+    width: 100%;
+    padding: 10px;
+}
+
+.fieldset form .inputbox select {
+    color: var(--text-paragraph);
+}
+
+.fieldset form .inputbox input[type="file"] {
+    border: none;
+    color: var(--text-paragraph);
+    padding: 0;
+}
+
+.fieldset form input[type="submit"], .fieldset form button {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+}
+
+@media (max-width: 600px){
+    .fieldset {
+        gap: 20px;
+        padding: 50px;
+    }
+}

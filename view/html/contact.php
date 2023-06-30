@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="view/css/contact.css">
+<link rel="stylesheet" href="view/css/forms.css">
 <title>Contacto</title>
 
 <div class="contac-container">
@@ -24,20 +25,26 @@
 
 <iframe id="location-map" class="location-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125331.46715983223!2d-74.83901635!3d10.992906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42c5022d41139%3A0x7777c8d5cf47bec!2sBarranquilla%2C%20Atl%C3%A1ntico!5e0!3m2!1ses-419!2sco!4v1687562953828!5m2!1ses-419!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-<div class="form-container">
+<div class="contact-form fieldset">
     <h4>Ponte en contacto con nosotros</h1> 
     <p class="require-field">Requerido *</p>
     <form method="post">
-      <input type="text" id="username" name="name" placeholder="Nombre">
-      <input type="email" name="email" placeholder="Email *" required>
+      <div class="inputbox">
+        <input type="text" id="username" name="name" placeholder="Nombre">
+      </div>
+      <div class="inputbox">
+        <input type="email" name="email" placeholder="Email *" required>
+      </div>
       <?php 
         $defaultMessage = '';
         if(isset($_POST["message_footer"])) {
           $defaultMessage = $_POST["message_footer"];
         }
       ?>
-      <textarea name="message" placeholder="Mensaje *" required><?php echo $defaultMessage ?></textarea>
-      <input type="submit" value="Enviar">
+      <div class="inputbox">
+        <textarea name="message" placeholder="Mensaje *" cols="30" rows="5" required><?php echo $defaultMessage ?></textarea>
+      </div>
+      <button type="submit">Enviar</button>
     </form>
 
     <?php
