@@ -1,3 +1,18 @@
+<?php
+
+$requiredAlert = "Obligatorio *";
+$fullFields = true;
+
+if(isset($_POST["send_message"])){
+  if(empty($_POST["email"]) ||
+    empty($_POST["message"])){
+      $requiredAlert = "Complete los campos obligatorios *";
+      $fullFields = false;
+  }
+}
+
+?>
+
 <link rel="stylesheet" href="view/css/contact.css">
 <link rel="stylesheet" href="view/css/forms.css">
 <title>Contacto</title>
@@ -27,13 +42,13 @@
 
 <div class="contact-form fieldset">
     <h4>Ponte en contacto con nosotros</h1> 
-    <p class="require-field">Requerido *</p>
+    <p class="require-field"><?php echo $requiredAlert ?></p>
     <form method="post">
       <div class="inputbox">
-        <input type="text" id="username" name="name" placeholder="Nombre">
+        <input type="text" id="username" name="name" placeholder="Nombre"/>
       </div>
       <div class="inputbox">
-        <input type="email" name="email" placeholder="Email *" required>
+        <input type="email" name="email" placeholder="Email *" required/>
       </div>
       <?php 
         $defaultMessage = '';
@@ -44,18 +59,27 @@
       <div class="inputbox">
         <textarea name="message" placeholder="Mensaje *" cols="30" rows="5" required><?php echo $defaultMessage ?></textarea>
       </div>
-      <button type="submit">Enviar</button>
+      <input type="submit" name="send_message" value="Enviar">
     </form>
-
     <?php
-      $contact = FormsController::ctrContactMessage();
-      if($contact == true) {
+    
+      if(isset($_POST["send_message"])){
+        if($fullFields){
+          $contact = FormsController::ctrContactMessage();
+          
+          if($contact == true) {
+            echo "<script>
+                alert('El mensaje se ha enviado exitosamente');
+            </script>";
+          }
+        }
+      
         echo "<script>
             if (window.history.replaceState) {
                 window.history.replaceState(null,null,window.location.href);
             }
-            alert('El mensaje se ha enviado exitosamente');
         </script>";
       }
+
     ?>
 </div>

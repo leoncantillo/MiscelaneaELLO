@@ -53,11 +53,11 @@ iframe.location-map {
 }
 
 .contact-form.fieldset form .inputbox:has(textarea),
-.contact-form.fieldset form button[type="submit"] {
+.contact-form.fieldset form input[type="submit"] {
     grid-column: 1 / 3;
 }
 
-.contact-form.fieldset form button[type="submit"] {
+.contact-form.fieldset form input[type="submit"] {
     background-color: #000;
     color: snow;
 }
@@ -79,6 +79,6 @@ iframe.location-map {
     }
 
     .contact-form.fieldset form .inputbox:has(textarea),
-    .contact-form.fieldset form button[type="submit"]
+    .contact-form.fieldset form input[type="submit"]
     {grid-column: 1;}
 }

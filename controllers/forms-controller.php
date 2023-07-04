@@ -8,7 +8,7 @@ require_once 'PHPMailer/src/Exception.php';
 
 Class FormsController {
     # VALIDATE FORM =========================
-    static public function test_input($data) {
+    static private function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
@@ -17,18 +17,18 @@ Class FormsController {
 
     # SIGNUP  =========================
     static public function ctrSignUp() {
-        if(isset($_POST["register-username"])){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
             $table = "ellodb_users";
 
             $validUserAdmin = 0;
             if(isset($_POST["register-useradmin"])){
-                if($_POST["register-useradmin"] == "1")
+                if($_POST["register-useradmin"] == "is_admin")
                     $validUserAdmin = 1;
             }
 
             $data = array("username" => self::test_input($_POST["register-username"]),
-                           "email" => self::test_input($_POST["register-email"]),
-                           "password" => self::test_input($_POST["register-password"]),
+                           "email" => filter_var(self::test_input($_POST["register-email"]), FILTER_VALIDATE_EMAIL),
+                           "password" => filter_var(self::test_input($_POST["register-password"]), FILTER_SANITIZE_STRING),
                            "useradmin" => self::test_input($validUserAdmin));
             $answer = FormsModel::mdlRegister($table, $data);
             return $answer;
@@ -44,10 +44,10 @@ Class FormsController {
 
     # SIGNIN =========================
     public function ctrSignin() {
-        if(isset($_POST["login-email"])){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
             $table = "ellodb_users";
             $columnName = "email";
-            $value = self::test_input($_POST["login-email"]);
+            $value = filter_var(self::test_input($_POST["login-email"]), FILTER_VALIDATE_EMAIL);
             $answer = FormsModel::mdlSelectRegister($table, $columnName, $value);
 
             if(is_array($answer)) {
@@ -57,33 +57,26 @@ Class FormsController {
                         $_SESSION["validate-useradmin"] = true;
                     }
                     echo "<script>
-                            if (window.history.replaceState) {
-                                window.history.replaceState(null,null,window.location.href);
-                            }
-                            window.location = 'index.php?rute=shop'
-                        </script>";
+                        window.location = 'index.php?rute=shop'
+                    </script>";
                 }else {
-                    echo "<script>
-                            if (window.history.replaceState) {
-                                window.history.replaceState(null,null,window.location.href);
-                            }
-                        </script>";
                     echo "<div>El email o la contraseña son incorrectos</div>";
                 }
             }else {
-                echo "<script>
-                        if (window.history.replaceState) {
-                            window.history.replaceState(null,null,window.location.href);
-                        }
-                    </script>";
                 echo "<div>El usuario ingresado no existe</div>";
             }
+
+            echo "<script>
+                if (window.history.replaceState) {
+                    window.history.replaceState(null,null,window.location.href);
+                }
+            </script>";
         }
     }
 
     # CONTACT =======================================
     static public function ctrContactMessage() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST["send_message"])) {
             $name = self::test_input($_POST["name"]);
             $email = self::test_input($_POST["email"]);
             $email = filter_var($email, FILTER_VALIDATE_EMAIL);

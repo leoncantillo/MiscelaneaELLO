@@ -137,7 +137,7 @@
     transform: translateY(-32px);
 }
 
-.signinbox .signin .content .form .inputbx i {
+.signinbox .signin .content .form .inputbx b {
     background: var(--highlight);
     border-radius: 4px;
     height: 3px;
@@ -150,8 +150,8 @@
     z-index: 1;
 }
 
-.signinbox .signin .content .form .inputbx input:focus ~ i,
-.signinbox .signin .content .form .inputbx input:valid ~ i {
+.signinbox .signin .content .form .inputbx input:focus ~ b,
+.signinbox .signin .content .form .inputbx input:valid ~ b {
     height: 100%;
 }
 
