@@ -23,7 +23,7 @@
         <div class="productos-en-venta">
             <div class="producto-en-vitrina">
                 <div class="imagen-producto">
-                    <img src="view/img/jpg/Productos/Cuaderno anillado.jpg" alt="">
+                    <img src="view/img/jpg/Products/Cuaderno anillado.jpg" alt="">
                 </div>
                 <div class="descripcion-del-producto">
                     <div class="info-producto">
@@ -41,7 +41,7 @@
             </div>
             <div class="producto-en-vitrina">
                 <div class="imagen-producto">
-                    <img src="view/img/jpg/Productos/Caja Lapiz HB.jpg" alt="">
+                    <img src="view/img/jpg/Products/Caja Lapiz HB.jpg" alt="">
                 </div>
                 <div class="descripcion-del-producto">
                     <div class="info-producto">
