@@ -2,7 +2,7 @@
     display: flex;
         align-items: center;
         flex-direction: column;
-        gap: 10px;
+        gap: 20px;
     margin: 0 auto;
     max-width: 700px;
     padding: 50px 120px;
@@ -13,8 +13,9 @@
     font-weight: 700;
 }
 
-.fieldset .require-field {
-    color: var(--text-paragraph);
+.fieldset .required-field {
+    color: tomato;
+    font-weight: normal;
 }
 
 .fieldset form {
@@ -39,7 +40,6 @@
     border: 0.5px #dbdbdb solid;
     border-radius: 3px;
     outline: none;
-    width: 100%;
     padding: 10px;
 }
 
@@ -53,10 +53,19 @@
     padding: 0;
 }
 
+.fieldset form .inputbox.input-radio .input-radio--options {
+    display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+    font-weight: normal;
+    margin-top: 10px;
+    width: 100%x;
+}
+
 .fieldset form input[type="submit"], .fieldset form button {
     border: none;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     padding: 10px;
 }
 

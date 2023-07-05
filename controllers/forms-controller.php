@@ -15,7 +15,9 @@ Class FormsController {
         return($data);
     }
 
-    # SIGNUP  =========================
+    # ================== CRUD USERS  =========================
+
+    # SIGN UP =======================================
     static public function ctrSignUp() {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $table = "ellodb_users";
@@ -27,9 +29,9 @@ Class FormsController {
             }
 
             $data = array("username" => self::test_input($_POST["register-username"]),
-                           "email" => filter_var(self::test_input($_POST["register-email"]), FILTER_VALIDATE_EMAIL),
-                           "password" => filter_var(self::test_input($_POST["register-password"]), FILTER_SANITIZE_STRING),
-                           "useradmin" => self::test_input($validUserAdmin));
+                          "email" => filter_var(self::test_input($_POST["register-email"]), FILTER_VALIDATE_EMAIL),
+                          "password" => filter_var(self::test_input($_POST["register-password"]), FILTER_SANITIZE_STRING),
+                          "useradmin" => self::test_input($validUserAdmin));
             $answer = FormsModel::mdlRegister($table, $data);
             return $answer;
         }
@@ -123,6 +125,32 @@ Class FormsController {
             }catch(Exception $e) {
                 print_r($mail->ErrorInfo);
             }
+        }
+    }
+
+    # CRUD PRODUCT ===============================================
+    static public function ctrCreateProduct() {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $table = "ellodb_products";
+
+            $conditionValue = 0;
+            if(isset($_POST["condition"])){
+                if($_POST["condition"] == "product-new")
+                    $conditionValue = 1;
+            }
+
+            $data = array("product_name" => self::test_input($_POST["product-name"]),
+                          "description" => self::test_input($_POST["description"]),
+                          "image" => self::test_input($_POST["product-image"]),
+                          "price" => self::test_input($_POST["price"]),
+                          "promotion_price" => self::test_input($_POST["promotion-price"]),
+                          "tag_id" => self::test_input($_POST["product-tag"]),
+                          "tag_id" => self::test_input($_POST["product-category"]),
+                          "color" => self::test_input($_POST["product-color"]),
+                          "condition" => self::test_input($conditionValue));
+            
+            $answer = FormsModel::mdlCreateProduct($table, $data);
+            return $answer;
         }
     }
 }

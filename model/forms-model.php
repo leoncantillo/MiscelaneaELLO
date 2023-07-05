@@ -14,8 +14,8 @@ Class FormsModel {
         }
         $password = filter_var($data["password"], FILTER_SANITIZE_STRING);
 
-        $statement = Connection::connect() -> prepare("INSERT INTO $table(username, email, password, useradmin) VALUES
-        (:username, :email, :password, :useradmin)");
+        $statement = Connection::connect() -> prepare("INSERT INTO $table (`username`, `email`, `password`, `useradmin`)
+        VALUES (:username, :email, :password, :useradmin)");
 
         $statement -> bindParam(":username", $data["username"], PDO::PARAM_STR);
         $statement -> bindParam(":email", $email, PDO::PARAM_STR);
@@ -60,6 +60,33 @@ Class FormsModel {
     
             return $result;
         }
+    }
+
+    # PRODUCTS ===================================================
+    static public function mdlCreateProduct($table, $data) {
+        $statement = Connection::connect() -> prepare("INSERT INTO
+        $table (`product_name`, `description`, `image`, `price`, `promotion_price`, `tag_id`, `category_id`, `color`, `condition`)
+        VALUES (:product_name, :description, :image, :price, :promotion_price, :tag_id, :category_id, :color, :condition)");
+
+        $statement -> bindParam(":product_name", $data["product_name"], PDO::PARAM_STR);
+        $statement -> bindParam(":description", $data["description"], PDO::PARAM_STR);
+        $statement -> bindParam(":image", $data["image"], PDO::PARAM_STR);
+        $statement -> bindParam(":price", $data["price"], PDO::PARAM_STR);
+        $statement -> bindParam(":promotion_price", $data["promotion_price"], PDO::PARAM_STR);
+        $statement -> bindParam(":tag_id", $data["tag_id"], PDO::PARAM_STR);
+        $statement -> bindParam(":category_id", $data["category_id"], PDO::PARAM_STR);
+        $statement -> bindParam(":color", $data["color"], PDO::PARAM_STR);
+        $statement -> bindParam(":condition", $data["condition"], PDO::PARAM_STR);
+
+
+        if($statement -> execute()) {
+            return true;
+        }else {
+            print_r(Connection::connect()->errorInfo());
+        }
+
+        $statement->closeCursor();
+        $statement = null;
     }
 }
 
