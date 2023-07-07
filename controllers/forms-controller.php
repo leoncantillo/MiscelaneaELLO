@@ -1,11 +1,5 @@
 <?php
 
-use PHPMailer\PHPMailer\{PHPMailer, SMTP, Exception};
-
-require_once 'PHPMailer/src/PHPMailer.php';
-require_once 'PHPMailer/src/SMTP.php';
-require_once 'PHPMailer/src/Exception.php';
-
 Class FormsController {
     # VALIDATE FORM =========================
     static private function test_input($data) {
@@ -17,7 +11,7 @@ Class FormsController {
 
     # ================== CRUD USERS  =========================
 
-    # SIGN UP =======================================
+    # Create Users ------------------------------------
     static public function ctrSignUp() {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $table = "ellodb_users";
@@ -32,25 +26,25 @@ Class FormsController {
                           "email" => filter_var(self::test_input($_POST["register-email"]), FILTER_VALIDATE_EMAIL),
                           "password" => filter_var(self::test_input($_POST["register-password"]), FILTER_SANITIZE_STRING),
                           "useradmin" => self::test_input($validUserAdmin));
-            $answer = FormsModel::mdlRegister($table, $data);
+            $answer = FormsModel::mdlInsertData($table, $data);
             return $answer;
         }
     }
 
-    # SELECT REGISTERS ==============================
-    static public function ctrSelectRegister() {
+    # SELECT USERS ------------------------------------------
+    static public function ctrSelectUsers() {
         $table = "ellodb_users";
-        $answer = FormsModel::mdlSelectRegister($table, null, null);
+        $answer = FormsModel::mdlFetchData($table, null, null);
         return $answer;
     }
 
-    # SIGNIN =========================
+    # SIGNIN ----------------------------------
     public function ctrSignin() {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $table = "ellodb_users";
             $columnName = "email";
             $value = filter_var(self::test_input($_POST["login-email"]), FILTER_VALIDATE_EMAIL);
-            $answer = FormsModel::mdlSelectRegister($table, $columnName, $value);
+            $answer = FormsModel::mdlFetchData($table, $columnName, $value);
 
             if(is_array($answer)) {
                 if($answer["email"] == $_POST["login-email"] && $answer["password"] == $_POST["login-password"]){
@@ -76,12 +70,13 @@ Class FormsController {
         }
     }
 
-    # CONTACT =======================================
+    # CONTACT ----------------------------------------
     static public function ctrContactMessage() {
         if (isset($_POST["send_message"])) {
             $name = self::test_input($_POST["name"]);
             $email = self::test_input($_POST["email"]);
             $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+            $subject = 'Formulario de Contacto';
             $message = self::test_input($_POST["message"]);
 
             $messageToSend = "De: $name <a href='mailto:$email'>$email</a><br/>";
@@ -90,45 +85,14 @@ Class FormsController {
             $messageToSend .= "<p>$message</p>";
             $messageToSend .= "--<p>Mensaje enviado desde miscelaneaello.com</p>";
 
-            $mail = new PHPMailer(true);
-
-            try {
-                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                $mail->isSMTP();
-                $mail->Host = 'mail.nuestromundoinfantil.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'pruebas@nuestromundoinfantil.com';
-                $mail->Password = 'Pruebas123';
-                $mail->SMTPSecure = 'ssl';
-                $mail->Port = 465;
-
-                // Configuración del correo
-                $mail->setFrom($email, 'Remitente');
-                $mail->addAddress('pruebas@nuestromundoinfantil.com', 'Destinatario');
-                $mail->addReplyTo($email, $name);
-                $mail->isHTML(true);
-                $mail->Subject = 'Formulario de Contacto';
-                $mail->Body = utf8_decode($messageToSend);
-
-                // Envío del correo
-                if ($mail->send()) {
-                    // Envío de copia al remitente
-                    $mail->clearAddresses();
-                    $mail->addAddress($email, $name);
-                    $mail->Subject = 'Copia del Formulario de Contacto';
-                    $mail->Body = "Gracias por contactarnos. Aquí tienes una copia de tu mensaje:<br><br>$messageToSend";
-                    $mail->send();
-                }
-
-                return true;
-
-            }catch(Exception $e) {
-                print_r($mail->ErrorInfo);
-            }
+            $answer = FormsModel::mdlSendMail($name, $email, $subject, $messageToSend);
+            return $answer;
         }
     }
 
-    # CRUD PRODUCT ===============================================
+    # ============================= CRUD PRODUCT ==============================
+
+    # Create Products ----------------------------------
     static public function ctrCreateProduct() {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $table = "ellodb_products";
@@ -145,11 +109,11 @@ Class FormsController {
                           "price" => self::test_input($_POST["price"]),
                           "promotion_price" => self::test_input($_POST["promotion-price"]),
                           "tag_id" => self::test_input($_POST["product-tag"]),
-                          "tag_id" => self::test_input($_POST["product-category"]),
+                          "category_id" => self::test_input($_POST["product-category"]),
                           "color" => self::test_input($_POST["product-color"]),
                           "condition" => self::test_input($conditionValue));
             
-            $answer = FormsModel::mdlCreateProduct($table, $data);
+            $answer = FormsModel::mdlInsertData($table, $data);
             return $answer;
         }
     }

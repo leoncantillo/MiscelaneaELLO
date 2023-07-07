@@ -101,7 +101,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <label for="tag_select">Etiqueta</label>
             <select name="product-tag" id="tag-select">
                 <option value="">... seleccionar</option>
-                <option name="product-tag" value="pencils">Lápices</option>
+                <option  value="pencils">Lápices</option>
+                <option name="product-tag" value="etiqueta1">etiqueta1</option>
+                <option name="product-tag" value="etiqueta2">etiqueta2</option>
+                <option name="product-tag" value="etiqueta3">etiqueta3</option>
             </select>
         </div>
         <div class="inputbox">
@@ -134,26 +137,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
     </form>
     <?php
-        
-            if($_SERVER["REQUEST_METHOD"] == "POST"){
-                if($fullFields){
-                    $createProduct = FormsController::ctrCreateProduct();
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($fullFields){
+                $createProduct = FormsController::ctrCreateProduct();
 
-                    if($createProduct){
-                        echo "<script>
-                            alert('El producto se ha sido creado correctamente');
-                            // window.location = 'index.php?rute='
-                        </script>";
-                    }
-                    echo "<pre>"; print_r($_POST); echo "</pre>";
+                if($createProduct){
+                    echo "<script>
+                        alert('El producto se ha sido creado correctamente');   
+                    </script>";
                 }
-
-                echo "<script>
-                    if (window.history.replaceState) {
-                        window.history.replaceState(null,null,window.location.href);
-                    }
-                </script>";
             }
+        }
+        
 
+        echo "<script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null,null,window.location.href);
+            }
+        </script>";
         ?>
 </div>

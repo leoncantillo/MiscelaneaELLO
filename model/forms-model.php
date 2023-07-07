@@ -2,37 +2,14 @@
 
 require_once "connecting.php";
 
+use PHPMailer\PHPMailer\{PHPMailer, SMTP, Exception};
+require_once 'PHPMailer/src/PHPMailer.php';
+require_once 'PHPMailer/src/SMTP.php';
+require_once 'PHPMailer/src/Exception.php';
+
 Class FormsModel {
 
-    # REGISTERS ===============================
-    static public function mdlRegister($table, $data) {
-        // Validación y saneamiento de email y contraseña
-        $email = filter_var($data["email"], FILTER_VALIDATE_EMAIL);
-        if (!$email) {
-            // El correo electrónico no es válido
-            return false;
-        }
-        $password = filter_var($data["password"], FILTER_SANITIZE_STRING);
-
-        $statement = Connection::connect() -> prepare("INSERT INTO $table (`username`, `email`, `password`, `useradmin`)
-        VALUES (:username, :email, :password, :useradmin)");
-
-        $statement -> bindParam(":username", $data["username"], PDO::PARAM_STR);
-        $statement -> bindParam(":email", $email, PDO::PARAM_STR);
-        $statement -> bindParam(":password", $password, PDO::PARAM_STR);
-        $statement -> bindParam(":useradmin", $data["useradmin"], PDO::PARAM_STR);
-
-        if($statement -> execute()) {
-            return true;
-        }else {
-            print_r(Connection::connect()->errorInfo());
-        }
-
-        $statement->closeCursor();
-        $statement = null;
-    }
-
-    static public function mdlSelectRegister($table, $columnName, $value) {
+    static public function mdlFetchData($table, $columnName, $value) {
         if ($columnName == "email") {
             $value = filter_var($value, FILTER_VALIDATE_EMAIL);
             if (!$value) {
@@ -62,32 +39,73 @@ Class FormsModel {
         }
     }
 
-    # PRODUCTS ===================================================
-    static public function mdlCreateProduct($table, $data) {
-        $statement = Connection::connect() -> prepare("INSERT INTO
-        $table (`product_name`, `description`, `image`, `price`, `promotion_price`, `tag_id`, `category_id`, `color`, `condition`)
-        VALUES (:product_name, :description, :image, :price, :promotion_price, :tag_id, :category_id, :color, :condition)");
+    # Insert Data Into Table ---------------------------------
+    static public function mdlInsertData($table, $data) {
+        $columns = array_keys($data);
 
-        $statement -> bindParam(":product_name", $data["product_name"], PDO::PARAM_STR);
-        $statement -> bindParam(":description", $data["description"], PDO::PARAM_STR);
-        $statement -> bindParam(":image", $data["image"], PDO::PARAM_STR);
-        $statement -> bindParam(":price", $data["price"], PDO::PARAM_STR);
-        $statement -> bindParam(":promotion_price", $data["promotion_price"], PDO::PARAM_STR);
-        $statement -> bindParam(":tag_id", $data["tag_id"], PDO::PARAM_STR);
-        $statement -> bindParam(":category_id", $data["category_id"], PDO::PARAM_STR);
-        $statement -> bindParam(":color", $data["color"], PDO::PARAM_STR);
-        $statement -> bindParam(":condition", $data["condition"], PDO::PARAM_STR);
-
-
-        if($statement -> execute()) {
+        $columnNames = "`" . implode("`, `", array_map(function($key) {
+            return $key;
+        }, $columns)) . "`";
+        
+        $columnValues = ":" . implode(", :", $columns);
+    
+        $query = "INSERT INTO $table ($columnNames) VALUES ($columnValues)";
+    
+        $statement = Connection::connect()->prepare($query);
+    
+        foreach ($data as $key => $value) {
+            $statement->bindValue(":" . $key, $value, PDO::PARAM_STR);
+        }
+    
+        if ($statement->execute()) {
             return true;
-        }else {
+        } else {
             print_r(Connection::connect()->errorInfo());
         }
-
+    
         $statement->closeCursor();
         $statement = null;
     }
+
+    # Send Mail -------------------------------------------
+    static public function mdlSendMail($name, $email, $subject, $messageToSend) {
+        $mail = new PHPMailer(true);
+
+        try {
+            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->Host = 'mail.nuestromundoinfantil.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'pruebas@nuestromundoinfantil.com';
+            $mail->Password = 'Pruebas123';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+
+            // Configuración del correo
+            $mail->setFrom($email, 'Remitente');
+            $mail->addAddress('pruebas@nuestromundoinfantil.com', 'Destinatario');
+            $mail->addReplyTo($email, $name);
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body = utf8_decode($messageToSend);
+
+            // Envío del correo
+            if ($mail->send()) {
+                // Envío de copia al remitente
+                $mail->clearAddresses();
+                $mail->addAddress($email, $name);
+                $mail->Subject = 'Copia del mensaje, correo recibido';
+                $mail->Body = "Gracias por contactarnos. Aquí tienes una copia de tu mensaje:<br><br>$messageToSend";
+                $mail->send();
+            }
+
+            return true;
+
+        }catch(Exception $e) {
+            print_r($mail->ErrorInfo);
+        }
+    }
+    
 }
 
 ?>
