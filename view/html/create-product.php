@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <div class="create-products-form fieldset">
     <h4>Datos del producto</h4>
     <p class="required-field">Requerido *</p>
-    <form method="post" autocomplete>
+    <form method="post" id="form-create-product">
         <div class="inputbox">
             <label for="product-name">Nombre del producto <span class="required-field">* <?php echo $nameProductErr ?></span></label>
             <input type="text" name="product-name" id="product-name" value="<?php echo $nameProduct ?>" required/>
@@ -133,7 +133,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
         <div class="action-buttons">
             <button type="submit">Guardar</button>
-            <button type="button">Cancelar</button>
+            <button type="button" onclick="btnCancelar()">Cancelar</button>
+            <script>
+                function btnCancelar() {
+                    document.querySelector("#form-create-product").reset();
+                    window.location = 'index.php?rute=manage';
+                }
+    </script>
         </div>
     </form>
     <?php
