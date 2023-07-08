@@ -1,12 +1,33 @@
 <?php
 
 Class FormsController {
-    # VALIDATE FORM =========================
+    # PRIVATE FUNCTIONS =========================
+
+    # Validate Inputs ---------------------------------
     static private function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return($data);
+    }
+
+    # Upload Files ------------------------------------
+    static private function upload_file($postFile, $destinationFolder) {
+        $directory = __DIR__ . $destinationFolder;
+        $file = $directory . $postFile['name'];
+        $fileBaseName = pathinfo($file, PATHINFO_FILENAME);
+        $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
+        $counter = 1;
+    
+        // Verificar si el archivo ya existe
+        while (file_exists($file)) {
+            $newFileName = $fileBaseName . '(' . $counter . ').' . $fileExtension;
+            $file = $directory . $newFileName;
+            $counter++;
+        }
+    
+        move_uploaded_file($postFile['tmp_name'], $file);
+        return $newFileName ?? $postFile['name'];
     }
 
     # ================== CRUD USERS  =========================
@@ -96,6 +117,10 @@ Class FormsController {
     static public function ctrCreateProduct() {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $table = "ellodb_products";
+            # se empieza desde la carpeta /controllers
+            $destinationFolder = "/../view/img/products/";
+
+            $postFile = $_FILES["product-image"];
 
             $conditionValue = 0;
             if(isset($_POST["condition"])){
@@ -105,7 +130,7 @@ Class FormsController {
 
             $data = array("product_name" => self::test_input($_POST["product-name"]),
                           "description" => self::test_input($_POST["description"]),
-                          "image" => self::test_input($_POST["product-image"]),
+                          "image" => self::upload_file($postFile, $destinationFolder),
                           "price" => self::test_input($_POST["price"]),
                           "promotion_price" => self::test_input($_POST["promotion-price"]),
                           "tag_id" => self::test_input($_POST["product-tag"]),

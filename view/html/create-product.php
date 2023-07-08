@@ -29,13 +29,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $description = $_POST["description"];
     }
     
-    if(empty($_POST["product-image"])){
-        $imageProductErr = "Seleccione una imagen que represente el producto";
+    if(isset($_FILES["product-image"]) && $_FILES["product-image"]["error"] === 0){  
+        $fileType = $_FILES["product-image"]["type"];
+        $allowedTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"];
+        if(!in_array($fileType, $allowedTypes)){
+            $imageProductErr = "Solo se permiten archivos de imagen (JPEG, PNG, GIF, WebP).";
+            $countError += 1;
+        }
+    }else {
+        $imageProductErr = "Por favor, seleccione una imagen.";
         $countError += 1;
     }
-    
+
     if(empty($_POST["price"])){
-        $priceErr = "Digite un precio para el producto";
+        $priceErr = "Digite un precio para el producto.";
         $countError += 1;
     }else{
         $price = $_POST["price"];
@@ -58,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(empty($_POST["condition"])){
-        $conditionErr = "Es obligatorio indicar la condición del producto";
+        $conditionErr = "Es obligatorio indicar la condición del producto.";
         $countError += 1;
     }
 
@@ -76,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <div class="create-products-form fieldset">
     <h4>Datos del producto</h4>
     <p class="required-field">Requerido *</p>
-    <form method="post" id="form-create-product">
+    <form method="post" id="form-create-product" enctype="multipart/form-data">
         <div class="inputbox">
             <label for="product-name">Nombre del producto <span class="required-field">* <?php echo $nameProductErr ?></span></label>
             <input type="text" name="product-name" id="product-name" value="<?php echo $nameProduct ?>" required/>
@@ -87,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
         <div class="inputbox">
             <label for="product-image">Imagen <span class="required-field">* <?php echo $imageProductErr ?></span></label>
-            <input type="file" name="product-image" id="product-image" required/>
+            <input type="file" name="product-image" id="product-image" accept="image/jpg, image/jpeg, image/png, image/gif, image/webp" required/>
         </div>
         <div class="inputbox">
             <label for="price">Precio <span class="required-field">* <?php echo $priceErr ?></span></label>
