@@ -62,13 +62,6 @@
     width: 100%x;
 }
 
-.fieldset form input[type="submit"], .fieldset form button {
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    padding: 10px;
-}
-
 @media (max-width: 600px){
     .fieldset {
         gap: 20px;

@@ -47,11 +47,7 @@
 
 .footer .contfooter.form .footerbox form input[type="submit"] {
     background-color: var(--global-color-3);
-    border: none;
     color: snow;
-    cursor: pointer;
-    font-weight: 600;
-    margin: 0;
     padding: 10px 15px;
 }
 

@@ -12,3 +12,10 @@
 @media (max-width: 600px) {
     :root {--header-height: 150px;}
 }
+
+input[type="submit"], button {
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px;
+}
