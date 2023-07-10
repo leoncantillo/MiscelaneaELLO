@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+    flex-direction: column;
+    gap: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.container h4 {
+  font-size: 26px;
+}
+
+.container a:has(button){align-self: flex-end;}
+.container a button.new-product {
+  background-color: var(--global-color-6);
+  border-radius: 5px;
+  color: snow;
+}
+
+.table-wrapper{overflow-x: auto;}
+
+.table-wrapper::-webkit-scrollbar{height: 8px; width: 8px;}
+.table-wrapper::-webkit-scrollbar-thumb{
+  background-color: var(--global-color-4);
+  border-radius: 8px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+td:last-child {
+  text-align: center;
+}
+
+td a button{border-radius: 5px;}
+td a button.delete {background-color: tomato;}
+td a button.update {background-color: var(--global-color-5);}
