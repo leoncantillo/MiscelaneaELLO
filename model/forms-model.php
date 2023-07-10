@@ -9,36 +9,6 @@ require_once 'PHPMailer/src/Exception.php';
 
 Class FormsModel {
 
-    static public function mdlFetchData($table, $columnName, $value) {
-        if ($columnName == "email") {
-            $value = filter_var($value, FILTER_VALIDATE_EMAIL);
-            if (!$value) {
-                // El valor de email no es válido
-                return null;
-            }
-        }
-        if ($columnName == null && $value == null) {
-            $statement = Connection::connect()->prepare("SELECT * FROM $table");
-            $statement->execute();
-            $result = $statement->fetchAll();
-    
-            $statement->closeCursor();
-            $statement = null;
-    
-            return $result;
-        } else {
-            $statement = Connection::connect()->prepare("SELECT * FROM $table WHERE $columnName = :$columnName");
-            $statement->bindParam(":".$columnName, $value, PDO::PARAM_STR);
-            $statement->execute();
-            $result = $statement->fetch();
-    
-            $statement->closeCursor();
-            $statement = null;
-    
-            return $result;
-        }
-    }
-
     # Insert Data Into Table ---------------------------------
     static public function mdlInsertData($table, $data) {
         $columns = array_keys($data);
@@ -67,6 +37,88 @@ Class FormsModel {
         $statement = null;
     }
 
+    # Update Data From Table -----------------------------
+    static public function mdlUpdateData($table, $data) {
+        $columns = array_keys($data);
+
+        $setColumns = implode(" = :",$columns);
+
+        $query = "UPDATE $table SET $setColumns WHERE id = :id";
+
+        $statement = Connection::connect()->prepare($query);
+
+        foreach ($data as $key => $value) {
+            $statement->bindValue(":" . $key, $value, PDO::PARAM_STR);
+        }
+
+        if ($statement->execute()) {
+            return true;
+        } else {
+            print_r($statement->errorInfo());
+        }
+
+        $statement->closeCursor();
+        $statement = null;
+    }
+
+    # Delete Data From Table ----------------------------------
+    static public function mdlDeleteData($table, $id) {
+        $query = "DELETE FROM $table WHERE id = :id";
+        $statement = Connection::connect()->prepare($query);
+        $statement->bindValue(":id", $id, PDO::PARAM_STR);
+
+        if ($statement->execute()) {
+            return true;
+        } else {
+            print_r($statement->errorInfo());
+        }
+
+        $statement->closeCursor();
+        $statement = null;
+    }
+
+    # Bring Data Form Table --------------------------------------
+    static public function mdlFetchData($table, $columnName, $value) {
+        if ($columnName == "email") {
+            $value = filter_var($value, FILTER_VALIDATE_EMAIL);
+            if (!$value) {
+                // El valor de email no es válido
+                return null;
+            }
+        }
+        if ($columnName == null && $value == null) {
+            $statement = null;
+            if ($table == "ellodb_products") {
+                $statement = Connection::connect()->prepare("SELECT 
+                $table.id, `product_name`, `description`, `image`, `price`, `promotion_price`, `tag_name`, `category_name`, `color`, `condition`
+                FROM $table INNER JOIN `ellodb_tags`
+                ON $table.tag_id = ellodb_tags.id
+                INNER JOIN `ellodb_categories`
+                ON $table.category_id = ellodb_categories.id ORDER BY $table.id DESC
+                ");
+            }else {
+                $statement = Connection::connect()->prepare("SELECT * FROM $table");
+            }
+            $statement->execute();
+            $result = $statement->fetchAll();
+    
+            $statement->closeCursor();
+            $statement = null;
+    
+            return $result;
+        } else {
+            $statement = Connection::connect()->prepare("SELECT * FROM $table WHERE $columnName = :$columnName");
+            $statement->bindParam(":".$columnName, $value, PDO::PARAM_STR);
+            $statement->execute();
+            $result = $statement->fetch();
+    
+            $statement->closeCursor();
+            $statement = null;
+    
+            return $result;
+        }
+    }
+    
     # Send Mail -------------------------------------------
     static public function mdlSendMail($name, $email, $subject, $messageToSend) {
         $mail = new PHPMailer(true);
