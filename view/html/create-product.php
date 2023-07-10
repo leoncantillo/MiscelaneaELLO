@@ -107,18 +107,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="inputbox">
             <label for="tag_select">Etiqueta</label>
             <select name="product-tag" id="tag-select">
-                <option value="">... seleccionar</option>
-                <option  value="pencils">Lápices</option>
-                <option name="product-tag" value="etiqueta1">etiqueta1</option>
-                <option name="product-tag" value="etiqueta2">etiqueta2</option>
-                <option name="product-tag" value="etiqueta3">etiqueta3</option>
+            <option value="0">... seleccionar</option>
+                <?php 
+                    $productTags = FormsController::ctrSelectTags();
+                    $quantityTags = count($productTags);
+                    if($quantityTags > 0){
+                        for($i = 1; $i < $quantityTags; $i++){
+                            $item = $productTags[$i];
+                ?>
+                    <option  value="<?php echo $item["id"] ?>"><?php echo $item["tag_name"] ?></option>
+                <?php
+                        }
+                    }
+                ?>
             </select>
         </div>
         <div class="inputbox">
             <label for="category-select">Categoría</label>
             <select name="product-category" id="category-select">
-                <option value="">... seleccionar</option>
-                <option name="product-category" value="utiles">Útiles Escolares</option>
+            <option value="0">... seleccionar</option>
+                <?php 
+                    $productCategories = FormsController::ctrSelectCategories();
+                    $quantityCategories = count($productCategories);
+                    if($quantityCategories > 0){
+                        for($i = 1; $i < $quantityCategories; $i++){
+                            $item = $productCategories[$i];
+                ?>
+                    <option  value="<?php echo $item["id"] ?>"><?php echo $item["category_name"] ?></option>
+                <?php
+                        }
+                    }
+                ?>
             </select>
         </div>
         <div class="inputbox">
