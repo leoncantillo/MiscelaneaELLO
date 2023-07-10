@@ -142,6 +142,25 @@ Class FormsController {
             return $answer;
         }
     }
+
+    # Select Products -------------------------------
+    static public function ctrSelectProducts() {
+        $table = "ellodb_products";
+        $answer = FormsModel::mdlFetchData($table, null, null);
+        return $answer;
+    }
+
+    static public function ctrSelectTags() {
+        $table = "ellodb_tags";
+        $answer = FormsModel::mdlFetchData($table, null, null);
+        return $answer;
+    }
+
+    static public function ctrSelectCategories() {
+        $table = "ellodb_categories";
+        $answer = FormsModel::mdlFetchData($table, null, null);
+        return $answer;
+    }
 }
 
 ?>
