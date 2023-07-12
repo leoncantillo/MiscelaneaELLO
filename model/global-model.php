@@ -7,7 +7,7 @@ require_once 'PHPMailer/src/PHPMailer.php';
 require_once 'PHPMailer/src/SMTP.php';
 require_once 'PHPMailer/src/Exception.php';
 
-Class FormsModel {
+Class GlobalModel {
 
     # Insert Data Into Table ---------------------------------
     static public function mdlInsertData($table, $data) {
