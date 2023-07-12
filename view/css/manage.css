@@ -51,8 +51,8 @@ tr:nth-child(even) {
 td img {height: 80px;}
 
 td button{border-radius: 5px;}
-td button.delete-product {background-color: tomato;}
-td a button.update {background-color: var(--global-color-5);}
+td button.delete {background-color: tomato;}
+td button.update {background-color: var(--global-color-5);}
 
 .overlay-delete-confirm {
   background-color: rgba(0, 0, 0, 0.3);
@@ -79,6 +79,11 @@ td a button.update {background-color: var(--global-color-5);}
   text-align: center;
   width: 300px;
   z-index: 9999;
+}
+
+.delete-confirm .confirm-buttons {
+  display: flex;
+    justify-content: space-around;
 }
 
 .delete-confirm button.confirm-delete {background-color: tomato;}

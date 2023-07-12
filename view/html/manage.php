@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        $bringProducts = FormsController::ctrSelectProducts();
+                        $bringProducts = ProductsController::ctrSelectProducts();
                         $quantityProducts = count($bringProducts);
                         try {
                             if($quantityProducts > 0){
@@ -69,8 +69,8 @@
                             ?>
                         </td>
                         <td>
-                            <button class="delete-product" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>)"><i class="fas fa-trash"></i></button>
-                            <a href="index.php?rute=update-product"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
+                            <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>)"><i class="fas fa-trash"></i></button>
+                            <a href="index.php?rute=update-product&id=<?php echo intval($item['id']) ?>"><button class="update"><i class="fas fa-sync-alt"></i></button></a>
                         </td>
                     </tr>
                     <?php
@@ -140,9 +140,8 @@
                     <?php
                                 }
                             }
-                        } catch(Exception $e) {
-                            echo "No se encontraron resultados";
-                            print_r($bringUsers->ErrorInfo);
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
                         }
                     ?>
                     
@@ -156,7 +155,7 @@
 <div class="delete-confirm" style="display: none;">
     <h3>Confirmar eliminación</h3>
     <p>¿Estás seguro de eliminar el producto?</p>
-    <div>
+    <div class="confirm-buttons">
         <button class="confirm-delete">Eliminar</button>
         <button class="confirm-cancel">Cancelar</button>
     </div>
