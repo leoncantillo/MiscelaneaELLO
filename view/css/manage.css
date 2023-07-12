@@ -18,7 +18,10 @@
   color: snow;
 }
 
-.table-wrapper{overflow-x: auto;}
+.table-wrapper {
+  border: 1px solid #ddd;
+  overflow-x: auto;
+}
 
 .table-wrapper::-webkit-scrollbar{height: 8px; width: 8px;}
 .table-wrapper::-webkit-scrollbar-thumb{
@@ -34,6 +37,7 @@ table {
 th, td {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: center;
 }
 
 th {
@@ -44,10 +48,38 @@ tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-td:last-child {
-  text-align: center;
+td img {height: 80px;}
+
+td button{border-radius: 5px;}
+td button.delete-product {background-color: tomato;}
+td a button.update {background-color: var(--global-color-5);}
+
+.overlay-delete-confirm {
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 100%;
+  position: fixed;
+    top: 0;
+    left: 0;
+  width: 100%;
+  z-index: 9998;
 }
 
-td a button{border-radius: 5px;}
-td a button.delete {background-color: tomato;}
-td a button.update {background-color: var(--global-color-5);}
+.delete-confirm {
+  background-color: snow;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+    flex-direction: column;
+    gap: 10px;
+  padding: 20px;
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  text-align: center;
+  width: 300px;
+  z-index: 9999;
+}
+
+.delete-confirm button.confirm-delete {background-color: tomato;}
+.delete-confirm button.confirm-cancel {background-color: var(--global-color-6);}

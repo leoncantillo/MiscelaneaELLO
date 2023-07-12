@@ -12,9 +12,9 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Imagen</th>
                         <th>Precio</th>
                         <th>Precio PROMO</th>
                         <th>Etiqueta</th>
@@ -36,6 +36,16 @@
                     ?>
                     <tr>
                         <td><?php echo $counter?></td>
+                        <td>
+                            <?php
+                                $image = "view/img/products/".$item["image"];
+                                if (file_exists($image)) {
+                            ?>
+                                <img src="<?php echo $image ?>" alt="product image">
+                            <?php } else  { ?>
+                                <img src="view/img/jpg/img-placeholder.jpg"/>
+                            <?php } ?>
+                        </td>
                         <td><?php echo $item["product_name"] ?></td>
                         <td>
                             <?php
@@ -44,7 +54,6 @@
                                 echo $truncatedDescription;
                             ?>
                         </td>
-                        <td><?php echo $item["image"] ?></td>
                         <td><?php echo $item["price"] ?></td>
                         <td><?php echo $item["promotion_price"] ?></td>
                         <td><?php echo $item["tag_name"] ?></td>
@@ -60,19 +69,19 @@
                             ?>
                         </td>
                         <td>
-                            <a href="index.php?rute=delete-product"><button class="delete"><i class="fas fa-trash"></i></button></a>
+                            <button class="delete-product" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>)"><i class="fas fa-trash"></i></button>
                             <a href="index.php?rute=update-product"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
                         </td>
                     </tr>
                     <?php
                                 }
+                            } else {
+                                echo "<td colspan=11>No hay productos</td>";
                             }
-                        } catch(Exception $e) {
-                            echo "No se encontraron resultados";
-                            print_r($bringProducts->ErrorInfo);
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
                         }
                     ?>
-                    
                 </tbody>
             </table>
         </div>
@@ -142,3 +151,40 @@
         </div>
     </div>
 </section>
+
+<div class="overlay-delete-confirm" style="display: none;"></div>
+<div class="delete-confirm" style="display: none;">
+    <h3>Confirmar eliminación</h3>
+    <p>¿Estás seguro de eliminar el producto?</p>
+    <div>
+        <button class="confirm-delete">Eliminar</button>
+        <button class="confirm-cancel">Cancelar</button>
+    </div>
+</div>
+<script>
+    let idToDelete = null
+    
+    function popUpDeleteConfirm(id) {
+        const popUpDelete = document.querySelector(".delete-confirm");
+        const overlay = document.querySelector(".overlay-delete-confirm");
+        popUpDelete.style.display = "flex";
+        overlay.style.display = "block";
+        idToDelete = id;
+    }
+
+    function cancelDelete() {
+        const popUpDelete = document.querySelector(".delete-confirm");
+        const overlay = document.querySelector(".overlay-delete-confirm");
+        popUpDelete.style.display = "none";
+        overlay.style.display = "none";    
+    }
+
+    function deleteProduct(idToDelete) {
+        window.location.href = "index.php?rute=delete-product&id=" + idToDelete;
+    }
+
+    const deleteButton = document.querySelector(".confirm-delete");
+    const cancelButton = document.querySelector(".confirm-cancel");
+    deleteButton.onclick = () => deleteProduct(idToDelete);
+    cancelButton.onclick = cancelDelete;
+</script>
