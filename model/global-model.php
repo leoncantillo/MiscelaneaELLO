@@ -9,7 +9,7 @@ require_once 'PHPMailer/src/Exception.php';
 
 Class GlobalModel {
 
-    # Insert Data Into Table ---------------------------------
+    # CREATE ---------------------------------
     static public function mdlInsertData($table, $data) {
         $columns = array_keys($data);
 
@@ -27,57 +27,19 @@ Class GlobalModel {
             $statement->bindValue(":" . $key, $value, PDO::PARAM_STR);
         }
     
-        if ($statement->execute()) {
+        try {
+            $statement->execute();
             return true;
-        } else {
-            print_r(Connection::connect()->errorInfo());
+        } catch (PDOException $e) {
+            echo "<pre>";
+            print_r($e);
+            $statement->closeCursor();
+            $statement = null;
+            return false;
         }
-    
-        $statement->closeCursor();
-        $statement = null;
     }
 
-    # Update Data From Table -----------------------------
-    static public function mdlUpdateData($table, $data) {
-        $columns = array_keys($data);
-
-        $setColumns = implode(" = :",$columns);
-
-        $query = "UPDATE $table SET $setColumns WHERE id = :id";
-
-        $statement = Connection::connect()->prepare($query);
-
-        foreach ($data as $key => $value) {
-            $statement->bindValue(":" . $key, $value, PDO::PARAM_STR);
-        }
-
-        if ($statement->execute()) {
-            return true;
-        } else {
-            print_r($statement->errorInfo());
-        }
-
-        $statement->closeCursor();
-        $statement = null;
-    }
-
-    # Delete Data From Table ----------------------------------
-    static public function mdlDeleteData($table, $id) {
-        $query = "DELETE FROM $table WHERE id = :id";
-        $statement = Connection::connect()->prepare($query);
-        $statement->bindValue(":id", $id, PDO::PARAM_STR);
-
-        if ($statement->execute()) {
-            return true;
-        } else {
-            print_r($statement->errorInfo());
-        }
-
-        $statement->closeCursor();
-        $statement = null;
-    }
-
-    # Bring Data Form Table --------------------------------------
+    # READ --------------------------------------
     static public function mdlFetchData($table, $columnName, $value) {
         if ($columnName == "email") {
             $value = filter_var($value, FILTER_VALIDATE_EMAIL);
@@ -116,6 +78,62 @@ Class GlobalModel {
             $statement = null;
     
             return $result;
+        }
+    }
+
+    # UPDATE -----------------------------
+    static public function mdlUpdateData($table, $data) {
+        $id = $data["id"];
+        unset($data["id"]);
+
+        $columns = array_keys($data);
+
+        $columnsWithBackticks = array_map(function($column) {
+            return "`$column`";
+        }, $columns);
+        
+        $columnValuePairs = array_map(function($column) {
+            return "`$column` = :$column";
+        }, $columns);
+        
+        $setColumns = implode(", ", $columnValuePairs);
+
+        $query = "UPDATE $table SET $setColumns WHERE id = :id";
+
+        $statement = Connection::connect()->prepare($query);
+        
+        foreach ($data as $key => $value) {
+            $statement->bindValue(":" . $key, $value, PDO::PARAM_STR);
+        }
+        $statement->bindParam(":id", $id, PDO::PARAM_INT);
+
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "<pre>";
+            print_r($e);
+            $statement->closeCursor();
+            $statement = null;
+            return false;
+        }
+    }
+
+    # DELETE ----------------------------------
+    static public function mdlDeleteData($table, $id) {
+        $query = "DELETE FROM $table WHERE id = :id";
+        $statement = Connection::connect()->prepare($query);
+        $statement->bindValue(":id", $id, PDO::PARAM_STR);
+
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "<pre>";
+            print_r($e);
+            $statement->closeCursor();
+            $statement = null;
+            return false;
         }
     }
     
