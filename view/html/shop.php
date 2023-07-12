@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="view/css/shop.css">
 <title>Shop</title>
 
-<?php $directory = "view/img/jpg/slides"; include 'slider.php'?>
+<?php $directory = "view/img/slides"; include 'slider.php'?>
 <section class="tienda-home">
     <h4 class="titulo-producto-filtro">Filtros</h4>
     <aside class="aside-filtros">
@@ -21,42 +21,61 @@
     <div class="ordenar-productos">Ordenar por <span class="filtros-de-orden">Más Vendidos <?php include 'view/img/svg/icon-chevron-down.svg'?></span></div>
     <section>
         <div class="productos-en-venta">
+        <?php
+            $bringProducts = ProductsController::ctrSelectProducts();
+            $quantityProducts = count($bringProducts);
+            try {
+                if($quantityProducts > 0){
+                    for($i = 0; $i < $quantityProducts; $i++){
+                        $counter = $i + 1;
+                        $item = $bringProducts[$i];
+        ?>
             <div class="producto-en-vitrina">
                 <div class="imagen-producto">
-                    <img src="view/img/jpg/Products/Cuaderno anillado.jpg" alt="">
+                <?php
+                    $image = "view/img/products/".$item["image"];
+                    if (file_exists($image)) {
+                ?>
+                    <img src="<?php echo $image ?>" alt="product image">
+                <?php } else  { ?>
+                    <img src="view/img/jpg/img-placeholder.jpg"/>
+                <?php } ?>
                 </div>
                 <div class="descripcion-del-producto">
                     <div class="info-producto">
-                        <h3 class="nombre-producto">Cuaderno Anillado 5 Materias</h3>
-                        <span class="precio-descuento"></span>
-                        <span class="precio-producto">$ 8000.00 cop</span> <!--Este valor será dinámico -->
-                        <p class="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam iure sit est fugit magni earum enim et inventore quia dolores?</p>
+                        <h3 class="nombre-producto"><?php echo $item["product_name"]?></h3>
+                        <span class="precio-descuento">$ <?php echo $item["promotion_price"] ?> cop</span>
+                        <span class="precio-producto">$ <?php echo $item["price"] ?> cop</span>
+                        <p class="info">
+                        <?php
+                            $description = $item["description"];
+                            $truncatedDescription = strlen($description) > 150 ? substr($description, 0, 150) . '...' : $description;
+                            echo $truncatedDescription;
+                        ?>
+                        </p>
                     </div>
                     <div class="etiquetas-producto">
-                        <span>Etiquetas: Taltal</span>
-                        <span>Categoría: Blablabla</span>
-                        <span>Color: Rojo</span>
+                        <?php if (!empty($item["tag_name"])) { ?>
+                            <span>Etiquetas: <?php echo $item["tag_name"] ?></span>
+                        <?php } ?>
+                        <?php if (!empty($item["category_name"])) { ?>
+                            <span>Categoría: <?php echo $item["category_name"] ?></span>
+                        <?php } ?>
+                        <?php if (!empty($item["color"])) { ?>
+                                <span>Color: <?php echo $item["color"] ?></span>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
-            <div class="producto-en-vitrina">
-                <div class="imagen-producto">
-                    <img src="view/img/jpg/Products/Caja Lapiz HB.jpg" alt="">
-                </div>
-                <div class="descripcion-del-producto">
-                    <div class="info-producto">
-                        <h3 class="nombre-producto">Caja De Lapices HB Faber Castell</h3>
-                        <span class="precio-descuento">$ 6000.00 cop</span>
-                        <span class="precio-producto">$ 4800.00 cop</span>
-                        <p class="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam iure sit est fugit magni earum enim et inventore quia dolores?</p>
-                    </div>
-                    <div class="etiquetas-producto">
-                        <span>Etiquetas: </span>
-                        <span>Categoría: Útiles</span>
-                        <span>Color: Verde</span>
-                    </div>
-                </div>
-            </div>
+        <?php
+                    }
+                } else {
+                    echo "No hay productos";
+                }
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        ?>
         </div>
     </section>
 </section>
