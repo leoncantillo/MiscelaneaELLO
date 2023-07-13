@@ -8,22 +8,21 @@ if(!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"]
     return;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
-        $id = $_GET["id"];
-        $fetchProducts = ProductsController::ctrSelectProductsWithId($id);
-        if (!$fetchProducts) {
-            echo "<script>window.location = 'index.php?rute=manage'</script>";
-            return;
-        }
-    } else {
+
+if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
+    $id = $_GET["id"];
+    $fetchProducts = ProductsController::ctrSelectProductsWithId($id);
+    if (!$fetchProducts) {
         echo "<script>window.location = 'index.php?rute=manage'</script>";
         return;
     }
+} else {
+    echo "<script>window.location = 'index.php?rute=manage'</script>";
+    return;
 }
 
-$nameProductErr = $descriptionErr = $imageProductErr = $priceErr = $conditionErr = ""; # Empty Fields
-$promotionPriceErr = "";
+$nameProductErr = $descriptionErr = $priceErr = $conditionErr = ""; # Empty Fields
+$promotionPriceErr = $imageProductErr = "";
 $countError = 0;
 $fullFields = true;
 
@@ -42,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $fileType = $_FILES["product-image"]["type"];
         $allowedTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"];
         if(!in_array($fileType, $allowedTypes)){
-            $imageProductErr = "Solo se permiten archivos de imagen (JPEG, PNG, GIF, WebP).";
+            $imageProductErr = "* Solo se permiten archivos de imagen (JPEG, PNG, GIF, WebP).";
             $countError += 1;
         }
     }
@@ -53,11 +52,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $countError += 1;
     } else if ($_POST["price"] < 0) {
         $priceErr = "El valor debe ser superior o igual a 0.";
-        $conditionErr += 1;
+        $countError += 1;
     }
 
     if (!empty($_POST["promotion-price"]) && $_POST["promotion-price"] < 0) {
-        $promotionPriceErr = "El valor debe ser superior o igual a 0.";
+        $promotionPriceErr = "* El valor debe ser superior o igual a 0.";
+        $countError += 1;
     }
 
     if(empty($_POST["condition"])){
@@ -112,7 +112,7 @@ echo "<script>
             <textarea name="description" id="description" cols="30" rows="10" required><?php echo $fetchProducts["description"] ?></textarea>
         </div>
         <div class="inputbox">
-            <label for="product-image">Imagen <span class="required-field">* <?php echo $imageProductErr ?></span></label>
+            <label for="product-image">Imagen <span class="required-field"><?php echo $imageProductErr ?></span></label>
             <input type="file" name="product-image" id="product-image" accept="image/jpg, image/jpeg, image/png, image/gif, image/webp"/>
             <input type="hidden" name="product-image-temp" value="<?php echo $fetchProducts["image"] ?>"/>
         </div>
@@ -121,7 +121,7 @@ echo "<script>
             <input type="number" step="0.01" min="0.00" name="price" id="price" placeholder="0.00" value="<?php echo $fetchProducts["price"] ?>" required/>
         </div>
         <div class="inputbox">
-            <label for="promotion-price">Precio de promoción <span class="required-field"><?php echo "* ".$promotionPriceErr ?></span></label>
+            <label for="promotion-price">Precio de promoción <span class="required-field"><?php echo $promotionPriceErr ?></span></label>
             <input type="number" step="0.01" min="0.00" name="promotion-price" id="promotion-price" placeholder="0.00" value="<?php echo $fetchProducts["promotion_price"] ?>"/>
         </div>
         <div class="inputbox">

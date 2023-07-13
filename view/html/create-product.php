@@ -45,7 +45,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if (!empty($_POST["promotion-price"]) && $_POST["promotion-price"] < 0) {
-        $promotionPriceErr = "El valor debe ser superior o igual a 0.";
+        $promotionPriceErr = "* El valor debe ser superior o igual a 0.";
+        $countError += 1;
     }
 
     if (empty($_POST["condition"])) {
@@ -101,7 +102,7 @@ echo "<script>
             <input type="number" step="0.01" min="0.00" name="price" id="price" placeholder="0.00" required/>
         </div>
         <div class="inputbox">
-            <label for="promotion-price">Precio de promoción <span class="required-field"><?php echo "* ".$promotionPriceErr ?></span></label>
+            <label for="promotion-price">Precio de promoción <span class="required-field"><?php echo $promotionPriceErr ?></span></label>
             <input type="number" step="0.01" min="0.00" name="promotion-price" id="promotion-price" placeholder="0.00"/>
         </div>
         <div class="inputbox">
