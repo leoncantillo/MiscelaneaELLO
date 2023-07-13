@@ -3,7 +3,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET["id"])) {
         $id = $_GET["id"];
-        $deleteProduct = ProductsController::ctrDeleteProducts($id);
+        $deleteProduct = ProductsController::ctrDeleteProduct($id);
 
         if ($deleteProduct) {
             echo "<script>

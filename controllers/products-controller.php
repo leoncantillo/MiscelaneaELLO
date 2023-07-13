@@ -104,7 +104,7 @@ Class ProductsController {
     }
 
     # DELETE ----------------------------------
-    static public function ctrDeleteProducts($id) {
+    static public function ctrDeleteProduct($id) {
         $table = "ellodb_products";
         $idProduct = GlobalController::test_input($id);
         $answer = GlobalModel::mdlDeleteData($table, $idProduct);
