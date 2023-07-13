@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $countError += 1;
     } else if ($_POST["price"] < 0) {
         $priceErr = "El valor debe ser superior o igual a 0.";
-        $conditionErr += 1;
+        $countError += 1;
     }
 
     if (!empty($_POST["promotion-price"]) && $_POST["promotion-price"] < 0) {
