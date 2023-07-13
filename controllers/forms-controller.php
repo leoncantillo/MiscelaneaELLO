@@ -14,10 +14,13 @@ Class FormsController {
                     $validUserAdmin = 1;
             }
 
-            $data = array("username" => GlobalControllers::test_input($_POST["register-username"]),
-                          "email" => filter_var(GlobalControllers::test_input($_POST["register-email"]), FILTER_VALIDATE_EMAIL),
-                          "password" => filter_var(GlobalControllers::test_input($_POST["register-password"]), FILTER_SANITIZE_STRING),
-                          "useradmin" => GlobalControllers::test_input($validUserAdmin));
+            $password = filter_var(GlobalController::test_input($_POST["register-password"]), FILTER_SANITIZE_STRING);
+            $password = password_hash($password, PASSWORD_DEFAULT);
+
+            $data = array("username" => GlobalController::test_input($_POST["register-username"]),
+                          "email" => filter_var(GlobalController::test_input($_POST["register-email"]), FILTER_VALIDATE_EMAIL),
+                          "password" => $password,
+                          "useradmin" => GlobalController::test_input($validUserAdmin));
             $answer = GlobalModel::mdlInsertData($table, $data);
             return $answer;
         }
@@ -34,11 +37,13 @@ Class FormsController {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $table = "ellodb_users";
             $columnName = "email";
-            $value = filter_var(GlobalControllers::test_input($_POST["login-email"]), FILTER_VALIDATE_EMAIL);
+            $value = filter_var(GlobalController::test_input($_POST["login-email"]), FILTER_VALIDATE_EMAIL);
             $answer = GlobalModel::mdlFetchData($table, $columnName, $value);
 
             if(is_array($answer)) {
-                if($answer["email"] == $_POST["login-email"] && $answer["password"] == $_POST["login-password"]){
+                $passwordHash = $answer["password"];
+                $passwordEntered = GlobalController::test_input($_POST["login-password"]);
+                if($answer["email"] == $_POST["login-email"] && password_verify($passwordEntered, $passwordHash)){
                     $_SESSION["validate-login"] = true;
                     if ($answer["useradmin"] == 1) {
                         $_SESSION["validate-useradmin"] = true;
@@ -64,11 +69,11 @@ Class FormsController {
     # CONTACT ----------------------------------------
     static public function ctrContactMessage() {
         if (isset($_POST["send_message"])) {
-            $name = GlobalControllers::test_input($_POST["name"]);
-            $email = GlobalControllers::test_input($_POST["email"]);
+            $name = GlobalController::test_input($_POST["name"]);
+            $email = GlobalController::test_input($_POST["email"]);
             $email = filter_var($email, FILTER_VALIDATE_EMAIL);
             $subject = 'Formulario de Contacto';
-            $message = GlobalControllers::test_input($_POST["message"]);
+            $message = GlobalController::test_input($_POST["message"]);
 
             $messageToSend = "De: $name <a href='mailto:$email'>$email</a><br/>";
             $messageToSend .= "Asunto: Mensaje de contacto<br/><br/>";
