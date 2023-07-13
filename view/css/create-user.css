@@ -1,0 +1,21 @@
+.create-user-form.fieldset {
+    align-items: start;
+    margin: unset;
+}
+
+.inputbox .option-admin {
+    display: flex;
+        gap: 40px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.fieldset form .action-buttons button[type="submit"] {
+    color: snow;
+    background-color: var(--global-color-6);
+}
+
+.fieldset form .action-buttons button[type="button"] {
+    color: snow;
+    background-color: var(--global-color-5);
+}
