@@ -1,9 +1,9 @@
 <?php
 
-$isAdmin = false;
-if(isset($_SESSION["validate-useradmin"])) {
-    if($_SESSION["validate-useradmin"] == true){
-        $isAdmin = true;
+if(isset($_SESSION["validate-login"])) {
+    if($_SESSION["validate-login"] == true){
+        echo "<script>window.location = 'index.php?rute=shop'</script>";
+        return;
     }
 }
 
@@ -13,8 +13,7 @@ $fullFields = true;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($_POST["register-username"]) ||
        empty($_POST["register-email"]) ||
-       empty($_POST["register-password"]) ||
-       ($isAdmin == true && empty($_POST["register-useradmin"]))){
+       empty($_POST["register-password"])){
         $requiredAlert = "*";
         $fullFields = false;
     }
@@ -319,21 +318,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <label>Contraseña <i><?php echo $requiredAlert ?></i></label>
                         <b></b>
                     </div>
-                    <?php if($isAdmin):?>
-                        <div class="inputbx__admin">
-                            <label>Usuario Administrador <i><?php echo $requiredAlert ?></i></label>
-                            <div class="inputbx__admin--options">
-                                <div>
-                                    <label for="is_admin">Si</label>
-                                    <input type="radio" name="register-useradmin" id="is_admin" value="is_admin" required>
-                                </div>
-                                <div>
-                                    <label for="no_admin">No</label>
-                                    <input type="radio" name="register-useradmin" id="no_admin" value="no_admin">
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif ?>
                     <div class="links">
                         <a href="">Términos y condiciones</a>
                         <a href="index.php?rute=signin">Iniciar sesión</a> 
