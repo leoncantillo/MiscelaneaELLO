@@ -21,19 +21,22 @@
                 $_GET["rute"] == "manage" ||
                 $_GET["rute"] == "create-product" ||
                 $_GET["rute"] == "update-product" ||
-                $_GET["rute"] == "delete-product" ||
-                $_GET["rute"] == "logout") {
+                $_GET["rute"] == "create-user" ||
+                $_GET["rute"] == "update-user") {
                 
                 include "view/html/header.php";
                 include "view/html/".$_GET["rute"].".php";
                 include "view/html/footer.php";
 
-            }elseif ($_GET["rute"] == "signin" ||
-                        $_GET["rute"] == "signup"){
+            } elseif ($_GET["rute"] == "signin" ||
+                      $_GET["rute"] == "signup" ||
+                      $_GET["rute"] == "delete-product" ||
+                      $_GET["rute"] == "delete-user" ||
+                      $_GET["rute"] == "logout"){
                         
                 include "view/html/".$_GET["rute"].".php";
 
-            }else {
+            } else {
                 include "view/html/404.php";
             }
         } else {
