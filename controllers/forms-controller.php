@@ -66,6 +66,14 @@ Class FormsController {
         }
     }
 
+    # DELETE -----------------------------------------
+    static public function ctrDeleteUser($id) {
+        $table = "ellodb_users";
+        $idProduct = GlobalController::test_input($id);
+        $answer = GlobalModel::mdlDeleteData($table, $idProduct);
+        return $answer;
+    }
+
     # CONTACT ----------------------------------------
     static public function ctrContactMessage() {
         if (isset($_POST["send_message"])) {
