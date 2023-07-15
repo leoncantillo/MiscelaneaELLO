@@ -18,7 +18,7 @@
                 <ul class="links">
                     <li><a href="index.php?rute=home">Inicio</a></li>
                     <li><a href="index.php?rute=shop">Tienda</a></li>
-                    <li><a href="index.php?rute=about_us">Nosotros</a></li>
+                    <li><a href="index.php?rute=about-us">Nosotros</a></li>
                     <li><a href="index.php?rute=contact">Contacto</a></li>
                     </ul>
                 <ul class="networks">
