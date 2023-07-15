@@ -325,7 +325,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
                     if($_SERVER["REQUEST_METHOD"] == "POST"){
                         if($fullFields){
-                            $login = new FormsController();
+                            $login = new UserController();
                             $login -> ctrSignin();
                         }
                     

@@ -331,7 +331,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
                     if($_SERVER["REQUEST_METHOD"] == "POST"){
                         if($fullFields){
-                            $signup = FormsController::ctrSignUp();
+                            $signup = UserController::ctrSignUp();
                     
                             if($signup == true){
                                 echo "<script>

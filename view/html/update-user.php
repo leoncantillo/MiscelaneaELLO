@@ -10,7 +10,7 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
 
 if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
     $id = $_GET["id"];
-    $fetchUsers = FormsController::ctrSelectUsersWithId($id);
+    $fetchUsers = UserController::ctrSelectUsersWithId($id);
     if (!$fetchUsers) {
         echo "<script>window.location = 'index.php?rute=manage'</script>";
         return;
@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if ($fullFields) {
-        $createProduct = FormsController::ctrUpdateUser();
+        $createProduct = UserController::ctrUpdateUser();
 
         if ($createProduct) {
             echo "<script>

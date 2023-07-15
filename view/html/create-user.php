@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if ($fullFields) {
-        $createProduct = FormsController::ctrSignUp();
+        $createProduct = UserController::ctrSignUp();
 
         if ($createProduct) {
             echo "<script> alert('El usuario ha sido creado correctamente') </script>";

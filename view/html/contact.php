@@ -65,7 +65,7 @@ if(isset($_POST["send_message"])){
     
       if(isset($_POST["send_message"])){
         if($fullFields){
-          $contact = FormsController::ctrContactMessage();
+          $contact = MessageController::ctrContactMessage();
           
           if($contact == true) {
             echo "<script>

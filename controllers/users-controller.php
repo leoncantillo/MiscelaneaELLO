@@ -1,6 +1,6 @@
 <?php
 
-Class FormsController {
+Class UserController {
     # ================== CRUD USERS  =========================
 
     # SIGNUP ------------------------------------
@@ -17,8 +17,8 @@ Class FormsController {
             $password = filter_var(GlobalController::test_input($_POST["register-password"]), FILTER_SANITIZE_STRING);
             $password = password_hash($password, PASSWORD_DEFAULT);
 
-            $data = array("username" => GlobalController::test_input($_POST["register-username"]),
-                          "email" => filter_var(GlobalController::test_input($_POST["register-email"]), FILTER_VALIDATE_EMAIL),
+            $data = array("username" => strtolower(GlobalController::test_input($_POST["register-username"])),
+                          "email" => filter_var(strtolower(GlobalController::test_input($_POST["register-email"])), FILTER_VALIDATE_EMAIL),
                           "password" => $password,
                           "useradmin" => GlobalController::test_input($validUserAdmin));
             $answer = GlobalModel::mdlInsertData($table, $data);
@@ -42,37 +42,42 @@ Class FormsController {
     }
 
     public function ctrSignin() {
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $table = "ellodb_users";
             $columnName = "email";
-            $value = filter_var(GlobalController::test_input($_POST["login-email"]), FILTER_VALIDATE_EMAIL);
+            $userEmail = strtolower(GlobalController::test_input($_POST["login-email"]));
+            $value = filter_var($userEmail, FILTER_VALIDATE_EMAIL);
             $answer = GlobalModel::mdlFetchData($table, $columnName, $value);
-
-            if(is_array($answer)) {
+    
+            if (is_array($answer)) {
+                $storedEmail = strtolower($answer["email"]);
                 $passwordHash = $answer["password"];
                 $passwordEntered = GlobalController::test_input($_POST["login-password"]);
-                if($answer["email"] == $_POST["login-email"] && password_verify($passwordEntered, $passwordHash)){
+                $enteredEmail = strtolower($userEmail);
+    
+                if ($storedEmail == $enteredEmail && password_verify($passwordEntered, $passwordHash)) {
                     $_SESSION["validate-login"] = true;
                     if ($answer["useradmin"] == 1) {
                         $_SESSION["validate-useradmin"] = true;
                     }
                     echo "<script>
-                        window.location = 'index.php?rute=shop'
-                    </script>";
-                }else {
+                            window.location = 'index.php?rute=shop'
+                        </script>";
+                } else {
                     echo "<div>El email o la contraseña son incorrectos</div>";
                 }
-            }else {
+            } else {
                 echo "<div>El usuario ingresado no existe</div>";
             }
-
+    
             echo "<script>
-                if (window.history.replaceState) {
-                    window.history.replaceState(null,null,window.location.href);
-                }
-            </script>";
+                    if (window.history.replaceState) {
+                        window.history.replaceState(null,null,window.location.href);
+                    }
+                </script>";
         }
     }
+    
 
     static public function ctrUpdateUser() {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -108,25 +113,6 @@ Class FormsController {
         return $answer;
     }
 
-    # CONTACT ----------------------------------------
-    static public function ctrContactMessage() {
-        if (isset($_POST["send_message"])) {
-            $name = GlobalController::test_input($_POST["name"]);
-            $email = GlobalController::test_input($_POST["email"]);
-            $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-            $subject = 'Formulario de Contacto';
-            $message = GlobalController::test_input($_POST["message"]);
-
-            $messageToSend = "De: $name <a href='mailto:$email'>$email</a><br/>";
-            $messageToSend .= "Asunto: Mensaje de contacto<br/><br/>";
-            $messageToSend .= "Cuerpo del mensaje:";
-            $messageToSend .= "<p>$message</p>";
-            $messageToSend .= "--<p>Mensaje enviado desde miscelaneaello.com</p>";
-
-            $answer = GlobalModel::mdlSendMail($name, $email, $subject, $messageToSend);
-            return $answer;
-        }
-    }
 }
 
 ?>

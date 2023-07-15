@@ -3,7 +3,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET["id"])) {
         $id = $_GET["id"];
-        $deleteUser = FormsController::ctrDeleteuser($id);
+        $deleteUser = UserController::ctrDeleteuser($id);
 
         if ($deleteUser) {
             echo "<script>

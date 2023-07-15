@@ -108,7 +108,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        $bringUsers = FormsController::ctrSelectUsers();
+                        $bringUsers = UserController::ctrSelectUsers();
                         try {
                             $quantityUsers = count($bringUsers);
                             if($quantityUsers > 0){
