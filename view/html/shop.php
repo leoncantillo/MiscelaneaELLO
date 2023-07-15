@@ -61,8 +61,12 @@
                 <div class="descripcion-del-producto">
                     <div class="info-producto">
                         <h3 class="nombre-producto"><?php echo $item["product_name"]?></h3>
-                        <span class="precio-descuento">$ <?php echo $item["promotion_price"] ?> cop</span>
+                    <?php if (!empty($item["promotion_price"])) { ?>
+                        <span class="old-price">$ <?php echo $item["price"] ?> cop</span>
+                        <span class="precio-producto">$ <?php echo $item["promotion_price"] ?> cop</span>
+                    <?php } else { ?>
                         <span class="precio-producto">$ <?php echo $item["price"] ?> cop</span>
+                    <?php } ?>
                         <p class="info">
                         <?php
                             $description = $item["description"];
@@ -106,7 +110,7 @@
             // Mostrar flecha para ir a la página anterior si no es la primera página
             if ($productPage > 1) {
         ?>
-            <a href="index.php?rute=manage-products&productPage=<?php echo ($productPage - 1); ?>"><i class="fas fa-chevron-left"></i></a>
+            <a href="index.php?rute=shop&productPage=<?php echo ($productPage - 1); ?>"><i class="fas fa-chevron-left"></i></a>
         <?php
             }
 
@@ -114,9 +118,9 @@
             for ($i = $startPage; $i <= $endPage; $i++) {
                 if ($i == $productPage) {
                 ?>
-                <a class="active" href="index.php?rute=manage-products&productPage=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <a class="active" href="index.php?rute=shop&productPage=<?php echo $i; ?>"><?php echo $i; ?></a>
                 <?php } else { ?>
-                <a href="index.php?rute=manage-products&productPage=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <a href="index.php?rute=shop&productPage=<?php echo $i; ?>"><?php echo $i; ?></a>
                 <?php
                 }
             }
@@ -124,7 +128,7 @@
             // Mostrar flecha para ir a la página siguiente si no es la última página
             if ($productPage < $totalProductPages) {
         ?>
-                <a href="index.php?rute=manage-products&productPage=<?php echo ($productPage + 1); ?>"><i class="fas fa-chevron-right"></i></a>
+                <a href="index.php?rute=shop&productPage=<?php echo ($productPage + 1); ?>"><i class="fas fa-chevron-right"></i></a>
         <?php
             }
         ?>
