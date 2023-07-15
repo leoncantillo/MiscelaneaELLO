@@ -36,7 +36,7 @@ Class ProductsController {
     # READ -------------------------------
     static public function ctrSelectProducts() {
         $table = "ellodb_products";
-        $answer = GlobalModel::mdlFetchData($table, null, null);
+        $answer = ProductModel::mdlFetchProductData();
         return $answer;
     }
 

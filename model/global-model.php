@@ -49,18 +49,8 @@ Class GlobalModel {
             }
         }
         if ($columnName == null && $value == null) {
-            $statement = null;
-            if ($table == "ellodb_products") {
-                $statement = Connection::connect()->prepare("SELECT 
-                $table.id, `product_name`, `description`, `image`, `price`, `promotion_price`, `tag_name`, `category_name`, `color`, `condition`
-                FROM $table INNER JOIN `ellodb_tags`
-                ON $table.tag_id = ellodb_tags.id
-                INNER JOIN `ellodb_categories`
-                ON $table.category_id = ellodb_categories.id ORDER BY $table.id DESC
-                ");
-            }else {
-                $statement = Connection::connect()->prepare("SELECT * FROM $table");
-            }
+            $statement = Connection::connect()->prepare("SELECT * FROM $table");
+            
             $statement->execute();
             $result = $statement->fetchAll();
     
