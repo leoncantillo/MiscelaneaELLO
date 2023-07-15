@@ -47,7 +47,7 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
                         $bringProducts = ProductsController::ctrSelectProducts();
                         $totalProducts = count($bringProducts);
 
-                        $productsPerPage = 3; 
+                        $productsPerPage = 10; 
 
                         // Obtener el número de página actual para cada tabla
                         $productPage = isset($_GET['productPage']) && is_numeric($_GET['productPage']) ? $_GET['productPage'] : 1;
@@ -74,7 +74,7 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
                         <td>
                             <?php
                                 $image = "view/img/products/".$item["image"];
-                                if (file_exists($image)) {
+                                if (!empty($item["image"]) && file_exists($image)) {
                             ?>
                                 <img src="<?php echo $image ?>" alt="product image">
                             <?php } else  { ?>
@@ -137,13 +137,6 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
         <?php
             }
 
-            // Mostrar puntos suspensivos si hay más de una página antes del rango mostrado
-            if ($startPage > 1) {
-        ?>
-            <span>...</span>
-        <?php
-            }
-
             // Mostrar enlaces de páginas dentro del rango
             for ($i = $startPage; $i <= $endPage; $i++) {
                 if ($i == $productPage) {
@@ -155,16 +148,9 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
                 }
             }
 
-            // Mostrar puntos suspensivos si hay más de una página después del rango mostrado
-            if ($endPage < $totalProductPages) {
-        ?>
-            <span>...</span>
-        <?php
-            }
-
             // Mostrar flecha para ir a la página siguiente si no es la última página
             if ($productPage < $totalProductPages) {
-                ?>
+        ?>
                 <a href="index.php?rute=manage-products&productPage=<?php echo ($productPage + 1); ?>"><i class="fas fa-chevron-right"></i></a>
         <?php
             }
