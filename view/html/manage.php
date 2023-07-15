@@ -145,23 +145,23 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
                         for ($i = 0; $i < $quantityUsers; $i++) {
                             $counter = $i + 1;
                             $item = $bringUsers[$i];
-                    ?>
-                        <tr>
-                            <td><?php echo $counter ?></td>
-                            <td><?php echo $item["username"] ?></td>
-                            <td><?php echo $item["email"] ?></td>
-                            <td><?php echo $item["registration_date"] ?></td>
-                            <td><?php echo $item["useradmin"] == 1 ? "Si" : "No" ?></td>
-                            <td>
-                                <?php if ($item["username"] == $adminUsername) { ?>
-                                <button style="pointer-events: none"><i class="fas fa-trash"></i></button>
-                                <button style="pointer-events: none"><i class="fas fa-sync-alt"></i></button>
-                                <?php } else { ?>
-                                <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>, 'user')"><i class="fas fa-trash"></i></button>
-                                <a href="index.php?rute=update-user&id=<?php echo intval($item['id']) ?>"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
-                                <?php } ?>
-                            </td>
-                        </tr>
+                ?>
+                    <tr <?php echo $item["username"] == $adminUsername ? 'class="actualadmin"' : '' ?> >
+                        <td><?php echo $counter ?></td>
+                        <td><?php echo $item["username"] ?></td>
+                        <td><?php echo $item["email"] ?></td>
+                        <td><?php echo $item["registration_date"] ?></td>
+                        <td><?php echo $item["useradmin"] == 1 ? "Si" : "No" ?></td>
+                        <td>
+                            <?php if ($item["username"] == $adminUsername) { ?>
+                            <button style="pointer-events: none"><i class="fas fa-trash"></i></button>
+                            <button style="pointer-events: none"><i class="fas fa-sync-alt"></i></button>
+                            <?php } else { ?>
+                            <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>, 'user')"><i class="fas fa-trash"></i></button>
+                            <a href="index.php?rute=update-user&id=<?php echo intval($item['id']) ?>"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
+                            <?php } ?>
+                        </td>
+                    </tr>
                 <?php
                         }
                         }
