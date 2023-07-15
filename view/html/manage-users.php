@@ -42,7 +42,7 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
                     $bringUsers = UserController::ctrSelectUsers();
                     $totalUsers = count($bringUsers);
 
-                    $usersPerPage = 2; // Número máximo de usuarios por página
+                    $usersPerPage = 10; // Número máximo de usuarios por página
                     
                     // Obtener el número de página actual para cada tabla
                     $userPage = isset($_GET['userPage']) && is_numeric($_GET['userPage']) ? $_GET['userPage'] : 1;
@@ -123,13 +123,6 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
         <?php
             }
 
-            // Mostrar puntos suspensivos si hay más de una página antes del rango mostrado
-            if ($startPage > 1) {
-        ?>
-            <span>...</span>
-        <?php
-            }
-
             // Mostrar enlaces de páginas dentro del rango
             for ($i = $startPage; $i <= $endPage; $i++) {
                 if ($i == $userPage) {
@@ -141,16 +134,9 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
                 }
             }
 
-            // Mostrar puntos suspensivos si hay más de una página después del rango mostrado
-            if ($endPage < $totalUserPages) {
-        ?>
-            <span>...</span>
-        <?php
-            }
-
             // Mostrar flecha para ir a la página siguiente si no es la última página
             if ($userPage < $totalUserPages) {
-                ?>
+        ?>
                 <a href="index.php?rute=manage-users&userPage=<?php echo ($userPage + 1); ?>"><i class="fas fa-chevron-right"></i></a>
         <?php
             }
