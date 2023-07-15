@@ -13,8 +13,8 @@ function getSliderImages($directory) {
     <div class="slider">
         <?php getSliderImages($directory); ?>
     </div>
-    <button class="prev-button slider-button">&lt;</button>
-    <button class="next-button slider-button">&gt;</button>
+    <button class="prev-button slider-button"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="next-button slider-button"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
 <script>
