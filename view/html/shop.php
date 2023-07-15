@@ -19,22 +19,39 @@
         </ul>
     </aside>
     <div class="ordenar-productos">Ordenar por <span class="filtros-de-orden">Más Vendidos <?php include 'view/img/svg/icon-chevron-down.svg'?></span></div>
-    <section>
+    <section class="showcase">
         <div class="productos-en-venta">
         <?php
             $bringProducts = ProductsController::ctrSelectProducts();
-            $quantityProducts = count($bringProducts);
+            $totalProducts = count($bringProducts);
+
+            $productsPerPage = 10; 
+
+            // Obtener el número de página actual para cada tabla
+            $productPage = isset($_GET['productPage']) && is_numeric($_GET['productPage']) ? $_GET['productPage'] : 1;
+
+            // Calcular el índice inicial y final de los productos a mostrar
+            $productStartIndex = ($productPage - 1) * $productsPerPage;
+            $productEndIndex = $productStartIndex + $productsPerPage;
+
+            // Obtener la sección de productos correspondiente a la página actual
+            $productPageProducts = array_slice($bringProducts, $productStartIndex, $productsPerPage);
+
+            // Calcular el número total de páginas para cada tabla
+            $totalProductPages = ceil($totalProducts / $productsPerPage);
+
+
             try {
-                if($quantityProducts > 0){
-                    for($i = 0; $i < $quantityProducts; $i++){
+                if($totalProducts > 0){
+                    for($i = $productStartIndex; $i < $productEndIndex && $i < $totalProducts; $i++){
                         $counter = $i + 1;
-                        $item = $bringProducts[$i];
+                        $item = $productPageProducts[$i - $productStartIndex];
         ?>
             <div class="producto-en-vitrina">
                 <div class="imagen-producto">
                 <?php
                     $image = "view/img/products/".$item["image"];
-                    if (file_exists($image)) {
+                    if (!empty($item["image"]) && file_exists($image)) {
                 ?>
                     <img src="<?php echo $image ?>" alt="product image">
                 <?php } else  { ?>
@@ -74,6 +91,41 @@
                 }
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
+            }
+        ?>
+        </div>
+        <!-- Navegación de páginas para la tabla de productos -->
+        <div class="pagination">
+        <?php
+            $maxPagesToShow = 5; // Máximo número de páginas a mostrar
+
+            // Calcular el rango de páginas a mostrar
+            $startPage = max(1, $productPage - floor($maxPagesToShow / 2));
+            $endPage = min($startPage + $maxPagesToShow - 1, $totalProductPages);
+
+            // Mostrar flecha para ir a la página anterior si no es la primera página
+            if ($productPage > 1) {
+        ?>
+            <a href="index.php?rute=manage-products&productPage=<?php echo ($productPage - 1); ?>"><i class="fas fa-chevron-left"></i></a>
+        <?php
+            }
+
+            // Mostrar enlaces de páginas dentro del rango
+            for ($i = $startPage; $i <= $endPage; $i++) {
+                if ($i == $productPage) {
+                ?>
+                <a class="active" href="index.php?rute=manage-products&productPage=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <?php } else { ?>
+                <a href="index.php?rute=manage-products&productPage=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <?php
+                }
+            }
+
+            // Mostrar flecha para ir a la página siguiente si no es la última página
+            if ($productPage < $totalProductPages) {
+        ?>
+                <a href="index.php?rute=manage-products&productPage=<?php echo ($productPage + 1); ?>"><i class="fas fa-chevron-right"></i></a>
+        <?php
             }
         ?>
         </div>
