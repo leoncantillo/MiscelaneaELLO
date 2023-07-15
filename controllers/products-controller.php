@@ -12,6 +12,11 @@ Class ProductsController {
 
             $postFile = $_FILES["product-image"];
 
+            $promotionPrice = GlobalController::test_input($_POST['promotion-price']);
+            if (empty($promotionPrice) || floatval($promotionPrice) === 0) {
+                $promotionPrice = null;
+            }
+
             $conditionValue = 0;
             if(isset($_POST["condition"])){
                 if($_POST["condition"] == "product-new")
@@ -22,7 +27,7 @@ Class ProductsController {
                           "description" => GlobalController::test_input($_POST["description"]),
                           "image" => GlobalController::upload_file($postFile, $destinationFolder),
                           "price" => GlobalController::test_input($_POST["price"]),
-                          "promotion_price" => GlobalController::test_input($_POST["promotion-price"]),
+                          "promotion_price" => $promotionPrice,
                           "tag_id" => GlobalController::test_input($_POST["product-tag"]),
                           "category_id" => GlobalController::test_input($_POST["product-category"]),
                           "color" => GlobalController::test_input($_POST["product-color"]),
