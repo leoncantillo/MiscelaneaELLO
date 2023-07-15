@@ -1,0 +1,25 @@
+.table-wrapper {
+  border: 1px solid #ddd;
+  overflow-x: auto;
+}
+
+.table-wrapper::-webkit-scrollbar{height: 8px; width: 8px;}
+.table-wrapper::-webkit-scrollbar-thumb{
+  background-color: var(--global-color-4);
+  border-radius: 8px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {background-color: #f2f2f2;}
+
+tr:nth-child(even) {background-color: #f9f9f9;}

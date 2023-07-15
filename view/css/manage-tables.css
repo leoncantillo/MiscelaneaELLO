@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+    flex-direction: column;
+    gap: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.container h4 {font-size: 26px;}
+
+.container .action-buttons {
+  display: flex;
+    justify-content: space-between;
+}
+
+.container .action-buttons a button {border-radius: 5px; color: snow;}
+.container .action-buttons a button.back-admin {background-color: var(--global-color-5);}
+.container .action-buttons a button.newone {background-color: var(--global-color-6);}
+
+tr.actualadmin {background: var(--global-color-4);}
+
+td img {height: 80px;}
+
+td button{border-radius: 5px;}
+td button.delete {background-color: tomato;}
+td button.update {background-color: var(--global-color-5);}
+
+.pagination {
+  margin: 0 auto;
+}
+
+.overlay-delete-confirm {
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 100%;
+  position: fixed;
+    top: 0;
+    left: 0;
+  width: 100%;
+  z-index: 9998;
+}
+
+.delete-confirm {
+  background-color: snow;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+    flex-direction: column;
+    gap: 10px;
+  padding: 20px;
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  text-align: center;
+  width: 300px;
+  z-index: 9999;
+}
+
+.delete-confirm .confirm-buttons {
+  display: flex;
+    justify-content: space-around;
+}
+
+.delete-confirm button.confirm-delete {background-color: tomato;}
+.delete-confirm button.confirm-cancel {background-color: var(--global-color-6);}

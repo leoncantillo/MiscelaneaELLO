@@ -19,6 +19,8 @@
                 $_GET["rute"] == "contact" ||
                 $_GET["rute"] == "profile" ||
                 $_GET["rute"] == "manage" ||
+                $_GET["rute"] == "manage-products" ||
+                $_GET["rute"] == "manage-users" ||
                 $_GET["rute"] == "create-product" ||
                 $_GET["rute"] == "update-product" ||
                 $_GET["rute"] == "create-user" ||
