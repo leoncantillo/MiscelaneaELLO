@@ -33,6 +33,14 @@ Class FormsController {
         return $answer;
     }
 
+    static public function ctrSelectUsersWithId($id) {
+        $table = "ellodb_users";
+        $columnName = "id";
+        $idFetch = GlobalController::test_input($id);
+        $answer = GlobalModel::mdlFetchData($table, $columnName, $idFetch);
+        return $answer;
+    }
+
     public function ctrSignin() {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $table = "ellodb_users";
@@ -63,6 +71,32 @@ Class FormsController {
                     window.history.replaceState(null,null,window.location.href);
                 }
             </script>";
+        }
+    }
+
+    static public function ctrUpdateUser() {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $table = "ellodb_users";
+
+            $validUserAdmin = 0;
+            if(isset($_POST["register-useradmin"])){
+                if($_POST["register-useradmin"] == "is_admin")
+                    $validUserAdmin = 1;
+            }
+            
+            $data = array("id" => GlobalController::test_input($_POST["user-id"]),
+                          "username" => GlobalController::test_input($_POST["register-username"]),
+                          "email" => filter_var(GlobalController::test_input($_POST["register-email"]), FILTER_VALIDATE_EMAIL),
+                          "useradmin" => GlobalController::test_input($validUserAdmin));
+
+            if (isset ($_POST["register-password"])) {
+                $password = filter_var(GlobalController::test_input($_POST["register-password"]), FILTER_SANITIZE_STRING);
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                $data["password"] = $password;
+            }
+
+            $answer = GlobalModel::mdlUpdateData($table, $data);
+            return $answer;
         }
     }
 
