@@ -69,7 +69,7 @@
                             ?>
                         </td>
                         <td>
-                            <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>)"><i class="fas fa-trash"></i></button>
+                            <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>, 'product')"><i class="fas fa-trash"></i></button>
                             <a href="index.php?rute=update-product&id=<?php echo intval($item['id']) ?>"><button class="update"><i class="fas fa-sync-alt"></i></button></a>
                         </td>
                     </tr>
@@ -91,7 +91,7 @@
 <section>
     <div class="container">
         <h4>Administrar Ususarios</h4>
-        <a href="index.php?rute=signup">
+        <a href="index.php?rute=create-user">
             <button class="new-product"><i class="fa-solid fa-plus"></i> Nuevo</button>
         </a>
         <div class="table-wrapper">
@@ -101,7 +101,6 @@
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Correo Electrónico</th>
-                        <th>Contraseña</th>
                         <th>Fecha De Registro</th>
                         <th>Admin</th>
                         <th>Acciones</th>
@@ -121,7 +120,6 @@
                         <td><?php echo $counter?></td>
                         <td><?php echo $item["username"] ?></td>
                         <td><?php echo $item["email"] ?></td>
-                        <td><?php echo $item["password"] ?></td>
                         <td><?php echo $item["registration_date"] ?></td>
                         <td>
                             <?php
@@ -133,8 +131,8 @@
                             ?>
                         </td>
                         <td>
-                            <a href="index.php?rute=delete-product"><button class="delete"><i class="fas fa-trash"></i></button></a>
-                            <a href="index.php?rute=update-product"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
+                            <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>, 'user')"><i class="fas fa-trash"></i></button>
+                            <a href="index.php?rute=update-user&id=<?php echo intval($item['id']) ?>"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
                         </td>
                     </tr>
                     <?php
@@ -154,21 +152,23 @@
 <div class="overlay-delete-confirm" style="display: none;"></div>
 <div class="delete-confirm" style="display: none;">
     <h3>Confirmar eliminación</h3>
-    <p>¿Estás seguro de eliminar el producto?</p>
+    <p>¿Estás seguro de realizar esta acción?</p>
     <div class="confirm-buttons">
         <button class="confirm-delete">Eliminar</button>
         <button class="confirm-cancel">Cancelar</button>
     </div>
 </div>
 <script>
-    let idToDelete = null
+    let idToDelete = null;
+    let targetToRemove = null;
     
-    function popUpDeleteConfirm(id) {
+    function popUpDeleteConfirm(id, target) {
         const popUpDelete = document.querySelector(".delete-confirm");
         const overlay = document.querySelector(".overlay-delete-confirm");
         popUpDelete.style.display = "flex";
         overlay.style.display = "block";
         idToDelete = id;
+        targetToRemove = target;
     }
 
     function cancelDelete() {
@@ -179,7 +179,11 @@
     }
 
     function deleteProduct(idToDelete) {
-        window.location.href = "index.php?rute=delete-product&id=" + idToDelete;
+        if (targetToRemove == "product") {
+            window.location.href = "index.php?rute=delete-product&id=" + idToDelete;
+        } else if (targetToRemove == "user") {
+            window.location.href = "index.php?rute=delete-user&id=" + idToDelete;
+        }
     }
 
     const deleteButton = document.querySelector(".confirm-delete");
