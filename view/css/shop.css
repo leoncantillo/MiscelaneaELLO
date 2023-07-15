@@ -1,4 +1,5 @@
 @import url(estilos-globales.css);
+@import url(pagination.css);
 
 .tienda-home {
     display: grid;
@@ -62,6 +63,12 @@
 .ordenar-productos .filtros-de-orden svg{fill: snow;}
 
 /* ESTILOS DEL PRODUCTO EN VENTA ===================================== */
+.showcase {
+    display: flex;
+        flex-direction: column;
+        gap: 10px;
+}
+
 .productos-en-venta {
     display: flex;  
         flex-direction: column;

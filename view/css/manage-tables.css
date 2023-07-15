@@ -1,3 +1,5 @@
+@import url(pagination.css);
+
 .container {
   display: flex;
     flex-direction: column;
@@ -25,10 +27,6 @@ td img {height: 80px;}
 td button{border-radius: 5px;}
 td button.delete {background-color: tomato;}
 td button.update {background-color: var(--global-color-5);}
-
-.pagination {
-  margin: 0 auto;
-}
 
 .overlay-delete-confirm {
   background-color: rgba(0, 0, 0, 0.3);
