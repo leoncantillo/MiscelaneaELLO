@@ -8,8 +8,8 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
     return;
 }
 
-$userNameErr = $passwordErr = $isUserAdminErr = ""; # Empty Fields
-$phoneNumberErr = "";
+$userNameErr = $emailErr = $passwordErr = $isUserAdminErr = ""; # Empty Fields
+$phoneNumberErr = $profilePhotoErr = "";
 $countError = 0;
 $fullFields = true;
 
@@ -33,10 +33,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $isUserAdminErr = "Indique los permisos para este usuario";
         $countError += 1;
     }
+    
+    if(isset($_FILES["profile-photo"]) && $_FILES["profile-photo"]["error"] === 0){  
+        $fileType = $_FILES["profile-photo"]["type"];
+        $allowedTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"];
+        if(!in_array($fileType, $allowedTypes)){
+            $profilePhotoErr = "* Solo se permiten archivos de imagen (JPEG, PNG, GIF, WebP).";
+            $countError += 1;
+        }
+    }
 
     if (!empty($_POST["phone-number"])) {
         if ($_POST["phone-number"] < 0 || strlen($_POST["phone-number"]) < 7) {
-            $phoneNumberErr = "Ingrese un número de teléfono válido";
+            $phoneNumberErr = "* Ingrese un número de teléfono válido";
             $countError += 1;
         }
     }
@@ -77,7 +86,7 @@ echo "<script>
             <input type="text" name="register-username" id="username" required/>
         </div>
         <div class="inputbox">
-            <label for="email"></label>
+            <label for="email">Email <span class="required-field">* <?php echo $emailErr ?></span></label>
             <input type="email" name="register-email" id="email" required>
         </div>
         <div class="inputbox">
@@ -109,11 +118,11 @@ echo "<script>
             <input type="text" name="user-lastname" id="user-lastname"/>
         </div>
         <div class="inputbox">
-            <label for="profile-photo">Foto</label>
+            <label for="profile-photo">Foto <span class="required-field"><?php echo $profilePhotoErr ?></span></label>
             <input type="file" name="profile-photo" id="profile-photo" accept="image/jpg, image/jpeg, image/png, image/gif, image/webp"/>
         </div>
         <div class="inputbox">
-            <label for="phone-number">Número de celular <span class="required-field"><?php echo !empty($phoneNumberErr) ? "* ".$phoneNumberErr : "" ?></span></label>
+            <label for="phone-number">Número de celular <span class="required-field"><?php $phoneNumberErr ?></span></label>
             <input type="number"  name="phone-number" id="phone-number" placeholder="(+57)"/>
         </div>
         <div class="action-buttons">
