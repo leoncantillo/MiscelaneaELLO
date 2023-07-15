@@ -1,3 +1,15 @@
+<?php
+
+if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"])) {
+    echo "<script>window.location = 'index.php?rute=signin'</script>";
+    return;
+} else if ($_SESSION["validate-login"] != true || $_SESSION["validate-useradmin"] != true) {
+    echo "<script>window.location = 'index.php?rute=signin'</script>";
+    return;
+}
+
+?>
+
 <link rel="stylesheet" href="view/css/manage.css">
 <title>Administrador</title>
 
@@ -107,43 +119,58 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                        $bringUsers = UserController::ctrSelectUsers();
-                        try {
-                            $quantityUsers = count($bringUsers);
-                            if($quantityUsers > 0){
-                                for($i = 0; $i < $quantityUsers; $i++){
-                                    $counter = $i + 1;
-                                    $item = $bringUsers[$i];
-                    ?>
-                    <tr>
-                        <td><?php echo $counter?></td>
-                        <td><?php echo $item["username"] ?></td>
-                        <td><?php echo $item["email"] ?></td>
-                        <td><?php echo $item["registration_date"] ?></td>
-                        <td>
-                            <?php
-                                if($item["useradmin"] == 1){
-                                    echo "Si";
-                                }else{
-                                    echo "No";
-                                }
-                            ?>
-                        </td>
-                        <td>
-                            <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>, 'user')"><i class="fas fa-trash"></i></button>
-                            <a href="index.php?rute=update-user&id=<?php echo intval($item['id']) ?>"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
-                        </td>
-                    </tr>
-                    <?php
-                                }
+                <?php
+                    $bringUsers = UserController::ctrSelectUsers();
+                    try {
+                        $quantityUsers = count($bringUsers);
+                        if ($quantityUsers > 0) {
+                        // Buscar el índice del usuario administrador actual
+                        $adminIndex = -1;
+                        $adminUsername = $_SESSION["username"];
+                        foreach ($bringUsers as $index => $item) {
+                            if ($item["username"] == $adminUsername && $item["useradmin"] == 1) {
+                            $adminIndex = $index;
+                            break;
                             }
-                        } catch (PDOException $e) {
-                            echo "Error: " . $e->getMessage();
                         }
+
+                        // Si se encontró el usuario administrador actual, moverlo al principio del array
+                        if ($adminIndex >= 0) {
+                            $adminUser = $bringUsers[$adminIndex];
+                            unset($bringUsers[$adminIndex]);
+                            array_unshift($bringUsers, $adminUser);
+                        }
+
+                        // Resto del código para mostrar las filas de la tabla
+                        for ($i = 0; $i < $quantityUsers; $i++) {
+                            $counter = $i + 1;
+                            $item = $bringUsers[$i];
                     ?>
-                    
+                        <tr>
+                            <td><?php echo $counter ?></td>
+                            <td><?php echo $item["username"] ?></td>
+                            <td><?php echo $item["email"] ?></td>
+                            <td><?php echo $item["registration_date"] ?></td>
+                            <td><?php echo $item["useradmin"] == 1 ? "Si" : "No" ?></td>
+                            <td>
+                                <?php if ($item["username"] == $adminUsername) { ?>
+                                <button style="pointer-events: none"><i class="fas fa-trash"></i></button>
+                                <button style="pointer-events: none"><i class="fas fa-sync-alt"></i></button>
+                                <?php } else { ?>
+                                <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>, 'user')"><i class="fas fa-trash"></i></button>
+                                <a href="index.php?rute=update-user&id=<?php echo intval($item['id']) ?>"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                <?php
+                        }
+                        }
+                    } catch (PDOException $e) {
+                        echo "Error: " . $e->getMessage();
+                    }
+                ?>
                 </tbody>
+
             </table>
         </div>
     </div>

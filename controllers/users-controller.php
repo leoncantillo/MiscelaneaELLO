@@ -57,6 +57,7 @@ Class UserController {
     
                 if ($storedEmail == $enteredEmail && password_verify($passwordEntered, $passwordHash)) {
                     $_SESSION["validate-login"] = true;
+                    $_SESSION["username"] = $answer["username"];
                     if ($answer["useradmin"] == 1) {
                         $_SESSION["validate-useradmin"] = true;
                     }
