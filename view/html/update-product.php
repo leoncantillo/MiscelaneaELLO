@@ -13,11 +13,11 @@ if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
     $id = $_GET["id"];
     $fetchProducts = ProductsController::ctrSelectProductsWithId($id);
     if (!$fetchProducts) {
-        echo "<script>window.location = 'index.php?rute=manage'</script>";
+        echo "<script>window.location = 'index.php?rute=manage-products'</script>";
         return;
     }
 } else {
-    echo "<script>window.location = 'index.php?rute=manage'</script>";
+    echo "<script>window.location = 'index.php?rute=manage-products'</script>";
     return;
 }
 
@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($createProduct){
             echo "<script>
                 alert('El producto ha sido actualizado correctamente');
-                window.location = 'index.php?rute=manage';
+                window.location = 'index.php?rute=manage-products';
             </script>";
         } else {
             echo "<script> alert('Ha ocurrido un error, intentelo nuevamente') </script>";
@@ -183,7 +183,7 @@ echo "<script>
             <script>
                 function btnCancelar() {
                     document.querySelector("#form-create-product").reset();
-                    window.location = 'index.php?rute=manage';
+                    window.location = 'index.php?rute=manage-products';
                 }
             </script>
         </div>

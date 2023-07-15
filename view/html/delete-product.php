@@ -8,12 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         if ($deleteProduct) {
             echo "<script>
                 alert('El producto ha sido eliminado.');
-                window.location = 'index.php?rute=manage';
+                window.location = 'index.php?rute=manage-products';
             </script>";
         } else {
             echo "<script>
                 alert('Hubo un error, intentelo nuevamente');
-                window.location = 'index.php?rute=manage';
+                window.location = 'index.php?rute=manage-products';
             </script>";
         }
     }

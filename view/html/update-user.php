@@ -12,11 +12,11 @@ if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
     $id = $_GET["id"];
     $fetchUsers = UserController::ctrSelectUsersWithId($id);
     if (!$fetchUsers) {
-        echo "<script>window.location = 'index.php?rute=manage'</script>";
+        echo "<script>window.location = 'index.php?rute=manage-users'</script>";
         return;
     }
 } else {
-    echo "<script>window.location = 'index.php?rute=manage'</script>";
+    echo "<script>window.location = 'index.php?rute=manage-users'</script>";
     return;
 }
 
@@ -67,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if ($createProduct) {
             echo "<script>
                 alert('El usuario ha sido actualizado correctamente');
-                window.location = 'index.php?rute=manage';
+                window.location = 'index.php?rute=manage-users';
             </script>";
         } else {
             echo "<script> alert('Ha ocurrido un error, intentelo nuevamente') </script>";
@@ -145,7 +145,7 @@ echo "<script>
             <script>
                 function btnCancelar() {
                     document.querySelector("#form-create-user").reset();
-                    window.location = 'index.php?rute=manage';
+                    window.location = 'index.php?rute=manage-users';
                 }
     </script>
         </div>

@@ -164,7 +164,7 @@ echo "<script>
             <script>
                 function btnCancelar() {
                     document.querySelector("#form-create-product").reset();
-                    window.location = 'index.php?rute=manage';
+                    window.location = 'index.php?rute=manage-products';
                 }
     </script>
         </div>

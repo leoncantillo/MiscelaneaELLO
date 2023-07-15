@@ -131,7 +131,7 @@ echo "<script>
             <script>
                 function btnCancelar() {
                     document.querySelector("#form-create-user").reset();
-                    window.location = 'index.php?rute=manage';
+                    window.location = 'index.php?rute=manage-users';
                 }
     </script>
         </div>
