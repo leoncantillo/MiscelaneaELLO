@@ -28,6 +28,24 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
                         <i class="fa-solid fa-wrench"></i> Administrar Usuarios
                     </a>
                 </li>
+                <li>
+                    <form method="post" action="">
+                        <input type="submit" name="create100products" id="create100products" value="Ejecutar">
+                        <label for="create100products">Crear 100 productos</label>
+                    </form>
+
+                    <?php
+                    // Verifica si se ha hecho clic en el botón
+                    if (isset($_POST['create100products'])) {
+                        $generate100products = TestCase::ctrCreate100Products();
+                        if ($generate100products) {
+                            echo "Código PHP ejecutado correctamente";
+                        } else {
+                            echo "Hubo un error";
+                        }
+                    }
+                    ?>
+                </li>
             </ul>
         </div>
     </div>
