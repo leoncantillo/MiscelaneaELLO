@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-07-2023 a las 13:32:30
+-- Tiempo de generación: 15-07-2023 a las 23:55:19
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -32,18 +32,16 @@ CREATE TABLE `ellodb_categories` (
   `category_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `ellodb_clients`
+-- Volcado de datos para la tabla `ellodb_categories`
 --
 
-CREATE TABLE `ellodb_clients` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `lastname` varchar(50) DEFAULT NULL,
-  `phonenumer` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `ellodb_categories` (`id`, `category_name`) VALUES
+(0, ''),
+(1, 'Cuadernos'),
+(2, 'Marcadores'),
+(3, 'Boligrafos'),
+(4, 'Lápices');
 
 -- --------------------------------------------------------
 
@@ -83,24 +81,29 @@ CREATE TABLE `ellodb_orders` (
 CREATE TABLE `ellodb_products` (
   `id` int(11) NOT NULL,
   `product_name` varchar(60) NOT NULL,
-  `description` varchar(600) NOT NULL,
+  `description` varchar(1200) NOT NULL,
   `image` varchar(100) NOT NULL,
-  `price` decimal(10,0) NOT NULL,
-  `promotion_price` decimal(11,0) DEFAULT NULL,
+  `price` decimal(11,2) NOT NULL,
+  `promotion_price` decimal(11,2) DEFAULT NULL,
   `tag_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `color` varchar(30) DEFAULT NULL,
   `condition` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `ellodb_products`
+-- Estructura de tabla para la tabla `ellodb_profiles`
 --
 
-INSERT INTO `ellodb_products` (`id`, `product_name`, `description`, `image`, `price`, `promotion_price`, `tag_id`, `category_id`, `color`, `condition`) VALUES
-(3, 'Libreta Anillada', 'Libreta norma', 'Cuaderno anillado.jpg', 8000, 6000, 0, NULL, 'Rosado', 0),
-(4, 'Caja de lapices HB', 'Lapices HB\r\nFaber Castell', 'Caja Lapiz HB.jpg', 8000, 7400, 0, NULL, 'Rosado', 1),
-(5, 'Caja de lapices HB', 'a', 'Caja Lapiz HB.jpg', 8000, 7300, 0, NULL, 'Negro', 1);
+CREATE TABLE `ellodb_profiles` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
+  `profile_photo` varchar(100) DEFAULT NULL,
+  `phonenumer` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -112,6 +115,16 @@ CREATE TABLE `ellodb_tags` (
   `id` int(11) NOT NULL,
   `tag_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ellodb_tags`
+--
+
+INSERT INTO `ellodb_tags` (`id`, `tag_name`) VALUES
+(0, ''),
+(1, 'Con Stickers'),
+(2, 'Para Dibujar'),
+(4, 'Lettering');
 
 -- --------------------------------------------------------
 
@@ -126,16 +139,8 @@ CREATE TABLE `ellodb_users` (
   `password` varchar(60) NOT NULL,
   `registration_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `useradmin` tinyint(1) NOT NULL DEFAULT 0,
-  `client_id` int(11) NOT NULL
+  `profile_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `ellodb_users`
---
-
-INSERT INTO `ellodb_users` (`id`, `username`, `email`, `password`, `registration_date`, `useradmin`, `client_id`) VALUES
-(1, 'kmenor', 'kmenor@gmail.com', 'SoyAdmin', '2023-06-30 15:02:16', 1, 0),
-(2, 'carlos', 'carlos@feo.com', '12345', '2023-07-01 20:17:25', 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -145,12 +150,6 @@ INSERT INTO `ellodb_users` (`id`, `username`, `email`, `password`, `registration
 -- Indices de la tabla `ellodb_categories`
 --
 ALTER TABLE `ellodb_categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `ellodb_clients`
---
-ALTER TABLE `ellodb_clients`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -169,6 +168,12 @@ ALTER TABLE `ellodb_orders`
 -- Indices de la tabla `ellodb_products`
 --
 ALTER TABLE `ellodb_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `ellodb_profiles`
+--
+ALTER TABLE `ellodb_profiles`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -191,13 +196,7 @@ ALTER TABLE `ellodb_users`
 -- AUTO_INCREMENT de la tabla `ellodb_categories`
 --
 ALTER TABLE `ellodb_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `ellodb_clients`
---
-ALTER TABLE `ellodb_clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `ellodb_orderdetails`
@@ -215,19 +214,25 @@ ALTER TABLE `ellodb_orders`
 -- AUTO_INCREMENT de la tabla `ellodb_products`
 --
 ALTER TABLE `ellodb_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ellodb_profiles`
+--
+ALTER TABLE `ellodb_profiles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ellodb_tags`
 --
 ALTER TABLE `ellodb_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `ellodb_users`
 --
 ALTER TABLE `ellodb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
