@@ -58,52 +58,59 @@ if (!isset($_SESSION["validate-login"]) || !isset($_SESSION["validate-useradmin"
                     $totalUserPages = ceil($totalUsers / $usersPerPage);
 
                     try {
-                        if ($totalUsers > 0) {
-                        // Buscar el índice del usuario administrador actual
-                        $adminIndex = -1;
                         $adminUsername = $_SESSION["username"];
-                        foreach ($bringUsers as $index => $item) {
-                            if ($item["username"] == $adminUsername && $item["useradmin"] == 1) {
-                            $adminIndex = $index;
-                            break;
+                        $adminUser = null;
+                
+                        // Buscar y guardar el usuario administrador actual
+                        foreach ($bringUsers as $user) {
+                            if ($user["username"] == $adminUsername && $user["useradmin"] == 1) {
+                                $adminUser = $user;
+                                break;
                             }
                         }
-
-                        // Si se encontró el usuario administrador actual, moverlo al principio del array
-                        if ($adminIndex >= 0) {
-                            $adminUser = $bringUsers[$adminIndex];
-                            unset($bringUsers[$adminIndex]);
-                            array_unshift($bringUsers, $adminUser);
-                        }
-
-                        // Resto del código para mostrar las filas de la tabla
-                        for ($i = $userStartIndex; $i < $userEndIndex && $i < $totalUsers; $i++) {
-                            $counter = $i + 1;
-                            $item = $userPageUsers[$i - $userStartIndex];
+                
+                        if ($adminUser) {
+                            // Mostrar la fila del usuario administrador primero
+                            $counter = $userStartIndex + 1;
                 ?>
-                    <tr <?php echo $item["username"] == $adminUsername ? 'class="actualadmin"' : '' ?> >
+                    <tr class="actualadmin">
                         <td><?php echo $counter ?></td>
-                        <td><?php echo $item["username"] ?></td>
-                        <td><?php echo $item["email"] ?></td>
-                        <td><?php echo $item["registration_date"] ?></td>
-                        <td><?php echo $item["useradmin"] == 1 ? "Si" : "No" ?></td>
+                        <td><?php echo $adminUser["username"] ?></td>
+                        <td><?php echo $adminUser["email"] ?></td>
+                        <td><?php echo $adminUser["registration_date"] ?></td>
+                        <td><?php echo $adminUser["useradmin"] == 1 ? "Si" : "No" ?></td>
                         <td>
-                            <?php if ($item["username"] == $adminUsername) { ?>
                             <button style="pointer-events: none"><i class="fas fa-trash"></i></button>
                             <button style="pointer-events: none"><i class="fas fa-sync-alt"></i></button>
-                            <?php } else { ?>
-                            <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($item['id']) ?>, 'user')"><i class="fas fa-trash"></i></button>
-                            <a href="index.php?rute=update-user&id=<?php echo intval($item['id']) ?>"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
-                            <?php } ?>
                         </td>
                     </tr>
                 <?php
-                        }
+                
+                            // Resto del código para mostrar las filas de los demás usuarios
+                            for ($i = $userStartIndex; $i < $userEndIndex && $i < $totalUsers; $i++) {
+                                $user = $bringUsers[$i];
+                                if ($user != $adminUser) {
+                                    $counter++;
+                ?>
+                    <tr>
+                        <td><?php echo $counter ?></td>
+                        <td><?php echo $user["username"] ?></td>
+                        <td><?php echo $user["email"] ?></td>
+                        <td><?php echo $user["registration_date"] ?></td>
+                        <td><?php echo $user["useradmin"] == 1 ? "Si" : "No" ?></td>
+                        <td>
+                            <button class="delete" onclick="popUpDeleteConfirm(<?php echo intval($user['id']) ?>, 'user')"><i class="fas fa-trash"></i></button>
+                            <a href="index.php?rute=update-user&id=<?php echo intval($user['id']) ?>"><button class="update"><i class="fas fa-sync-alt"></button></i></a>
+                        </td>
+                    </tr>
+                <?php
+                                }
+                            }
                         }
                     } catch (PDOException $e) {
                         echo "Error: " . $e->getMessage();
                     }
-                ?>
+                    ?>
                 </tbody>
             </table>
         </div>
