@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($_POST["register-username"]) ||
        empty($_POST["register-email"]) ||
        empty($_POST["register-password"]) ||
-       !filter_var($_POST["login-email"], FILTER_VALIDATE_EMAIL)){
+       !filter_var($_POST["register-email"], FILTER_VALIDATE_EMAIL)){
         $requiredAlert = "*";
         $fullFields = false;
     }
